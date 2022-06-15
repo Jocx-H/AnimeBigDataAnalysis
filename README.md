@@ -1,2 +1,2 @@
-# AnimeBigDataAnalysis
-This is a summer practice in CQU at 2022.
+###注意事项
+* 请注意设置自己目录下面的.gitignore文件，不要将'.idea'等文件一起添加进来了
