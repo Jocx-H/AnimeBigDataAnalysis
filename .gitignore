@@ -133,3 +133,4 @@ dmypy.json
 
 # Python file
 **/test.py
+**/test/
