@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
 # Scrapy settings for BliBli project
 #
 # For simplicity, this file contains only settings considered important or

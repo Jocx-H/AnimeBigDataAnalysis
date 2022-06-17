@@ -1,13 +1,15 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
 from pyspark import SparkConf, SparkContext
 import json
 import codecs
 import os
 
 if __name__ == '__main__':
-    #conf = SparkConf().setMaster("spark://Pspark:7077").setAppName("rdd-1")
-    conf = SparkConf().setMaster("local[2]").setAppName("rdd-1")
+    conf = SparkConf().setMaster("spark://master:7077").setAppName("rdd-1")
     sc = SparkContext(conf=conf)
-    with open("../data/anime.json", encoding="utf-8") as file:
+    with open("hdfs://master:9000/test/data/anime.json", encoding="utf-8") as file:
         file_json = json.load(file)
     # 将每line的所有标签添加进data中
     data = []
@@ -15,13 +17,13 @@ if __name__ == '__main__':
         for i in line['media_tags']:
             data.append(i)
     rdd1 = sc.parallelize(data)
-    counts = rdd1.map(lambda x:(x, 1)) \
-            .reduceByKey(lambda a,b:a+b) \
-            .map(lambda x:(x[1], x[0])) \
-            .sortByKey(False) \
-            .map(lambda x:(x[1], x[0]))
+    counts = rdd1.map(lambda x: (x, 1)) \
+        .reduceByKey(lambda a, b: a + b) \
+        .map(lambda x: (x[1], x[0])) \
+        .sortByKey(False) \
+        .map(lambda x: (x[1], x[0]))
     output = counts.collect()
-    for (word,count) in output:
-        print("%s: %i" % (word,count))
+    for (word, count) in output:
+        print("%s: %i" % (word, count))
 
     sc.stop()
