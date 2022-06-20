@@ -134,3 +134,6 @@ dmypy.json
 # Python file
 **/test.py
 **/test/
+
+# 附件
+《二次元分析推荐系统》交付工件/
