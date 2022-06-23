@@ -6,7 +6,8 @@
 import json
 
 '''
-用户画像tag表
+用户画像tag表:
+中二、现充、肥宅、志怪、青春
 '''
 # 中二
 str = "热血，战斗，冒险，魔法，运动，机战，励志，冒险，热血，格斗，魔法，励志，战争，竞技，武侠，魔幻，校园"
@@ -37,6 +38,7 @@ qingchunTagSet = set(qingchun)
 '''
 根据用户画像tag表，获取对应种类作品的id列表
 '''
+# 动漫
 def getAnimeIdBasedOnTags(tagSet: set) -> list:
     animeTagIdList = []
     cnt = 0
@@ -52,6 +54,7 @@ def getAnimeIdBasedOnTags(tagSet: set) -> list:
                     break
     return animeTagIdList
 
+# 漫画
 def getComicIdBasedOnTags(tagSet: set) -> list:
     comicTagIdList = []
     cnt = 0
@@ -67,15 +70,25 @@ def getComicIdBasedOnTags(tagSet: set) -> list:
                     break
     return comicTagIdList
 
+# 小说
 def getNovelIdBasedOnTags(tagSet: set) -> list:
-    novelTagIddList = []
+    novelTagIdList = []
     with open("../data/novel_3.json", encoding = "utf-8") as file:
         file_json = json.load(file)
     for line in file_json:
         for tag in tagSet:
             if tag == line['type']:
-                novelTagIddList.append(line['id'])
-    return novelTagIddList
+                novelTagIdList.append(line['id'])
+    return novelTagIdList
 
+# cosplay(实际上cosplay无tag，不基于画像甄别，返回全部id)
+def getCosIdBasedOnTags(tagSet: set) -> list:
+    cosTagIdList = []
+    with open("../data/cos_4.json", encoding = "utf-8") as file:
+        file_json = json.load(file)
+    for line in file_json:
+        cosTagIdList.append(line['id'])
+    return cosTagIdList
 
-print(len(getNovelIdBasedOnTags(qingchunTagSet)))
+# 测试代码
+# print(len(getNovelIdBasedOnTags(qingchunTagSet)))

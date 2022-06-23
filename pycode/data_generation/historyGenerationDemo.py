@@ -5,7 +5,7 @@ from typing import MappingView
 import json
 
 '''
-userHistoryGeneration.py
+historyGenerationDemo.py
 包含功能：
 1.生成用户历史；
 2.每日阅览记录。
@@ -16,11 +16,11 @@ animeTotalNum = 3531    # 动漫总数
 comicTotalNum = 20931   # 漫画总数
 novelTotalNum = 9841    # 小说总数
 cosTotalNum = 200       # cosplay 总数
-# 每天 不 阅览动漫、漫画、小说的概率
-animeDailyRate = 0.3
-comicDailyRate = 0.3
-novelDailyRate = 0.3
-cosDailyRate = 0.5
+# 每天阅览动漫、漫画、小说的概率
+animeDailyRate = 0.7
+comicDailyRate = 0.7
+novelDailyRate = 0.7
+cosDailyRate = 0.25
 # 全局变量信息设置
 usersTotalNum = 3    # 用户总数
 startUserId = 10000     # 起始用户ID
@@ -94,7 +94,7 @@ def generateHistory(userId: int):
 def generateDailyBrowsing(userData: list):
     dailyRecordList = []  # 用户record.py中的recordList，记录用户每天观看的各种类型作品的信息
     # 动漫
-    dailyAnimeNum = int(random.random() * 5) if random.random() > animeDailyRate else 0
+    dailyAnimeNum = int(random.random() * 5) if random.random() < animeDailyRate else 0
     for i in range(dailyAnimeNum):
         dailyRecordList.append(1)
         dailyAnimeIdList = ['1', str(int(animeTotalNum * random.random()))]
@@ -107,7 +107,7 @@ def generateDailyBrowsing(userData: list):
         userData[1][dailyAnimeId] = dailyAnimeMark
     # 漫画
     time.sleep(0.01)
-    dailyComicNum = int(random.random() * 5) if random.random() > comicDailyRate else 0
+    dailyComicNum = int(random.random() * 5) if random.random() < comicDailyRate else 0
     for i in range(dailyComicNum):
         dailyRecordList.append(2)
         dailyComicIdList = ['2', str(int(comicTotalNum * random.random()))]
@@ -120,7 +120,7 @@ def generateDailyBrowsing(userData: list):
         userData[2][dailyComicId] = dailyComicMark
     # 小说
     time.sleep(0.01)
-    dailyNovelNum = int(random.random() * 5) if random.random() > novelDailyRate else 0
+    dailyNovelNum = int(random.random() * 5) if random.random() < novelDailyRate else 0
     for i in range(dailyNovelNum):
         dailyRecordList.append(3)
         dailyNovelIdList = ['3', str(int(novelTotalNum * random.random()))]
@@ -133,7 +133,7 @@ def generateDailyBrowsing(userData: list):
         userData[3][dailyNovelId] = dailyNovelMark
     # cosplay
     time.sleep(0.01)
-    dailyCosNum = int(random.random() * 5) if random.random() > cosDailyRate else 0
+    dailyCosNum = int(random.random() * 5) if random.random() < cosDailyRate else 0
     for i in range(dailyCosNum):
         dailyRecordList.append(4)
         dailyCosIdList = ['3', str(int(cosTotalNum * random.random()))]
