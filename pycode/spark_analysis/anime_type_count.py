@@ -23,6 +23,7 @@ if __name__ == '__main__':
     output = counts.collect()
     output = counts.collect()
     json_file = codecs.open('../data/anime_type_count.json', 'w+', encoding='UTF-8')
+    json_file.write('[\n')
     for (word,count) in output:
         print("%s: %i" % (word,count))
         item_json = json.dumps({'type': word, 'count': count}, ensure_ascii=False)
