@@ -43,7 +43,7 @@ userData = {}           # 单个用户数据列表
 sysData = []            # 系统用户总数据 sysData = [userData1, userData2, ...]
 recordList = []         # recordList = [[dailyRecord-user1], [dailyRecord-user2], ...]
 initDate = datetime.datetime.now()
-initDateStamp = initDate.timestamp()
+initDateStamp = int(initDate.timestamp() * 1000000)
 
 '''
 根据用户id进行初始数据生成（某个用户，init为每项单条）
@@ -134,7 +134,7 @@ ctrlCode: 控制码，0表示无特定画像的用户，1表示有画像的用�
 userId: 用户id
 currDate: 插入日期
 '''
-def imgDailyGenerate(ctrlCode: int, userId: int, currDate: float):
+def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     global preferenceRate
     preferFactor = 1        # 偏好因子：有偏好画像的用户对于特定的作品三连概率更高，以此修正
     if ctrlCode == 0:       # 无具体画像的用户无显著偏好，preferenceRate = 0
@@ -234,14 +234,13 @@ def init():
 
 
 '''main'''
-'''【 ☆ 注意：插入日期的格式还有问题！】'''
 if __name__ == '__main__':
     init()
     timeDateForm = initDate
     time.sleep(0.1)
     for day in range(1, 5): # 日期遍历（eg：更新4天的阅览记录）
         currDateForm = timeDateForm - day * datetime.timedelta(days = 1)
-        currDate = float(currDateForm.timestamp())
+        currDate = int(currDateForm.timestamp() * 1000000)
         for i in range(startUserId, startUserId + usersTotalNum): # 用户id遍历
             if i in range(10000, 10002):    # 中二
                 setUserImg('zhonger')
@@ -261,7 +260,7 @@ if __name__ == '__main__':
             else:                           # 无特定画像
                 recordList.append(imgDailyGenerate(0, i, currDate)[1])
     print('generate completed!')
-
+    print(recordList)
     # 写入json文件中（多行写入）
     with open("sysData.json", "w", encoding='utf-8') as f:
         json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)
