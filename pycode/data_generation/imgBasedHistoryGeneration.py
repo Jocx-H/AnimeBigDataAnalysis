@@ -8,7 +8,8 @@ import random
 import time
 from typing import MappingView
 import json
-from datetime import date
+import datetime
+
 
 '''
 imgBasedHistoryGeneration.py
@@ -41,8 +42,8 @@ tagSet = {}             # 用户画像对应的tag集合
 userData = {}           # 单个用户数据列表
 sysData = []            # 系统用户总数据 sysData = [userData1, userData2, ...]
 recordList = []         # recordList = [[dailyRecord-user1], [dailyRecord-user2], ...]
-initDate = "2022-01-01"
-
+initDate = datetime.datetime.now()
+initDateStamp = initDate.timestamp()
 
 '''
 根据用户id进行初始数据生成（某个用户，init为每项单条）
@@ -60,7 +61,7 @@ def initDataGenerate(userId: int) -> dict:
     animeMark.append(round(random.random(), 2))     # 用户观看时长百分比
     animeMark.append((random.random() > 0.5))       # 点赞（bool）
     animeMark.append((random.random() > 0.5))       # 收藏（bool）
-    animeMark.append(initDate)                      # 日期（date）
+    animeMark.append(initDateStamp)                      # 日期（date）
     animeDic[animeId] = animeMark
     userHistoryList.append(animeDic)
     # 漫画 作品编号2开头
@@ -72,7 +73,7 @@ def initDataGenerate(userId: int) -> dict:
     comicMark.append(round(random.random(), 2))     # 用户观看时长百分比
     comicMark.append((random.random() > 0.5))       # 点赞（bool）
     comicMark.append((random.random() > 0.5))       # 收藏（bool）
-    comicMark.append(initDate)                      # 日期（date）
+    comicMark.append(initDateStamp)                      # 日期（date）
     comicDic[comicId] = comicMark
     userHistoryList.append(comicDic)
     # 小说 作品编号3开头
@@ -84,7 +85,7 @@ def initDataGenerate(userId: int) -> dict:
     novelMark.append(round(random.random(), 2))     # 用户观看时长百分比
     novelMark.append((random.random() > 0.5))       # 点赞（bool）
     novelMark.append((random.random() > 0.5))       # 收藏（bool）
-    novelMark.append(initDate)                      # 日期（date）
+    novelMark.append(initDateStamp)                      # 日期（date）
     novelDic[novelId] = novelMark
     userHistoryList.append(novelDic)
     # cosplay 作品编号4开头
@@ -96,7 +97,7 @@ def initDataGenerate(userId: int) -> dict:
     cosMark.append(round(random.random(), 2))       # 用户观看时长百分比
     cosMark.append((random.random() > 0.5))         # 点赞（bool）
     cosMark.append((random.random() > 0.5))         # 收藏（bool）
-    cosMark.append(initDate)                        # 日期（date）
+    cosMark.append(initDateStamp)                        # 日期（date）
     cosDic[cosId] = cosMark
     userHistoryList.append(cosDic)
     # userData
@@ -133,12 +134,13 @@ ctrlCode: 控制码，0表示无特定画像的用户，1表示有画像的用�
 userId: 用户id
 currDate: 插入日期
 '''
-def imgDailyGenerate(ctrlCode: int, userId: int, currDate: str):
+def imgDailyGenerate(ctrlCode: int, userId: int, currDate: float):
     global preferenceRate
+    preferFactor = 1        # 偏好因子：有偏好画像的用户对于特定的作品三连概率更高，以此修正
     if ctrlCode == 0:       # 无具体画像的用户无显著偏好，preferenceRate = 0
         preferenceRate = 0
-    else:                   # 有具体画像的用户阅览内容时有偏好，preferenceRate = 0.7(原始设置)
-        pass
+    else:                   # 有具体画像的用户阅览内容时有偏好，preferenceRate = 0.7(原始设置)，preferFactor = 1.5
+        preferFactor = 1.5
     dailyRecordList = []    # 某用户record.py中的recordList，记录用户每天观看的各种类型作品的信息
     userData = sysData[userId-10000]
     # 动漫 - 每天有0.7的概率会看动漫
@@ -151,11 +153,14 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: str):
         dailyAnimeId = animeOption1 if random.random() > preferenceRate else animeOption2
         # dailyRecordList.append(dailyAnimeId == animeOption2) # -- 测试选项 --
         dailyAnimeMark = []
-        dailyAnimeMark.append(int(random.random() * 6))
+        animeScore = int(random.random() * 6)
+        if animeScore < 5:
+            animeScore += ctrlCode * 1 # 评分偏好
+        dailyAnimeMark.append(animeScore)
         dailyAnimeMark.append(round(random.random(), 2))
-        dailyAnimeMark.append((random.random() > 0.5))  # 点赞
-        dailyAnimeMark.append((random.random() > 0.5))  # 收藏
-        dailyAnimeMark.append(currDate)                 # 日期
+        dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 点赞
+        dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 收藏
+        dailyAnimeMark.append(currDate)                                 # 日期
         userData[userId][0][dailyAnimeId] = dailyAnimeMark
     # 漫画 - 每天有0.7的概率会看漫画
     dailyComicNum = int(random.random() * 5) if random.random() < comicDailyRate else 0
@@ -167,11 +172,14 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: str):
         dailyComicId = comicOption1 if random.random() > preferenceRate else comicOption2
         # dailyRecordList.append(dailyComicId == comicOption2) # -- 测试选项 --
         dailyComicMark = []
-        dailyComicMark.append(int(random.random() * 6))
+        comicScore = int(random.random() * 6)
+        if comicScore < 5:
+            comicScore += ctrlCode * 1  # 评分偏好
+        dailyComicMark.append(comicScore)
         dailyComicMark.append(round(random.random(), 2))
-        dailyComicMark.append((random.random() > 0.5))  # 点赞
-        dailyComicMark.append((random.random() > 0.5))  # 收藏
-        dailyComicMark.append(currDate)                 # 日期
+        dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 点赞
+        dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 收藏
+        dailyComicMark.append(currDate)                                 # 日期
         userData[userId][1][dailyComicId] = dailyComicMark
     # 小说 - 每天有0.7的概率会看小说
     dailyNovelNum = int(random.random() * 5) if random.random() < novelDailyRate else 0
@@ -183,11 +191,14 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: str):
         dailyNovelId = novelOption1 if random.random() > preferenceRate else novelOption2
         # dailyRecordList.append(dailyNovelId == novelOption2) # -- 测试选项 --
         dailyNovelMark = []
-        dailyNovelMark.append(int(random.random() * 6))
+        novelScore = int(random.random() * 6)
+        if novelScore < 5:
+            novelScore += ctrlCode * 1  # 评分偏好
+        dailyNovelMark.append(novelScore)
         dailyNovelMark.append(round(random.random(), 2))
-        dailyNovelMark.append((random.random() > 0.5))  # 点赞
-        dailyNovelMark.append((random.random() > 0.5))  # 收藏
-        dailyNovelMark.append(currDate)                 # 日期
+        dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 点赞
+        dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 收藏
+        dailyNovelMark.append(currDate)                                 # 日期
         userData[userId][2][dailyNovelId] = dailyNovelMark
     # cosplay - 每天有0.25的概率会看cosplay
     dailyCosNum = int(random.random() * 5) if random.random() < cosDailyRate else 0
@@ -199,11 +210,14 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: str):
         dailyCosId = cosOption1 if random.random() > preferenceRate else cosOption2
         # dailyRecordList.append(dailyCosId == cosOption2) # -- 测试选项 --
         dailyCosMark = []
-        dailyCosMark.append(int(random.random() * 6))
+        cosScore = int(random.random() * 6)
+        if cosScore < 5:
+            cosScore += ctrlCode * 1  # 评分偏好
+        dailyCosMark.append(cosScore)
         dailyCosMark.append(round(random.random(), 2))
-        dailyCosMark.append((random.random() > 0.5))    # 点赞
-        dailyCosMark.append((random.random() > 0.5))    # 收藏
-        dailyCosMark.append(currDate)                   # 日期
+        dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 点赞
+        dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 收藏
+        dailyCosMark.append(currDate)                                   # 日期
         userData[userId][3][dailyCosId] = dailyCosMark
     return userData, dailyRecordList
 
@@ -223,27 +237,31 @@ def init():
 '''【 ☆ 注意：插入日期的格式还有问题！】'''
 if __name__ == '__main__':
     init()
+    timeDateForm = initDate
     time.sleep(0.1)
-    for day in range(2, 5): # 日期遍历（eg：更新三天的阅览记录）
+    for day in range(1, 5): # 日期遍历（eg：更新4天的阅览记录）
+        currDateForm = timeDateForm - day * datetime.timedelta(days = 1)
+        currDate = float(currDateForm.timestamp())
         for i in range(startUserId, startUserId + usersTotalNum): # 用户id遍历
             if i in range(10000, 10002):    # 中二
                 setUserImg('zhonger')
-                recordList.append(imgDailyGenerate(1, i, '2022-01-0'+str(day))[1])
+                recordList.append(imgDailyGenerate(1, i, currDate)[1])
             elif i in range(10002, 10004):  # 现充
                 setUserImg('xianchong')
-                recordList.append(imgDailyGenerate(1, i, '2022-01-0'+str(day))[1])
+                recordList.append(imgDailyGenerate(1, i, currDate)[1])
             elif i in range(10004, 10006):  # 肥宅
                 setUserImg('feizhai')
-                recordList.append(imgDailyGenerate(1, i, '2022-01-0'+str(day))[1])
+                recordList.append(imgDailyGenerate(1, i, currDate)[1])
             elif i in range(10006, 10008):  # 志怪
                 setUserImg('zhiguai')
-                recordList.append(imgDailyGenerate(1, i, '2022-01-0'+str(day))[1])
+                recordList.append(imgDailyGenerate(1, i, currDate)[1])
             elif i in range(10008, 10010):  # 青春
                 setUserImg('qingchun')
-                recordList.append(imgDailyGenerate(1, i, '2022-01-0'+str(day))[1])
+                recordList.append(imgDailyGenerate(1, i, currDate)[1])
             else:                           # 无特定画像
-                recordList.append(imgDailyGenerate(0, i, '2022-01-0' + str(day))[1])
+                recordList.append(imgDailyGenerate(0, i, currDate)[1])
     print('generate completed!')
+
     # 写入json文件中（多行写入）
     with open("sysData.json", "w", encoding='utf-8') as f:
         json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)
