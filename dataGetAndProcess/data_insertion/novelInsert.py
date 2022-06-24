@@ -44,7 +44,7 @@ def ins_novel(novel_json_path):
         value = list(line.values())
         # print(attr)
         # print(value)
-        #     拼接sql方言
+        # 拼接sql方言
         print(value)
         nid = value[-1]
         nid = int(nid)
