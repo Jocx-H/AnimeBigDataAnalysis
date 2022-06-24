@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:42
-# @Author: Jocx
-# @Description:
-#   提供给热门推荐API的服务，包括：
-#       按热度降序排序动漫、小说、漫画和cosplay
+'''
+@Time: 2022/6/23 9:42
+@Author: Jocx
+@Description:
+  提供给热门推荐API的服务，包括：
+      按热度降序排序动漫、小说、漫画和cosplay
+'''
 
 
 def __statAnime__():

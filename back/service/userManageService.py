@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:43
-# @Author: Jocx
-# @Description:
-#   提供给用户管理API的服务，包括：
-#       对用户的登录信息进行验证
+'''
+@Time: 2022/6/23 9:43
+@Author: Jocx
+@Description:
+    提供给用户管理API的服务，包括：
+        对用户的登录信息进行验证
+'''
 
 
 from fastapi import HTTPException

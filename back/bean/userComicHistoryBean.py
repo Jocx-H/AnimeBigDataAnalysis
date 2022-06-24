@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 17:08
-# @Author: Jocx
-# @Description: 数据表单`用户漫画浏览记录`的抽象类
+'''
+@Time: 2022/6/23 17:08
+@Author: Jocx
+@Description: 数据表单`用户漫画浏览记录`的抽象类
+'''
 
 
 from dataclasses import dataclass

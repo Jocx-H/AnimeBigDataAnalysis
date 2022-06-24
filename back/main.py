@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+'''
 # @Time: 2022/6/23 9:39
-# @Author: Jocx
+# @Author: 何润熹
 # @Description: 二次元动漫推荐系统主程序，用于开发环境的调试
+'''
 
 import uvicorn
 from fastapi import FastAPI, File, UploadFile, Form

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:39
-# @Author: Jocx
-# @Description:
-#   前端调用的获取个性化推荐的动漫、小说、漫画按用户喜好程度降序排序的API
+'''
+@Time: 2022/6/23 9:39
+@Author: Jocx
+@Description:
+  前端调用的获取个性化推荐的动漫、小说、漫画按用户喜好程度降序排序的API
+'''
 
 import traceback
 from fastapi import APIRouter, Query, Path, HTTPException

@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:41
-# @Author: Jocx
-# @Description:
+'''
+@Time: 2022/6/23 9:41
+@Author: Jocx
+@Description:
+'''
 
 import traceback
 from fastapi import APIRouter, Query, Path, HTTPException

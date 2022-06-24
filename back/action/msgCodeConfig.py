@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 15:07
-# @Author: Jocx
-# @Description: 配置各种状态码返回的信息
+'''
+@Time: 2022/6/23 15:07
+@Author: Jocx
+@Description: 配置各种状态码返回的信息
+'''
 
 from pydantic import BaseModel
 

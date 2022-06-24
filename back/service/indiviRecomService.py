@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:42
-# @Author: Jocx
-# @Description:
-#   提供给个性化推荐API的服务，包括：
-#       按用户喜好程度降序排序动漫、小说、漫画
+'''
+@Time: 2022/6/23 9:42
+@Author: Jocx
+@Description:
+  提供给个性化推荐API的服务，包括：
+      按用户喜好程度降序排序动漫、小说、漫画
+'''
 
 
 def __computeAnime__(uname: str):

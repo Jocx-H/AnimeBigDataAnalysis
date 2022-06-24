@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# @Time: 2022/6/23 9:42
-# @Author: Jocx
-# @Description:
-#   获取动漫、小说、漫画和cosplay各项统计信息的API
-#   统计信息包括：
-#       动漫、小说的分数；
-#       动漫、小说、漫画的类型；
-#       动漫、小说、漫画、cosplay的关键词
+'''
+@Time: 2022/6/23 9:42
+@Author: Jocx
+@Description:
+  获取动漫、小说、漫画和cosplay各项统计信息的API
+  统计信息包括：
+      动漫、小说的分数；
+      动漫、小说、漫画的类型；
+      动漫、小说、漫画、cosplay的关键词
+'''
 
 import traceback
 from fastapi import APIRouter, Query, Path, HTTPException
