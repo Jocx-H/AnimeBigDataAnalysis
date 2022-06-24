@@ -28,3 +28,4 @@ class BlibliItem(scrapy.Item):
     cm_count = scrapy.Field()       # 评论数
     score = scrapy.Field()          # 评分
     media_tags = scrapy.Field()     # 类型标签
+    introduce = scrapy.Field()      # 简介
