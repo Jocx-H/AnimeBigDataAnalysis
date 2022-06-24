@@ -1,4 +1,8 @@
 # -*- coding: gbk -*-
+# @Time :2022/6/21 16:32
+# @File : getUserImgIdList.py
+# @author: derrick
+
 import random
 import time
 from typing import MappingView

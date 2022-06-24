@@ -1,4 +1,4 @@
-# -*- codeing = utf-8 -*-
+# -*- coding = utf-8 -*-
 # @Time :2022/6/23 18:51
 # @File : imgBasedHistoryGeneration.py
 # @author: derrick

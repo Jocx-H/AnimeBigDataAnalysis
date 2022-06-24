@@ -1,3 +1,9 @@
+'''
+@Time: 2022/6/23 9:42
+@Author: WILLOSCAR
+@Description:
+生成浏览记录
+'''
 import numpy
 import random
 import pandas
