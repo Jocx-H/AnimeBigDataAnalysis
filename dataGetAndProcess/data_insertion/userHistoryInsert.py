@@ -1,6 +1,6 @@
 # -*- coding = utf-8 -*-
 # @Time :2022/6/24 15:08
-# @File : userHistoryDao.py
+# @File : userHistoryInsert.py
 # @Author : derrick
 
 import pymysql
