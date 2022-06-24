@@ -17,7 +17,7 @@ timestamp = time.time()
 Day = 24 * 3600
 timeList = []
 strfTimeList = []
-with open("../../data/anime.json", encoding="utf-8") as file:
+with open("../../data/preData/preAnime.json", encoding="utf-8") as file:
     file_json = json.load(file)
 
 animeMaxNum = 3531

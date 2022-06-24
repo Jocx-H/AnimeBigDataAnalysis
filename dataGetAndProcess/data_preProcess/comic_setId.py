@@ -3,9 +3,9 @@ import codecs
 import os
 
 if __name__ == '__main__':
-    with open("../data/comic.json", encoding="utf-8") as file:
+    with open("../data/preData/preComic.json", encoding="utf-8") as file:
         file_json = json.load(file)
-    json_file = codecs.open('../data/comic_2.json', 'w+', encoding='UTF-8')
+    json_file = codecs.open('../data/comic.json', 'w+', encoding='UTF-8')
     json_file.write('[\n')
     id = 1
     for line in file_json:

@@ -23,7 +23,7 @@ class BlibliPipeline:
     def __init__(self):
         # 必须使用 w+ 模式打开文件，以便后续进行 读写操作（w+模式，意味既可读，亦可写）
         # 注意：此处打开文件使用的不是 python 的 open 方法，而是 codecs 中的 open 方法
-        self.json_file = codecs.open('novel.json', 'w+', encoding='UTF-8')
+        self.json_file = codecs.open('preNovel.json', 'w+', encoding='UTF-8')
 
     # 爬虫开始时执行的方法
     def open_spider(self, spider):

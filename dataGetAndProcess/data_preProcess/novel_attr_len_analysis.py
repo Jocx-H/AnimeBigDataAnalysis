@@ -3,7 +3,7 @@ import codecs
 import os
 
 if __name__ == '__main__':
-    with open("../data/novel_3.json", encoding="utf-8") as file:
+    with open("../data/novel.json", encoding="utf-8") as file:
         file_json = json.load(file)
     max_title = 1
     max_url = 1

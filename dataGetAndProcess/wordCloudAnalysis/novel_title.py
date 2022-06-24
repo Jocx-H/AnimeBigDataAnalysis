@@ -15,7 +15,7 @@ def getStopWords(stopWords_filePath):
     return stopwords
 
 if __name__ == '__main__':
-    with open("../data/novel.json", encoding="utf-8") as file:
+    with open("../data/preData/preNovel.json", encoding="utf-8") as file:
         file_json = json.load(file)
     text = ""
     for line in file_json:

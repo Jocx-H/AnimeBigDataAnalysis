@@ -42,7 +42,7 @@ qingchunTagSet = set(qingchun)
 def getAnimeIdBasedOnTags(tagSet: set) -> list:
     animeTagIdList = []
     cnt = 0
-    with open("../data/anime_1.json", encoding = "utf-8") as file:
+    with open("../data/anime.json", encoding ="utf-8") as file:
         file_json = json.load(file)
     for line in file_json:
         cnt = 0
@@ -58,7 +58,7 @@ def getAnimeIdBasedOnTags(tagSet: set) -> list:
 def getComicIdBasedOnTags(tagSet: set) -> list:
     comicTagIdList = []
     cnt = 0
-    with open("../data/comic_2.json", encoding = "utf-8") as file:
+    with open("../data/comic.json", encoding ="utf-8") as file:
         file_json = json.load(file)
     for line in file_json:
         cnt = 0
@@ -73,7 +73,7 @@ def getComicIdBasedOnTags(tagSet: set) -> list:
 # 小说
 def getNovelIdBasedOnTags(tagSet: set) -> list:
     novelTagIdList = []
-    with open("../data/novel_3.json", encoding = "utf-8") as file:
+    with open("../data/novel.json", encoding ="utf-8") as file:
         file_json = json.load(file)
     for line in file_json:
         for tag in tagSet:
@@ -84,7 +84,7 @@ def getNovelIdBasedOnTags(tagSet: set) -> list:
 # cosplay(实际上cosplay无tag，不基于画像甄别，返回全部id)
 def getCosIdBasedOnTags(tagSet: set) -> list:
     cosTagIdList = []
-    with open("../data/cos_4.json", encoding = "utf-8") as file:
+    with open("../data/cos.json", encoding ="utf-8") as file:
         file_json = json.load(file)
     for line in file_json:
         cosTagIdList.append(line['id'])

@@ -7,7 +7,7 @@ if __name__ == '__main__':
     # conf = SparkConf().setMaster("spark://Pspark:7077").setAppName("rdd-1")
     conf = SparkConf().setMaster("local[2]").setAppName("rdd-1")
     sc = SparkContext(conf=conf)
-    with open("../data/novel.json", encoding="utf-8") as file:
+    with open("../data/preData/preNovel.json", encoding="utf-8") as file:
         file_json = json.load(file)
     # 将每line的所有标签添加进data中
     data = []

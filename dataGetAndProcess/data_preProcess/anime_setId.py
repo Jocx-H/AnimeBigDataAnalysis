@@ -3,9 +3,9 @@ import codecs
 import os
 
 if __name__ == '__main__':
-    with open("../data/anime+intro.json", encoding="utf-8") as file:
+    with open("../data/preData/preAnime.json", encoding="utf-8") as file:
         file_json = json.load(file)
-    json_file = codecs.open('../data/anime_1.json', 'w+', encoding='UTF-8')
+    json_file = codecs.open('../data/anime.json', 'w+', encoding='UTF-8')
     json_file.write('[\n')
     id = 1
     max_intro = 1
