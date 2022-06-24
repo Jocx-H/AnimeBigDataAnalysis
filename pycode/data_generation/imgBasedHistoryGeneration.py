@@ -108,7 +108,7 @@ def initDataGenerate(userId: int) -> dict:
 '''
 设定用户的画像
 '''
-def setUserImg(type: str) -> set:
+def setUserImg(type: str):
     tagSet = {}
     if type == 'zhonger':       # 中二
         tagSet = getList.zhongerTagSet
@@ -121,11 +121,14 @@ def setUserImg(type: str) -> set:
     elif type == 'qingchun':    # 青春
         tagSet = getList.qingchunTagSet
     global animeSelectList, comicSelectList, novelSelectList, cosSelectList
-    animeSelectList = getList.getAnimeIdBasedOnTags(tagSet)
-    comicSelectList = getList.getComicIdBasedOnTags(tagSet)
-    novelSelectList = getList.getNovelIdBasedOnTags(tagSet)
-    cosSelectList = getList.getCosIdBasedOnTags(tagSet)
-
+    # 读取已经保存的各个画像对应的selectList：空间换时间
+    jsonPath = type + "SelectList.json"
+    jsonFile = open(jsonPath, 'r')
+    selectList = json.load(jsonFile)
+    animeSelectList = selectList[0]
+    comicSelectList = selectList[1]
+    novelSelectList = selectList[2]
+    cosSelectList = selectList[3]
 
 '''
 基于用户画像的记录生成函数：
@@ -237,7 +240,7 @@ def init():
 if __name__ == '__main__':
     init()
     timeDateForm = initDate
-    time.sleep(0.1)
+    time.sleep(0.001)
     for day in range(1, 5): # 日期遍历（eg：更新4天的阅览记录）
         currDateForm = timeDateForm - day * datetime.timedelta(days = 1)
         currDate = int(currDateForm.timestamp() * 1000000)
