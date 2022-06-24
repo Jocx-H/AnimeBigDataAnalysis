@@ -26,7 +26,7 @@ class SpiderBlSpider(scrapy.Spider):
         # if self.page == 2:  # 限制爬取页数，用于测试爬取状态
         #     return
         list_data = json.loads(response.text).get('result').get('data')
-        if list_data is None:  # 如果响应中没有数据，则结束执行
+        if len(list_data) == 0: # 如果响应中没有数据，则结束执行
             return
 
         for data in list_data:
@@ -57,6 +57,7 @@ class SpiderBlSpider(scrapy.Spider):
         item['coins'] = resp_data.get('coins')
         item['views'] = resp_data.get('views')
         item['danmakus'] = resp_data.get('danmakus')
+
         yield scrapy.Request(url=self.media_url.format(item['media_id']),
                              callback=self.parse_media,
                              meta=item)
@@ -74,4 +75,20 @@ class SpiderBlSpider(scrapy.Spider):
             item['cm_count'] = resp.xpath('//div[@class="media-info-review-times"]/text()').extract()[0]
         except Exception:
             item['cm_count'] = '0人评'
+
+        yield scrapy.Request(url=item['video_link'],
+                             callback=self.parse_intro,
+                             meta=item)
+
+    def parse_intro(self, response):
+        item = response.meta
+
+        try:
+            item['introduce'] = response.xpath('//meta[@name="description"]/@content').extract_first()
+            item['introduce'] = re.sub('[\n\t\r]', '', item['introduce'])
+        except Exception:
+            item['introduce'] = '暂无简介'
+
         yield item
+
+
