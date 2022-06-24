@@ -22,7 +22,7 @@ def __hashPassword__(password: str):
     return usrHash.hexdigest()
 
 
-def usrLogin(username, password) -> dict:
+def usrLogin(username: str, password: str) -> dict:
     r"""
     检查用户账号和密码是否与数据库中账号密码匹配
     """

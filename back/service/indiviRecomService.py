@@ -30,11 +30,11 @@ def __computeComic__(uname: str):
     pass
 
 
-def getAnime(uname: str):
+def getAnime(uname: str) -> dict:
     return {'result': __computeAnime__(uname)}
 
 
-def getNovel(uname: str):
+def getNovel(uname: str) -> dict:
     return {'result': __computeNovel__(uname)}
 
 

@@ -23,7 +23,7 @@ router = APIRouter(
 
 
 @router.get("/anime", responses={400: {"model": Code400}})
-async def getAnime():
+def getAnime():
     r"""
     按热度升序获得热门动漫数据
     """
@@ -39,7 +39,7 @@ async def getAnime():
 
 
 @router.get("/novel", responses={400: {"model": Code400}})
-async def getNovel():
+def getNovel():
     r"""
     按热度降序获得热门小说数据
     """
@@ -55,7 +55,7 @@ async def getNovel():
 
 
 @router.get("/comic", responses={400: {"model": Code400}})
-async def getComic():
+def getComic():
     r"""
     按热度降序获得热门漫画数据
     """
@@ -71,7 +71,7 @@ async def getComic():
 
 
 @router.get("/cosplay", responses={400: {"model": Code400}})
-async def getCosplay():
+def getCosplay():
     r"""
     按热度降序获得热门cosplay数据
     """
