@@ -9,8 +9,8 @@ import time
 from typing import MappingView
 import json
 import datetime
-from pycode.data_generation import getUserImgIdList as getList
-from pycode.data_generation import imgBasedHistoryGeneration as imgGer
+from dataGetAndProcess.data_generation import getUserImgIdList as getList
+from dataGetAndProcess.data_generation import imgBasedHistoryGeneration as imgGer
 
 '''
 将用户初始数据和每日阅览数据加入数据库
