@@ -1,3 +1,9 @@
+'''
+@Time:
+@Author: WILLOSCAR
+@Description:
+生成浏览记录
+'''
 import numpy
 import random
 import pandas
