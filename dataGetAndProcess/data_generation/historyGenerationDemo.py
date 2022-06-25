@@ -37,7 +37,7 @@ def generateHistory(userId: int):
     # list类型: [userId, {12:[3, 0.85, 1, 0], 45: [4, 0.40, 0, 1], ...}, {12:[3, 0.85, 0, 0], 45: [4, 0.40, 1, 1], ...}, ...]
     # 第一项是用户ID,第二、三、四、五项分别是动漫、漫画、小说、cosplay记录（字典类型）
     # 作品评分: 满分5分,最低分1分,0分表示观看但未评分
-    # mark列表中存放莫用户作品的观看信息，由评分(int)、观看时长占总时长占比(float)、点赞(bool)、收藏(bool)构成：[score, timePercentage, like, collect]
+    # mark列表中存放莫用户作品的观看信息，由评分(int)、观看时长占总时长占比(float)、点赞(bool)、收藏(bool)构成
     userData = []
     userData.append(userId)
     # 动漫 作品编号1开头

@@ -3,7 +3,7 @@
 # @File : imgBasedHistoryGeneration.py
 # @author: derrick
 
-import getUserImgIdList as getList
+from dataGetAndProcess.data_generation import getUserImgIdList as getList
 import random
 import time
 from typing import MappingView
@@ -61,7 +61,7 @@ def initDataGenerate(userId: int) -> dict:
     animeMark.append(round(random.random(), 2))     # 用户观看时长百分比
     animeMark.append((random.random() > 0.5))       # 点赞（bool）
     animeMark.append((random.random() > 0.5))       # 收藏（bool）
-    animeMark.append(initDateStamp)                      # 日期（date）
+    animeMark.append(initDateStamp)                 # 日期（date）
     animeDic[animeId] = animeMark
     userHistoryList.append(animeDic)
     # 漫画 作品编号2开头
@@ -73,7 +73,7 @@ def initDataGenerate(userId: int) -> dict:
     comicMark.append(round(random.random(), 2))     # 用户观看时长百分比
     comicMark.append((random.random() > 0.5))       # 点赞（bool）
     comicMark.append((random.random() > 0.5))       # 收藏（bool）
-    comicMark.append(initDateStamp)                      # 日期（date）
+    comicMark.append(initDateStamp)                 # 日期（date）
     comicDic[comicId] = comicMark
     userHistoryList.append(comicDic)
     # 小说 作品编号3开头
@@ -85,7 +85,7 @@ def initDataGenerate(userId: int) -> dict:
     novelMark.append(round(random.random(), 2))     # 用户观看时长百分比
     novelMark.append((random.random() > 0.5))       # 点赞（bool）
     novelMark.append((random.random() > 0.5))       # 收藏（bool）
-    novelMark.append(initDateStamp)                      # 日期（date）
+    novelMark.append(initDateStamp)                 # 日期（date）
     novelDic[novelId] = novelMark
     userHistoryList.append(novelDic)
     # cosplay 作品编号4开头
@@ -97,7 +97,7 @@ def initDataGenerate(userId: int) -> dict:
     cosMark.append(round(random.random(), 2))       # 用户观看时长百分比
     cosMark.append((random.random() > 0.5))         # 点赞（bool）
     cosMark.append((random.random() > 0.5))         # 收藏（bool）
-    cosMark.append(initDateStamp)                        # 日期（date）
+    cosMark.append(initDateStamp)                   # 日期（date）
     cosDic[cosId] = cosMark
     userHistoryList.append(cosDic)
     # userData

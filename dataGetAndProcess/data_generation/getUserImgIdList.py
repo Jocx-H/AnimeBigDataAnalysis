@@ -93,15 +93,16 @@ def getCosIdBasedOnTags(tagSet: set) -> list:
 # 测试代码
 # print(len(getNovelIdBasedOnTags(qingchunTagSet)))
 
-# 保存各个画像对应的selectList以提高速度：空间换时间
-tagSet = qingchunTagSet
-imgList = []
-animeList = getAnimeIdBasedOnTags(tagSet)
-comicList = getComicIdBasedOnTags(tagSet)
-novelList = getNovelIdBasedOnTags(tagSet)
-cosList = getCosIdBasedOnTags(tagSet)
-imgList = [animeList, comicList, novelList, cosList]
-# 写入json文件中（多行写入）
-with open("qingchunSelectList.json", "w", encoding='utf-8') as f:
-    json.dump(imgList, f, indent = 2, sort_keys = True, ensure_ascii = False)
-print('write into json completed!')
+if __name__ == "__main__":
+    # 保存各个画像对应的selectList以提高速度：空间换时间
+    tagSet = qingchunTagSet
+    imgList = []
+    animeList = getAnimeIdBasedOnTags(tagSet)
+    comicList = getComicIdBasedOnTags(tagSet)
+    novelList = getNovelIdBasedOnTags(tagSet)
+    cosList = getCosIdBasedOnTags(tagSet)
+    imgList = [animeList, comicList, novelList, cosList]
+    # 写入json文件中（多行写入）
+    with open("qingchunSelectList.json", "w", encoding='utf-8') as f:
+        json.dump(imgList, f, indent = 2, sort_keys = True, ensure_ascii = False)
+    print('write into json completed!')
