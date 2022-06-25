@@ -92,7 +92,7 @@ def ins_novel(novel_json_path):
 
 
 if __name__ == '__main__':
-    novel_json_path = '../data/novel_3.json'
+    novel_json_path = '../data/novel.json'
     ins_novel(novel_json_path)
     cursor.close()
     conn.close()
