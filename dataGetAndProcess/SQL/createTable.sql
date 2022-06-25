@@ -84,6 +84,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- Table structure for novel
 -- ----------------------------
 
+DROP TABLE IF EXISTS `novel`;
 create table novel
 (
     `nid`         int          not null
@@ -166,6 +167,7 @@ CREATE TABLE `usercomichistory`  (
 
 SET FOREIGN_KEY_CHECKS = 1;
 
+DROP TABLE IF EXISTS `UserCosplayHistory`;
 create table UserCosplayHistory
 (
     `coshid`    int    AUTO_INCREMENT    not null,
@@ -175,7 +177,7 @@ create table UserCosplayHistory
     `ratio`     float      null,
     `thumb`    tinyint(1) null,
     `collect`   tinyint(1) null,
-    `time` date       null,
+    `time` bigint(0)       null,
     constraint UserCosplayHistory_pk
         primary key (coshid),
     constraint UserCosplayHistory___fk1
@@ -184,7 +186,7 @@ create table UserCosplayHistory
         foreign key (cosid) references cosplay (cosid)
 );
 
-
+DROP TABLE IF EXISTS `UserNovelHistory`;
 create table UserNovelHistory
 (
     `nhid`    int    AUTO_INCREMENT    not null,
@@ -194,7 +196,7 @@ create table UserNovelHistory
     `ratio`     float      null,
     `thumb`    tinyint(1) null,
     `collect`   tinyint(1) null,
-    `time` date       null,
+    `time` bigint(0)       null,
     constraint UserNovelHistory_pk
         primary key (nhid),
     constraint UserNovelHistory___fk1

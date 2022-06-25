@@ -1,3 +1,6 @@
+"""
+@Author: CloudAndMist
+"""
 import scrapy
 from BliBli.items import BlibliItem
 import json

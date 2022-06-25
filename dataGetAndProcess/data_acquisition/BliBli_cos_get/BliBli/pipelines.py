@@ -12,8 +12,8 @@
 from itemadapter import ItemAdapter
 import json
 import json
-import codecs
 import os
+import codecs
 import re
 from datetime import datetime
 import scrapy
@@ -22,11 +22,22 @@ from scrapy.spiders import CrawlSpider
 
 class BlibliPipeline:
 
+    # def open_spider(self, spider):
+    #     self.file = open('bilibili_comic.json', 'a+', encoding='utf-8')
+    #
+    # def process_item(self, item, spider):
+    #     content = json.dumps(dict(item), ensure_ascii=False) + ',\n'
+    #     self.file.write(content)
+    #     return item
+    #
+    # def close_spider(self, spider):
+    #     self.file.close()
+
     # 构造方法（初始化对象时执行的方法）
     def __init__(self):
         # 必须使用 w+ 模式打开文件，以便后续进行 读写操作（w+模式，意味既可读，亦可写）
         # 注意：此处打开文件使用的不是 python 的 open 方法，而是 codecs 中的 open 方法
-        self.json_file = codecs.open('../../../data/anime+intro.json', 'w+', encoding='UTF-8')
+        self.json_file = codecs.open('../../data/cos.json', 'w+', encoding='UTF-8')
 
     # 爬虫开始时执行的方法
     def open_spider(self, spider):
