@@ -2,36 +2,24 @@
 # -*- coding: utf-8 -*-
 # ---
 # @Software: PyCharm
-# @File: animeIns.py
+# @File: animeInsTest.py
 # @Author: WILLOSCAR
 # @Institution: --- University, ---, China
 # @E-mail: ---@---.com, ---@---.edu.cn
 # @Site: 
 # @Time: 6月 24, 2022
 # ---
-# !/anaconda3/python3.7
-# -*- coding: utf-8 -*-
-# ---
-# @Software: PyCharm
-# @File: animeInsert.py
-# @Author: WILLOSCAR
-# @Institution: --- University, ---, China
-# @E-mail: ---@---.com, ---@---.edu.cn
-# @Site:
-# @Time: 6月 24, 2022
-# ---
 import pymysql
 import prettytable as pt
 import json
 import time
-from pymysql.converters import escape_string
 
 # 填写数据库有关信息
 dbconfig = {
     'host': '127.0.0.1',
     'port': 3306,
     'user': 'root',
-    'password': 'xxxxx',
+    'password': 'xxxxxxx',
     'database': 'anime',
     'charset': 'utf8'
 }
@@ -44,6 +32,12 @@ cursor.execute("SELECT VERSION()")
 # 使用 fetchone() 方法获取单条数据.
 data = cursor.fetchone()
 print("Database version : %s " % data)
+
+
+def trans_time(stamp: int):
+    time_local = time.localtime(stamp)
+    dtime = time.strftime("%Y-%m-%d", time_local)
+    return dtime
 
 
 def ins_anime(anime_json_path):
@@ -62,19 +56,26 @@ def ins_anime(anime_json_path):
         aid = int(aid)
         j = 2
         title = value[j]
-        title = escape_string(title)
         index_show = value[j + 1]
         is_finished = value[j + 2]
         is_finished = int(is_finished)
         video_link = value[j + 3]
         cover = value[j + 4]
         pub_real_time = value[j + 5]
+
+        # timestamp转换 Y-M-D
+        # *100000数据格式不对
         pub_real_time = int(pub_real_time)
+        time_local = time.localtime(pub_real_time)
+        dtime = time.strftime("%Y-%m-%d", time_local)
+        pub_real_time = dtime
         renewal_time = value[j + 6]
-        if renewal_time is None:
-            renewal_time = pub_real_time
-        else:
-            renewal_time = int(renewal_time)
+        renewal_time = int(renewal_time)
+        time_local = time.localtime(renewal_time)
+        dtime = time.strftime("%Y-%m-%d", time_local)
+        print(dtime)
+        renewal_time = dtime
+
         favorites = value[j + 7]
         favorites = int(favorites)
         coins = value[j + 8]
@@ -98,34 +99,3 @@ def ins_anime(anime_json_path):
             score = float(score)
         cm_count = value[-3]
         introduce = value[-2]
-        introduce = escape_string(introduce)
-
-        # sql = "INSERT INTO " \
-        #       "anime(nid,url,cover,title,author) " \
-        #       "VALUES (%d,'%s','%s','%s','%s')" %(nid, url, cover, title, author)
-        op1 = (aid, title, index_show, is_finished, video_link, cover, pub_real_time
-               , renewal_time, favorites, coins, views, danmakus, depth, media_tags, score, cm_count, introduce)
-        sql = """INSERT INTO 
-        anime(aid,title,index_show,is_finished,video_link,cover,pub_real_time,renewal_time,favorites,coins,views,danmakus,depth,media_tags,score,cm_count,introduce) 
-        VALUES (%d,'%s','%s',%d,'%s','%s','%s',%s,%d,%d,%d,%d,%d,'%s',%f,'%s','%s')""" % op1
-
-        cursor.execute(sql)
-        conn.commit()
-        # # op2 = (nid, url, cover, title, author)
-        # try:
-        #     # 执行sql语句
-        #     cursor.execute(sql)
-        #     # print("success")
-        #     # 提交到数据库执行
-        #     conn.commit()
-        # except:
-        #     # 如果发生错误则回滚
-        #     print("failed")
-        #     conn.rollback()
-
-
-if __name__ == '__main__':
-    anime_json_path = '../data/anime.json'
-    ins_anime(anime_json_path)
-    cursor.close()
-    conn.close()
