@@ -125,7 +125,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `useranimehistory`;
 CREATE TABLE `useranimehistory`  (
-  `ahid` int(0) NOT NULL,
+  `ahid` int(0) AUTO_INCREMENT NOT NULL,
   `uid` int(0) NULL DEFAULT NULL,
   `aid` int(0) NULL DEFAULT NULL,
   `score` float NULL DEFAULT NULL,
@@ -149,7 +149,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `usercomichistory`;
 CREATE TABLE `usercomichistory`  (
-  `chid` int(0) NOT NULL,
+  `chid` int(0) AUTO_INCREMENT NOT NULL,
   `uid` int(0) NULL DEFAULT NULL,
   `cid` int(0) NULL DEFAULT NULL,
   `score` float NULL DEFAULT NULL,
@@ -168,7 +168,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 create table UserCosplayHistory
 (
-    `coshid`    int        not null,
+    `coshid`    int    AUTO_INCREMENT    not null,
     `uid`       int        null,
     `cosid`     int        null,
     `score`     float      null,
@@ -187,7 +187,7 @@ create table UserCosplayHistory
 
 create table UserNovelHistory
 (
-    `nhid`    int        not null,
+    `nhid`    int    AUTO_INCREMENT    not null,
     `uid`      int        null,
     `nid`     int        null,
     `score`     float      null,
