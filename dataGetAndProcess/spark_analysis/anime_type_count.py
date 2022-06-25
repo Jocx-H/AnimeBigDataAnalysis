@@ -24,7 +24,6 @@ if __name__ == '__main__':
             .sortByKey(False) \
             .map(lambda x:(x[1], x[0]))
     output = counts.collect()
-    output = counts.collect()
     json_file = codecs.open('../data/anime_type_count.json', 'w+', encoding='UTF-8')
     json_file.write('[\n')
     for (word,count) in output:
