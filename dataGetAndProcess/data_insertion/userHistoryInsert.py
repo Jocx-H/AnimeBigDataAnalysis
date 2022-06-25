@@ -45,8 +45,9 @@ initDate = datetime.datetime.now()
 initDateStamp = int(initDate.timestamp() * 1000000)
 db = None
 
+
 '''
-插入初始数据
+根据用户id向数据库中插入初始数据（某一用户，每项单条）
 '''
 def insertInitData(userId: int):
     global db
@@ -108,14 +109,18 @@ def insertInitData(userId: int):
     except:
         db.rollback()
 
+
 '''
 插入用户每日阅览记录
+根据用户画像，以天为单位添加用户阅览记录。
+ctrlCode: 控制码，0表示无特定画像的用户，1表示有画像的用户（中二、现充、肥宅、志怪、青春）
+userId: 用户id
+currDate: 插入日期
 '''
 def insertUserDailyData(ctrlCode: int, userId:int, currDate: int):
     global db
     db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
     cursor = db.cursor(pymysql.cursors.DictCursor)
-
     global preferenceRate
     preferFactor = 1  # 偏好因子：有偏好画像的用户对于特定的作品三连概率更高，以此修正
     if ctrlCode == 0:  # 无具体画像的用户无显著偏好，preferenceRate = 0
@@ -262,6 +267,7 @@ def setUserImg(type: str):
     comicSelectList = selectList[1]
     novelSelectList = selectList[2]
     cosSelectList = selectList[3]
+
 
 '''main'''
 if __name__ == "__main__":
