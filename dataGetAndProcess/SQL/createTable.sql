@@ -43,8 +43,8 @@ CREATE TABLE `anime`  (
   `is_finished` tinyint(1) NULL DEFAULT NULL,
   `video_link` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `cover` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pub_real_time` timestamp(0) NULL DEFAULT NULL,
-  `renewal_time` timestamp(0) NULL DEFAULT NULL,
+  `pub_real_time` bigint(0) NULL DEFAULT NULL,
+  `renewal_time` bigint(0) NULL DEFAULT NULL,
   `favorites` int(0) NULL DEFAULT NULL,
   `coins` int(0) NULL DEFAULT NULL,
   `views` int(0) NULL DEFAULT NULL,
@@ -86,19 +86,19 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 create table novel
 (
-    nid         int          not null
+    `nid`         int          not null
         primary key,
-    url         varchar(256) null,
-    cover       varchar(256) null,
-    title       varchar(256)  null,
-    author      varchar(32)  null,
-    score       float        null,
-    type        varchar(64)  null,
-    depth       int          null,
-    state       varchar(32)  null,
-    click_cnt   int          null,
-    update_time date         null,
-    introduce   varchar(512) null
+    `url`         varchar(256) null,
+    `cover`       varchar(256) null,
+    `title`       varchar(256)  null,
+    `author`      varchar(32)  null,
+    `score`       float        null,
+    `type`        varchar(64)  null,
+    `depth`       int          null,
+    `state`       varchar(32)  null,
+    `click_cnt`   int          null,
+    `update_time` date         null,
+    `introduce`   varchar(512) null
 );
 
 
@@ -130,9 +130,9 @@ CREATE TABLE `useranimehistory`  (
   `aid` int(0) NULL DEFAULT NULL,
   `score` float NULL DEFAULT NULL,
   `ratio` float NULL DEFAULT NULL,
-  `like` tinyint(1) NULL DEFAULT NULL,
+  `thumb` tinyint(1) NULL DEFAULT NULL,
   `collect` tinyint(1) NULL DEFAULT NULL,
-  `timestamp` timestamp(0) NULL DEFAULT NULL,
+  `time` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`ahid`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `aid`(`aid`) USING BTREE,
@@ -154,9 +154,9 @@ CREATE TABLE `usercomichistory`  (
   `cid` int(0) NULL DEFAULT NULL,
   `score` float NULL DEFAULT NULL,
   `ratio` float NULL DEFAULT NULL,
-  `like` tinyint(1) NULL DEFAULT NULL,
+  `thumb` tinyint(1) NULL DEFAULT NULL,
   `collect` tinyint(1) NULL DEFAULT NULL,
-  `timestamp` timestamp(0) NULL DEFAULT NULL,
+  `time` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`chid`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `cid`(`cid`) USING BTREE,
@@ -168,14 +168,14 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 create table UserCosplayHistory
 (
-    coshid    int        not null,
-    uid       int        null,
-    cosid     int        null,
-    score     float      null,
-    ratio     float      null,
-    `like`    tinyint(1) null,
-    collect   tinyint(1) null,
-    timestamp date       null,
+    `coshid`    int        not null,
+    `uid`       int        null,
+    `cosid`     int        null,
+    `score`     float      null,
+    `ratio`     float      null,
+    `thumb`    tinyint(1) null,
+    `collect`   tinyint(1) null,
+    `time` date       null,
     constraint UserCosplayHistory_pk
         primary key (coshid),
     constraint UserCosplayHistory___fk1
@@ -187,14 +187,14 @@ create table UserCosplayHistory
 
 create table UserNovelHistory
 (
-    nhid    int        not null,
-    uid       int        null,
-    nid     int        null,
-    score     float      null,
-    ratio     float      null,
-    `like`    tinyint(1) null,
-    collect   tinyint(1) null,
-    timestamp date       null,
+    `nhid`    int        not null,
+    `uid`      int        null,
+    `nid`     int        null,
+    `score`     float      null,
+    `ratio`     float      null,
+    `thumb`    tinyint(1) null,
+    `collect`   tinyint(1) null,
+    `time` date       null,
     constraint UserNovelHistory_pk
         primary key (nhid),
     constraint UserNovelHistory___fk1
