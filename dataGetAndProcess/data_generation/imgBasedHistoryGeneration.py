@@ -160,7 +160,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if animeScore < 5:
             animeScore += ctrlCode * 1 # 评分偏好
         dailyAnimeMark.append(animeScore)
-        dailyAnimeMark.append(max(round(random.random(), 2) * preferFactor, 1))
+        dailyAnimeMark.append(min(round(random.random() * preferFactor, 2), 1))
         dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyAnimeMark.append(currDate)                                 # 日期
@@ -179,7 +179,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if comicScore < 5:
             comicScore += ctrlCode * 1  # 评分偏好
         dailyComicMark.append(comicScore)
-        dailyComicMark.append(max(round(random.random(), 2) * preferFactor, 1))
+        dailyComicMark.append(min(round(random.random() * preferFactor, 2), 1))
         dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyComicMark.append(currDate)                                 # 日期
@@ -198,7 +198,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if novelScore < 5:
             novelScore += ctrlCode * 1  # 评分偏好
         dailyNovelMark.append(novelScore)
-        dailyNovelMark.append(max(round(random.random(), 2) * preferFactor, 1))
+        dailyNovelMark.append(min(round(random.random() * preferFactor, 2), 1))
         dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyNovelMark.append(currDate)                                 # 日期
@@ -217,7 +217,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if cosScore < 5:
             cosScore += ctrlCode * 1  # 评分偏好
         dailyCosMark.append(cosScore)
-        dailyCosMark.append(max(round(random.random(), 2) * preferFactor, 1))
+        dailyCosMark.append(min(round(random.random() * preferFactor, 2), 1))
         dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 点赞
         dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 收藏
         dailyCosMark.append(currDate)                                   # 日期
