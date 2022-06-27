@@ -14,10 +14,9 @@ from animeDao import getAnime, getAnimeById
 from comicDao import getComic, getComicById
 from novelDao import getNovel, getNovelById
 from cosplayDao import getCosplay, getCosplayById
-
 if __name__ == '__main__':
-    novel = getNovelById(3298)
-    # getAnime()
-    # getComic()
-    # getNovel()
-    # getCosplay()
+    novel3298 = getNovelById(3298)
+    anime = getAnime()
+    comic = getComic()
+    novel = getNovel()
+    cosplay = getCosplay()

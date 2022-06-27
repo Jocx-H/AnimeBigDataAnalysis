@@ -11,6 +11,7 @@ from dao.userAnimeHistoryDao import getAnimeHistoryByUserId
 from dao.userComicHistoryDao import getComicHistoryByUserId
 from dao.userNovelHistoryDao import getNovelHistoryByUserId
 
+
 def analysisWatchRatio(ratio: float):
     if ratio > 0.7:
         return ratio
@@ -29,7 +30,6 @@ def userAnalysis(uid: int):
     with open("../assets/userImageDataList/feizhaiSelectList.json", encoding="utf-8") as file:
         userImageDataDir['feizhai'] = json.load(file)
     print(type(userImageDataDir['feizhai']))
-
 
     result = {}
 
