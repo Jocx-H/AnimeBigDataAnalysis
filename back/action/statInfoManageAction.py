@@ -33,6 +33,8 @@ def getAnimeScore():
     """
     try:
         animeScore = statInfoManageService.getAnimeScore()
+        if animeScore['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -49,6 +51,8 @@ def getNovelScore():
     """
     try:
         novelScore = statInfoManageService.getNovelScore()
+        if novelScore['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -65,6 +69,8 @@ def getAnimeType():
     """
     try:
         animeType = statInfoManageService.getAnimeType()
+        if animeType['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -81,6 +87,8 @@ def getNovelType():
     """
     try:
         novelType = statInfoManageService.getNovelType()
+        if novelType['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -97,6 +105,8 @@ def getComicType():
     """
     try:
         comicType = statInfoManageService.getComicType()
+        if comicType['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -113,6 +123,8 @@ def getAnimeKeyWord():
     """
     try:
         animeKeyWord = statInfoManageService.getAnimeKeyWord()
+        if animeKeyWord['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -128,14 +140,16 @@ def getNovelKeyWord():
     获得全站小说关键词的统计信息
     """
     try:
-        getNovelKeyWord = statInfoManageService.getNovelKeyWord()
+        novelKeyWord = statInfoManageService.getNovelKeyWord()
+        if novelKeyWord['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
-    return jsonable_encoder(getNovelKeyWord)
+    return jsonable_encoder(novelKeyWord)
 
 
 @router.get("/comickeyword", responses={400: {"model": Code400}})
@@ -145,6 +159,8 @@ def getComicKeyWord():
     """
     try:
         comicKeyWord = statInfoManageService.getComicKeyWord()
+        if comicKeyWord['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -161,6 +177,8 @@ async def getCosplayKeyWord():
     """
     try:
         cosplayKeyWord = statInfoManageService.getCosplayKeyWord()
+        if cosplayKeyWord['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
     except HTTPException as e:
         raise e
     except Exception as e:

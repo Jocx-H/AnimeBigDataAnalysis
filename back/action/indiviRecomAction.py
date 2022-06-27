@@ -23,7 +23,7 @@ router = APIRouter(
 
 
 @router.post("/anime", responses={400: {"model": Code400}})
-def getAnime(uname: str = Field(None, min_length=1, max_length=50)):
+def getAnime(uname: str):
     r"""
     根据用户喜好个性化推荐动漫
     """
@@ -39,7 +39,7 @@ def getAnime(uname: str = Field(None, min_length=1, max_length=50)):
 
 
 @router.post("/novel", responses={400: {"model": Code400}})
-def getNovel(uname: str = Field(None, min_length=1, max_length=50)):
+def getNovel(uname: str):
     r"""
     根据用户喜好个性化推荐小说
     """
@@ -55,7 +55,7 @@ def getNovel(uname: str = Field(None, min_length=1, max_length=50)):
 
 
 @router.post("/comic", responses={400: {"model": Code400}})
-def getComic(uname: str = Field(None, min_length=1, max_length=50)):
+def getComic(uname: str):
     r"""
     根据用户喜好个性化推荐漫画
     """

@@ -17,7 +17,7 @@ from action import hotRecomAction, statInfoManageAction, userManageAction, indiv
 app = FastAPI(title='文档说明', description='整体描述')
 
 # 配置静态资源的存放路径以及请求的路径
-app.mount("/resources", StaticFiles(directory="assets/public"), name="assets/public")
+app.mount("/resources", StaticFiles(directory="assets"), name="assets")
 
 # 跨域配置
 origins = ["*"]

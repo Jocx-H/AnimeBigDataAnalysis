@@ -22,7 +22,7 @@ router = APIRouter(
 
 
 @router.post("/login", responses={400: {"model": Code400}})
-def usrLogin(account: str, password: str):
+def usrLogin(account: int, password: str):
     r"""
     返回用户登录信息
     """
