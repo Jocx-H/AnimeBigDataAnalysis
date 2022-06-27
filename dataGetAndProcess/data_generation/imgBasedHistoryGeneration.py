@@ -54,7 +54,7 @@ def initDataGenerate(userId: int) -> dict:
     userHistoryList = []    # userHistoryList = [{animeDic}, {comicDic}]
     # 动漫 作品编号1开头
     animeDic = {}
-    animeIdList = ['1', str(int(animeTotalNum * random.random()))]
+    animeIdList = ['1', str(1 + int(animeTotalNum * random.random()))]
     animeId = int(''.join(animeIdList))             # 作品编号
     animeMark = []                                  # [评分, 时间占比, 点赞, 收藏, 日期]
     animeMark.append(int(random.random() * 6))      # 用户评分
@@ -66,7 +66,7 @@ def initDataGenerate(userId: int) -> dict:
     userHistoryList.append(animeDic)
     # 漫画 作品编号2开头
     comicDic = {}
-    comicIdList = ['2', str(int(comicTotalNum * random.random()))]
+    comicIdList = ['2', str(1 + int(comicTotalNum * random.random()))]
     comicId = int(''.join(comicIdList))  # 作品编号
     comicMark = []                                  # [评分, 时间占比, 点赞, 收藏, 日期]
     comicMark.append(int(random.random() * 6))      # 用户评分
@@ -78,7 +78,7 @@ def initDataGenerate(userId: int) -> dict:
     userHistoryList.append(comicDic)
     # 小说 作品编号3开头
     novelDic = {}
-    novelIdList = ['3', str(int(novelTotalNum * random.random()))]
+    novelIdList = ['3', str(1 + int(novelTotalNum * random.random()))]
     novelId = int(''.join(novelIdList))             # 作品编号
     novelMark = []                                  # [评分, 时间占比, 点赞, 收藏, 日期]
     novelMark.append(int(random.random() * 6))      # 用户评分
@@ -90,7 +90,7 @@ def initDataGenerate(userId: int) -> dict:
     userHistoryList.append(novelDic)
     # cosplay 作品编号4开头
     cosDic = {}
-    cosIdList = ['4', str(int(cosTotalNum * random.random()))]
+    cosIdList = ['4', str(1 + int(cosTotalNum * random.random()))]
     cosId = int(''.join(cosIdList))                 # 作品编号
     cosMark = []                                    # [评分, 时间占比, 点赞, 收藏, 日期]
     cosMark.append(int(random.random() * 6))        # 用户评分
@@ -150,7 +150,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     dailyAnimeNum = int(random.random() * 5) if random.random() < animeDailyRate else 0
     for i in range(dailyAnimeNum):
         dailyRecordList.append(1)
-        animeOptionList = ['1', str(int(animeTotalNum * random.random()))]
+        animeOptionList = ['1', str(1 + int(animeTotalNum * random.random()))]
         animeOption1 = int(''.join(animeOptionList))        # 0.3
         animeOption2 = int(random.choice(animeSelectList))  # 0.7 - prefer
         dailyAnimeId = animeOption1 if random.random() > preferenceRate else animeOption2
@@ -169,7 +169,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     dailyComicNum = int(random.random() * 5) if random.random() < comicDailyRate else 0
     for i in range(dailyComicNum):
         dailyRecordList.append(2)
-        comicOptionList = ['2', str(int(comicTotalNum * random.random()))]
+        comicOptionList = ['2', str(1 + int(comicTotalNum * random.random()))]
         comicOption1 = int(''.join(comicOptionList))        # 0.3
         comicOption2 = int(random.choice(comicSelectList))  # 0.7 - prefer
         dailyComicId = comicOption1 if random.random() > preferenceRate else comicOption2
@@ -188,7 +188,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     dailyNovelNum = int(random.random() * 5) if random.random() < novelDailyRate else 0
     for i in range(dailyNovelNum):
         dailyRecordList.append(3)
-        novelOptionList = ['3', str(int(novelTotalNum * random.random()))]
+        novelOptionList = ['3', str(1 + int(novelTotalNum * random.random()))]
         novelOption1 = int(''.join(novelOptionList))        # 0.3
         novelOption2 = int(random.choice(novelSelectList))  # 0.7 - prefer
         dailyNovelId = novelOption1 if random.random() > preferenceRate else novelOption2
@@ -207,7 +207,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     dailyCosNum = int(random.random() * 5) if random.random() < cosDailyRate else 0
     for i in range(dailyCosNum):
         dailyRecordList.append(4)
-        cosOptionList = ['4', str(int(cosTotalNum * random.random()))]
+        cosOptionList = ['4', str(1 + int(cosTotalNum * random.random()))]
         cosOption1 = int(''.join(cosOptionList))        # 0.3
         cosOption2 = int(random.choice(cosSelectList))  # 0.7 - prefer
         dailyCosId = cosOption1 if random.random() > preferenceRate else cosOption2
