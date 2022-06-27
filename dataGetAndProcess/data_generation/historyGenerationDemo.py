@@ -27,7 +27,7 @@ novelDailyRate = 0.7
 cosDailyRate = 0.25
 # 全局变量信息设置
 usersTotalNum = 3    # 用户总数
-startUserId = 10000     # 起始用户ID
+startUserId = 1000      # 起始用户ID
 userData = []           # 单个用户数据列表
 sysData = []            # 系统用户总数据: [userData[], userData[], ...]
 

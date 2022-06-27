@@ -19,7 +19,7 @@ imgBasedHistoryGeneration.py
 '''
 
 # 各类作品总数
-animeTotalNum = 3531    # 动漫总数
+animeTotalNum = 3512    # 动漫总数
 comicTotalNum = 20931   # 漫画总数
 novelTotalNum = 9841    # 小说总数
 cosTotalNum = 200       # cosplay 总数
@@ -36,8 +36,8 @@ comicSelectList = []
 novelSelectList = []
 cosSelectList = []
 # 全局变量信息设置
-usersTotalNum = 15    # 用户总数
-startUserId = 10000     # 起始用户ID
+usersTotalNum = 300    # 用户总数
+startUserId = 1000      # 起始用户ID
 tagSet = {}             # 用户画像对应的tag集合
 userData = {}           # 单个用户数据列表
 sysData = []            # 系统用户总数据 sysData = [userData1, userData2, ...]
@@ -145,7 +145,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     else:                   # 有具体画像的用户阅览内容时有偏好，preferenceRate = 0.7(原始设置)，preferFactor = 1.5
         preferFactor = 1.5
     dailyRecordList = []    # 某用户record.py中的recordList，记录用户每天观看的各种类型作品的信息
-    userData = sysData[userId-10000]
+    userData = sysData[userId-1000]
     # 动漫 - 每天有0.7的概率会看动漫
     dailyAnimeNum = int(random.random() * 5) if random.random() < animeDailyRate else 0
     for i in range(dailyAnimeNum):
@@ -160,7 +160,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if animeScore < 5:
             animeScore += ctrlCode * 1 # 评分偏好
         dailyAnimeMark.append(animeScore)
-        dailyAnimeMark.append(round(random.random(), 2))
+        dailyAnimeMark.append(max(round(random.random(), 2) * preferFactor, 1))
         dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyAnimeMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyAnimeMark.append(currDate)                                 # 日期
@@ -179,7 +179,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if comicScore < 5:
             comicScore += ctrlCode * 1  # 评分偏好
         dailyComicMark.append(comicScore)
-        dailyComicMark.append(round(random.random(), 2))
+        dailyComicMark.append(max(round(random.random(), 2) * preferFactor, 1))
         dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyComicMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyComicMark.append(currDate)                                 # 日期
@@ -198,7 +198,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if novelScore < 5:
             novelScore += ctrlCode * 1  # 评分偏好
         dailyNovelMark.append(novelScore)
-        dailyNovelMark.append(round(random.random(), 2))
+        dailyNovelMark.append(max(round(random.random(), 2) * preferFactor, 1))
         dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 点赞
         dailyNovelMark.append((random.random() > 0.5 / preferFactor))   # 收藏
         dailyNovelMark.append(currDate)                                 # 日期
@@ -217,7 +217,7 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
         if cosScore < 5:
             cosScore += ctrlCode * 1  # 评分偏好
         dailyCosMark.append(cosScore)
-        dailyCosMark.append(round(random.random(), 2))
+        dailyCosMark.append(max(round(random.random(), 2) * preferFactor, 1))
         dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 点赞
         dailyCosMark.append((random.random() > 0.5 / preferFactor))     # 收藏
         dailyCosMark.append(currDate)                                   # 日期
@@ -241,23 +241,23 @@ if __name__ == '__main__':
     init()
     timeDateForm = initDate
     time.sleep(0.001)
-    for day in range(1, 5): # 日期遍历（eg：更新4天的阅览记录）
+    for day in range(1, 50): # 日期遍历（eg：更新4天的阅览记录）
         currDateForm = timeDateForm - day * datetime.timedelta(days = 1)
         currDate = int(currDateForm.timestamp() * 1000000)
         for i in range(startUserId, startUserId + usersTotalNum): # 用户id遍历
-            if i in range(10000, 10002):    # 中二
+            if i in range(1000, 1040):    # 中二
                 setUserImg('zhonger')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
-            elif i in range(10002, 10004):  # 现充
+            elif i in range(1040, 1080):  # 现充
                 setUserImg('xianchong')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
-            elif i in range(10004, 10006):  # 肥宅
+            elif i in range(1080, 1120):  # 肥宅
                 setUserImg('feizhai')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
-            elif i in range(10006, 10008):  # 志怪
+            elif i in range(1120, 1160):  # 志怪
                 setUserImg('zhiguai')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
-            elif i in range(10008, 10010):  # 青春
+            elif i in range(1160, 1200):  # 青春
                 setUserImg('qingchun')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
             else:                           # 无特定画像
