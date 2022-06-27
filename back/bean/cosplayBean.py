@@ -16,3 +16,9 @@ class CosplayBean:
     url: str = None
     cover: str = None
     title: str = None
+
+    def keys(self):
+        return 'cosid', 'url', 'cover', 'title'
+
+    def __getitem__(self, item):
+        return getattr(self, item)

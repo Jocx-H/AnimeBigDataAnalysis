@@ -20,3 +20,9 @@ class ComicBean:
     author: str = None
     type: str = None
     state: str = None
+
+    def keys(self):
+        return 'cid', 'url', 'cover', 'title', 'last_short_title', 'author', 'type', 'state'
+
+    def __getitem__(self, item):
+        return getattr(self, item)

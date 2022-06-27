@@ -23,12 +23,12 @@ router = APIRouter(
 
 
 @router.get("/anime", responses={400: {"model": Code400}})
-def getAnime():
+def getAnime(uid: int):
     r"""
     按热度升序获得热门动漫数据
     """
     try:
-        hotAnime = hotRecomService.getAnime()
+        hotAnime = hotRecomService.getAnime(uid)
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -39,12 +39,12 @@ def getAnime():
 
 
 @router.get("/novel", responses={400: {"model": Code400}})
-def getNovel():
+def getNovel(uid: int):
     r"""
     按热度降序获得热门小说数据
     """
     try:
-        hotNovel = hotRecomService.getAnime()
+        hotNovel = hotRecomService.getNovel(uid)
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -55,12 +55,12 @@ def getNovel():
 
 
 @router.get("/comic", responses={400: {"model": Code400}})
-def getComic():
+def getComic(uid: int):
     r"""
     按热度降序获得热门漫画数据
     """
     try:
-        hotComic = hotRecomService.getAnime()
+        hotComic = hotRecomService.getComic(uid)
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -71,12 +71,12 @@ def getComic():
 
 
 @router.get("/cosplay", responses={400: {"model": Code400}})
-def getCosplay():
+def getCosplay(uid: int):
     r"""
     按热度降序获得热门cosplay数据
     """
     try:
-        hotCosplay = hotRecomService.getAnime()
+        hotCosplay = hotRecomService.getCosplay(uid)
     except HTTPException as e:
         raise e
     except Exception as e:

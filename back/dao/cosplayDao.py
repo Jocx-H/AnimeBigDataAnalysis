@@ -68,12 +68,42 @@ def getCosplayById(cosid):
     return cosplay_bean
 
 
+def getCosplayDict():
+    r"""获得nid升序的CosplayBean字典"""
+    conn, cursor = database()
+    table_name = "cosplay"
+    attr = "cosid"
+    sql = f"""
+            SELECT * 
+            FROM {table_name} 
+            order by  {attr} 
+            """
+    cosplays_dict = {}
+    try:
+        cursor.execute(sql)
+        res = cursor.fetchall()
+        for row in res:
+            cosplays_dict[row[0]] = dict(CosplayBean(
+                cosid=row[0],
+                url=row[1],
+                cover=row[2],
+                title=row[3],
+            ))
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        return None
+    return cosplays_dict
+
+
 # TEST
 '''
 单元测试：
   getCosplay()
   getCosplayById()
+  getCosplayDict()
 '''
 if __name__ == '__main__':
     print(len(getCosplay()))
     print(getCosplayById('41'))
+    print(getCosplayDict())
