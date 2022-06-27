@@ -6,7 +6,6 @@
 @Description: 数据表单`动漫`的抽象类
 '''
 
-
 from dataclasses import dataclass
 
 
@@ -28,3 +27,10 @@ class AnimeBean:
     media_tags: str = None
     score: float = None
     cm_count: str = None
+
+    def keys(self):
+        return 'aid', 'title', 'index_show', 'is_finished', 'video_link', 'cover', 'pub_real_time', \
+               'renewal_time', 'favorites', 'coins', 'views', 'danmakus', 'depth', 'media_tags', 'score', 'cm_count'
+
+    def __getitem__(self, item):
+        return getattr(self, item)

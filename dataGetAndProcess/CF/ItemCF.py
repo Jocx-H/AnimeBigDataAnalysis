@@ -12,7 +12,7 @@ from operator import itemgetter
 import json
 import os
 
-from utils import *
+from dataGetAndProcess.CF.utils import *
 
 class ItemBasedCF():
     def __init__(self, kind, filename):

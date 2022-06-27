@@ -76,12 +76,46 @@ def getComicById(cid):
     return comic_bean
 
 
+def getComicDict():
+    r"""获得以cid升序的ComicBean字典"""
+    conn, cursor = database()
+    table_name = "comic"
+    attr = "cid"
+    sql = f"""
+            SELECT * 
+            FROM {table_name} 
+            order by  {attr}
+            """
+    comics_dict = {}
+    try:
+        cursor.execute(sql)
+        res = cursor.fetchall()
+        for row in res:
+            comics_dict[row[0]] = dict(ComicBean(
+                cid=row[0],
+                url=row[1],
+                cover=row[2],
+                title=row[3],
+                last_short_title=row[4],
+                author=row[5],
+                type=row[6],
+                state=row[7]
+            ))
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        return None
+    return comics_dict
+
+
 # TEST
 '''
 单元测试：
   getComic()
   getComicById()
+  getComicDict()
 '''
 if __name__ == '__main__':
     print(len(getComic()))
     print(getComicById(21))
+    print(getComicDict())

@@ -24,3 +24,10 @@ class NovelBean:
     click_cnt: int = None
     update_time: str = None
     introduce: str = None
+
+    def keys(self):
+        return 'nid', 'url', 'cover', 'title', 'author', 'score', 'type', 'depth', 'state', 'click_cnt', \
+               'update_time', 'introduce'
+
+    def __getitem__(self, item):
+        return getattr(self, item)

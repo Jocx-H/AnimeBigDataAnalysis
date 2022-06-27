@@ -12,7 +12,7 @@ from operator import itemgetter
 import json
 import os
 
-from utils import *
+from dataGetAndProcess.CF.utils import *
 
 class UserBasedCF():
     def __init__(self, kind, filename):
@@ -87,7 +87,6 @@ class UserBasedCF():
                     prefer_score = perfer_cal(score,collect,up,view_ratio,timestamp)
                     self.user_item.setdefault(user_id, {})
                     self.user_item[user_id][item[0]] = prefer_score
-        print('='*10, '加载 %s 成功!' % self.filename, '='*10)
 
     def calc_user_sim(self):
         """
@@ -102,7 +101,6 @@ class UserBasedCF():
                 if not self.item_user.__contains__(item):
                     self.item_user[item] = set()
                 self.item_user[item].add(user)
-        print('='*10, '动漫-用户矩阵构建完毕', '='*10)
 
         # 统计有多少部动漫
         self.item_count = len(self.item_user)
@@ -118,14 +116,11 @@ class UserBasedCF():
                     self.user_sim_matrix.setdefault(u, {})
                     self.user_sim_matrix[u].setdefault(v, 0)
                     self.user_sim_matrix[u][v] += 1
-        print('='*10, '用户喜爱物品交集矩阵构建完毕', '='*10)
 
         # 计算用户相似度
-        # TODO 添加惩罚因子改进算法
         for u, related_users in self.user_sim_matrix.items():
             for v, count in related_users.items():
                 self.user_sim_matrix[u][v] = count / sqrt(len(self.user_item[u])*len(self.user_item[v]))
-        print('='*10, '用户相似度矩阵计算完毕', '='*10)
 
     def user_rec(self, user):
         """
@@ -145,7 +140,6 @@ class UserBasedCF():
                 rank.setdefault(item, 0)
                 rank[item] += Wuv * float(self.user_item[v][item])
         res = sorted(rank.items(), key=itemgetter(1), reverse=True)[:REC_ITEMS]
-        print('推荐12部动漫：', res)
         return res
 
     def save(self):
@@ -153,7 +147,6 @@ class UserBasedCF():
             f.write(json.dumps(self.user_sim_matrix, ensure_ascii=False, indent=4, separators=(',', ':')))
         with open(os.path.join(DATA_PATH, self.user_item_name), "w") as f:
             f.write(json.dumps(self.user_item, ensure_ascii=False, indent=4, separators=(',', ':')))
-        print('='*10, '用户-物品矩阵与用户相似度矩阵保存成功', '='*10)
 
 
 if __name__ == "__main__":
