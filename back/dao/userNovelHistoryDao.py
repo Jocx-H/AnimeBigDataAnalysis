@@ -8,6 +8,7 @@
 
 import pymysql
 from bean.userNovelHistoryBean import UserNovelHistoryBean
+from dao.utils import database
 
 '''
 根据用户id获取其所有的动漫阅览记录
@@ -17,25 +18,28 @@ from bean.userNovelHistoryBean import UserNovelHistoryBean
 
 
 def getNovelHistoryByUserId(userId: int):
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
-    cursor = db.cursor(pymysql.cursors.DictCursor)
+    db, cursor = database()
     sql = """SELECT * FROM usernovelhistory WHERE uid = %d""" % (userId)
     try:
         cursor.execute(sql)
-        row = cursor.fetchone()
-        novelList = UserNovelHistoryBean(
-            nhid=row[0],
-            uid=row[1],
-            nid=row[2],
-            score=row[3],
-            ratio=row[4],
-            like=row[5],
-            collect=row[6],
-            timestamp=row[7]
-        )
+        tmp_result = cursor.fetchall()
         db.commit()
         db.close()
-        return novelList
+        result = []
+        for row in tmp_result:
+            result.append(
+                UserNovelHistoryBean(
+                    nhid=row[0],
+                    uid=row[1],
+                    nid=row[2],
+                    score=row[3],
+                    ratio=row[4],
+                    like=row[5],
+                    collect=row[6],
+                    timestamp=row[7]
+                )
+            )
+        return result
     except:
         db.rollback()
         return {'message': 'get novel fail'}
@@ -51,8 +55,7 @@ def getNovelHistoryByUserId(userId: int):
 
 
 def getNovelHistoryAll():
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
-    cursor = db.cursor(pymysql.cursors.DictCursor)
+    db, cursor = database()
     sql = """SELECT * FROM usernovelhistory"""
     try:
         cursor.execute(sql)
