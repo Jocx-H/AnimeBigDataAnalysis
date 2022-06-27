@@ -11,9 +11,11 @@ from utils import database
 def getComic():
     conn, cursor = database()
     table_name = "comic"
+    attr = "cid"
     sql = f"""
             SELECT * 
             FROM {table_name} 
+            order by {attr}
             """
     print(sql)
     cursor.execute(sql)
