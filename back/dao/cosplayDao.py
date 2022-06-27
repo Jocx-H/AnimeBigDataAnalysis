@@ -4,17 +4,17 @@
 @Time: 2022/6/24 9:27
 @Author: Jocx,WILLOSACR
 @Description:
+    对cosplay表单的操作
 '''
 
-import pymysql
-import prettytable as pt
-import json
-import time
-from pymysql.converters import escape_string
-from utils import database
+import traceback
+
+from bean.cosplayBean import CosplayBean
+from dao.utils import database
 
 
 def getCosplay():
+    r"""获得nid升序的CosplayBean列表"""
     conn, cursor = database()
     table_name = "cosplay"
     attr = "cosid"
@@ -23,27 +23,57 @@ def getCosplay():
             FROM {table_name} 
             order by  {attr} 
             """
-    print(sql)
-    cursor.execute(sql)
-    res = cursor.fetchall()
-    print(list(res))
-    return list(res)
-    # conn.commit()
+    cosplays = []
+    try:
+        cursor.execute(sql)
+        res = cursor.fetchall()
+        for row in res:
+            cosplays.append(CosplayBean(
+                cosid=row[0],
+                url=row[1],
+                cover=row[2],
+                title=row[3],
+            ))
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        return None
+    return cosplays
 
 
-def getCosplayById(id):
+def getCosplayById(cosid):
+    r"""根据cosid获得一个具体的CosplayBean"""
     conn, cursor = database()
     table_name = "cosplay"
-    attr = "cid"
-    selId = "cid="
+    attr = "cosid"
+    selId = "cosid"
     sql = f"""
                 SELECT * 
-                FROM {table_name} 
-                order by {attr} 
-                where  {selId}{id}   
+                FROM {table_name}  
+                where  {selId}={cosid}   
                 """
-    print(sql)
-    cursor.execute(sql)
-    res = cursor.fetchall()
-    print(list(res))
-    return list(res)
+    try:
+        cursor.execute(sql)
+        row = cursor.fetchone()
+        cosplay_bean = CosplayBean(
+                cosid=row[0],
+                url=row[1],
+                cover=row[2],
+                title=row[3],
+            )
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        return None
+    return cosplay_bean
+
+
+# TEST
+'''
+单元测试：
+  getCosplay()
+  getCosplayById()
+'''
+if __name__ == '__main__':
+    print(len(getCosplay()))
+    print(getCosplayById('41'))

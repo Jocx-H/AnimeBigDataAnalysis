@@ -22,5 +22,5 @@ class NovelBean:
     depth: int = None
     state: str = None
     click_cnt: int = None
-    update_time: str = None  # TODO 请在使用前将str改为与MySQL Date数据适配的类型
+    update_time: str = None
     introduce: str = None
