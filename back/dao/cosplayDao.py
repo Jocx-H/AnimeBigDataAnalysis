@@ -17,9 +17,11 @@ from utils import database
 def getCosplay():
     conn, cursor = database()
     table_name = "cosplay"
+    attr = "cosid"
     sql = f"""
             SELECT * 
             FROM {table_name} 
+            order by {attr} 
             """
     print(sql)
     cursor.execute(sql)

@@ -16,9 +16,11 @@ from utils import database
 def getAnime():
     conn, cursor = database()
     table_name = "anime"
+    attr = "aid"
     sql = f"""
             SELECT * 
             FROM {table_name} 
+            ORDER BY {attr}
             """
     print(sql)
     cursor.execute(sql)

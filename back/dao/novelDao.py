@@ -4,7 +4,7 @@
 @Time: 2022/6/24 9:26
 @Author: Jocx,WILLOSCAR
 @Description:
-''' 
+'''
 
 import pymysql
 import prettytable as pt
@@ -17,9 +17,11 @@ from utils import database
 def getNovel():
     conn, cursor = database()
     table_name = "novel"
+    attr = "nid"
     sql = f"""
             SELECT * 
             FROM {table_name} 
+            order by {attr}      
             """
     print(sql)
     cursor.execute(sql)
