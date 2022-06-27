@@ -35,12 +35,11 @@ def getNovelById(id):
     conn, cursor = database()
     table_name = "novel"
     attr = "nid"
-    selId = "nid="
+    selId = "nid = "
     sql = f"""
                 SELECT * 
                 FROM {table_name} 
-                order by {attr} 
-                where  {selId}{id}   
+                where {selId}{id}   
                 """
     print(sql)
     cursor.execute(sql)

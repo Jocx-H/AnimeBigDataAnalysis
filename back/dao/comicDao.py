@@ -32,7 +32,6 @@ def getComicById(id):
     sql = f"""
                 SELECT * 
                 FROM {table_name} 
-                order by {attr} 
                 where  {selId}{id}   
                 """
     print(sql)
