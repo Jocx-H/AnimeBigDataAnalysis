@@ -21,7 +21,7 @@ def getNovel():
     sql = f"""
             SELECT * 
             FROM {table_name} 
-            order by {attr}      
+            order by  {attr}      
             """
     print(sql)
     cursor.execute(sql)
@@ -29,3 +29,21 @@ def getNovel():
     print(list(res))
     return list(res)
     # conn.commit()
+
+
+def getNovelById(id):
+    conn, cursor = database()
+    table_name = "novel"
+    attr = "nid"
+    selId = "nid="
+    sql = f"""
+                SELECT * 
+                FROM {table_name} 
+                order by {attr} 
+                where  {selId}{id}   
+                """
+    print(sql)
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    print(list(res))
+    return list(res)

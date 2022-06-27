@@ -21,7 +21,7 @@ def getCosplay():
     sql = f"""
             SELECT * 
             FROM {table_name} 
-            order by {attr} 
+            order by  {attr} 
             """
     print(sql)
     cursor.execute(sql)
@@ -29,3 +29,21 @@ def getCosplay():
     print(list(res))
     return list(res)
     # conn.commit()
+
+
+def getCosplayById(id):
+    conn, cursor = database()
+    table_name = "cosplay"
+    attr = "cid"
+    selId = "cid="
+    sql = f"""
+                SELECT * 
+                FROM {table_name} 
+                order by {attr} 
+                where  {selId}{id}   
+                """
+    print(sql)
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    print(list(res))
+    return list(res)

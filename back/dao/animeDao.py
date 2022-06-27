@@ -20,7 +20,7 @@ def getAnime():
     sql = f"""
             SELECT * 
             FROM {table_name} 
-            ORDER BY {attr}
+            ORDER BY   {attr}
             """
     print(sql)
     cursor.execute(sql)
@@ -28,3 +28,20 @@ def getAnime():
     print(list(res))
     return list(res)
     # conn.commit()
+
+def getAnimeById(id):
+    conn, cursor = database()
+    table_name = "anime"
+    attr = "aid"
+    selId = "aid="
+    sql = f"""
+                SELECT * 
+                FROM {table_name} 
+                order by {attr} 
+                where  {selId}{id}   
+                """
+    print(sql)
+    cursor.execute(sql)
+    res = cursor.fetchall()
+    print(list(res))
+    return list(res)
