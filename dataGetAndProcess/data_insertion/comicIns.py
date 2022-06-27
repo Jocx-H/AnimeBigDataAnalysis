@@ -15,11 +15,11 @@ import json
 import time
 
 dbconfig = {
-    'host': '127.0.0.1',
+    'host': '124.70.91.77',
     'port': 3306,
     'user': 'root',
-    'password': 'xxxxxxx',
-    'database': 'anime',
+    'password': '12345678',
+    'database': 'AnimeBigDataAnalysis',
     'charset': 'utf8'
 }
 
