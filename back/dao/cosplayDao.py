@@ -34,8 +34,8 @@ def getCosplay():
 def getCosplayById(id):
     conn, cursor = database()
     table_name = "cosplay"
-    attr = "cid"
-    selId = "cid="
+    attr = "cosid"
+    selId = "cosid="
     sql = f"""
                 SELECT * 
                 FROM {table_name} 
