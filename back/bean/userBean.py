@@ -15,3 +15,9 @@ class UserBean:
     uid: int
     uname: str = None
     password: str = None
+
+    def keys(self):
+        return 'uid', 'uname', 'password'
+
+    def __getitem__(self, item):
+        return getattr(self, item)
