@@ -29,7 +29,7 @@ if __name__ == '__main__':
     # 停词表生成
     stopwords = getStopWords(r'src\stop_words.txt')
     stopwords += ["港澳台", "地区", "第二季", "地區", "OVA", "台灣", "僅限", "剧场版", "第一季", "第三季", "篇", " ", "新",
-                  "季", "哆", "版", "名", "号", "部", "记", "达", " "]
+                  "季", "哆", "版", "名", "号", "部", "记", "达", " ", "事", "米", "狼", "囧", "Q"]
     for i in range(9):
         stopwords.append("十" + num2str[i])
         stopwords.append(num2str[i] + "十")
