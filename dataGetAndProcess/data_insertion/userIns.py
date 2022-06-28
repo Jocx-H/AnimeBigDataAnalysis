@@ -28,7 +28,7 @@ def ins_user(userId: int, uname: str):
 if __name__ == "__main__":
     familyNameString = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐"
     familyNameList = list(familyNameString)
-    for i in range(1000, 1300):
+    for i in range(1000, 1200):
         if i <=1200 and i % 40 == 0:
             print("new type start")
         if i in range(1000, 1040):    # 中二
@@ -46,11 +46,10 @@ if __name__ == "__main__":
         elif i in range(1160, 1200):  # 青春
             uname = '青春' + random.choice(familyNameList)
             ins_user(i, uname)
-        else:                           # 无特定画像
-            uname = '平凡' + random.choice(familyNameList)
-            ins_user(i, uname)
+        # else:                           # 无特定画像
+        #     uname = '平凡' + random.choice(familyNameList)
+        #     ins_user(i, uname)
     print('generate completed!')
     # 勿忘关闭数据库
-
     db.close()
     print('db closed.')

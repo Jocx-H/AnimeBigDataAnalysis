@@ -100,7 +100,7 @@ def insertUserJsonToDB(userId: int):
 
 
 if __name__ == "__main__":
-    jsonFile = open('..\\data_generation\\sysData.json', 'r')
+    jsonFile = open('..\\data_generation\\sysDataV2.json', 'r')
     sysDataList = json.load(jsonFile)
     # print(sysDataList[1]['1001'][0].keys())
     for i in range(1000, 1300):
