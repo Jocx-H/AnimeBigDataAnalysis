@@ -188,3 +188,73 @@ def getCosplayKeyWord():
     return jsonable_encoder(cosplayKeyWord)
 
 
+@router.get("/oneanime", responses={400: {"model": Code400}})
+def getOneAnime(aid: int):
+    r"""
+    根据id获得动漫
+    """
+    try:
+        anime = statInfoManageService.getAnimeById(aid)
+        if anime['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(anime)
+
+
+@router.get("/onenovel", responses={400: {"model": Code400}})
+def getOneNovel(nid: int):
+    r"""
+    根据id获得小说
+    """
+    try:
+        novel = statInfoManageService.getNovelById(nid)
+        if novel['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(novel)
+
+
+@router.get("/onecomic", responses={400: {"model": Code400}})
+def getOneComic(cid: int):
+    r"""
+    根据id获得漫画
+    """
+    try:
+        comic = statInfoManageService.getComicById(cid)
+        if comic['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(comic)
+
+
+@router.get("/onecosplay", responses={400: {"model": Code400}})
+def getOneCosplay(cosid: int):
+    r"""
+    根据id获得cosplay
+    """
+    try:
+        cosplay = statInfoManageService.getCosplayById(cosid)
+        if cosplay['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(cosplay)
