@@ -207,6 +207,17 @@ def getCosplayById(id_: int) -> dict:
     return {'type': 'cosplay', 'result': cosplayDao.getCosplayById(id_)}
 
 
+def getDetail(id_: int) -> dict:
+    id2_ = str(id_)
+    if id2_[0] == '1':
+        return getAnimeById(id_)
+    elif id2_[0] == '2':
+        return getComicById(id_)
+    elif id2_[0] == '3':
+        return getNovelById(id_)
+    return getCosplayById(id_)
+
+
 # TEST
 '''
 单元测试：
@@ -236,3 +247,4 @@ if __name__ == '__main__':
     print(getNovelById(333))
     print(getComicById(222))
     print(getCosplayById(444))
+    print(getDetail(234))

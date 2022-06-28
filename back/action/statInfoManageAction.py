@@ -258,3 +258,21 @@ def getOneCosplay(cosid: int):
         traceback.print_exc()
         raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
     return jsonable_encoder(cosplay)
+
+
+@router.get("/detail", responses={400: {"model": Code400}})
+def getDetail(did: int):
+    r"""
+    根据did自动获取对应详情页信息
+    """
+    try:
+        detail = statInfoManageService.getDetail(did)
+        if detail['result'] is None:
+            raise HTTPException(status_code=400, detail="没有获取相关数据")
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(detail)
