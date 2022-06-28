@@ -14,6 +14,8 @@ import json
 import os
 import traceback
 
+from dao import animeDao, novelDao, comicDao, cosplayDao
+
 
 RESOURCE_PATH = r'./assets/resourcedata/{}.json'
 
@@ -189,6 +191,22 @@ def getCosplayKeyWord() -> dict:
     return {'result': __cosplayKeyWordStatInfo__()}
 
 
+def getAnimeById(id_: int) -> dict:
+    return {'type': 'anime', 'result': animeDao.getAnimeById(id_)}
+
+
+def getNovelById(id_: int) -> dict:
+    return {'type': 'novel', 'result': novelDao.getNovelById(id_)}
+
+
+def getComicById(id_: int) -> dict:
+    return {'type': 'comic', 'result': comicDao.getComicById(id_)}
+
+
+def getCosplayById(id_: int) -> dict:
+    return {'type': 'cosplay', 'result': cosplayDao.getCosplayById(id_)}
+
+
 # TEST
 '''
 单元测试：
@@ -214,3 +232,7 @@ if __name__ == '__main__':
     print(getNovelKeyWord())
     print(getComicKeyWord())
     print(getCosplayKeyWord())
+    print(getAnimeById(111))
+    print(getNovelById(333))
+    print(getComicById(222))
+    print(getCosplayById(444))

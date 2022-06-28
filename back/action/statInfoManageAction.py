@@ -171,7 +171,7 @@ def getComicKeyWord():
 
 
 @router.get("/cosplaykeyword", responses={400: {"model": Code400}})
-async def getCosplayKeyWord():
+def getCosplayKeyWord():
     r"""
     获得全站cosplay关键词的统计信息
     """
@@ -186,3 +186,5 @@ async def getCosplayKeyWord():
         traceback.print_exc()
         raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
     return jsonable_encoder(cosplayKeyWord)
+
+
