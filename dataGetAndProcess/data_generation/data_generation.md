@@ -36,7 +36,7 @@
 #### qingchunUniqueIdList.json
 存放仅独占青春画像的作品id列表
 
-### getUniqueIdList.py
+#### getUniqueIdList.py
 获取独占某一用户画像的作品id列表
 #### getUserImgIdList.py
 获取某种用户画像对应的tag，再根据tag获取符合对应画像的作品id列表
