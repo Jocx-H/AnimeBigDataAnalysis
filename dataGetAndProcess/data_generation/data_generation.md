@@ -1,7 +1,32 @@
 ## data_generation
 存放用户记录数据生成的算法、代码及所生成的用户记录数据
 
+#### getUniqueIdList.py
+
+获取独占某一用户画像的作品id列表
+
+#### getUserImgIdList.py
+
+获取某种用户画像对应的tag，再根据tag获取符合对应画像的作品id列表
+
+#### historyGenerationDemo.py
+
+尝试生成用户记录的demo文件
+
+#### imgBasedHistoryGeneration.py
+
+根据用户画像生成用户记录数据（初始数据与每日阅览数据）
+
+#### userImgDescription.md
+
+用户画像描述
+
+#### data_generation.md
+
+本文档
+
 ### selectList
+
 存放符合各个用户画像对应tag的作品id列表
 #### zhongerSelectList.json
 存放符合中二画像对应tag的作品id列表
@@ -36,15 +61,3 @@
 #### qingchunUniqueIdList.json
 存放仅独占青春画像的作品id列表
 
-#### getUniqueIdList.py
-获取独占某一用户画像的作品id列表
-#### getUserImgIdList.py
-获取某种用户画像对应的tag，再根据tag获取符合对应画像的作品id列表
-#### historyGenerationDemo.py
-尝试生成用户记录的demo文件
-#### imgBasedHistoryGeneration.py
-根据用户画像生成用户记录数据（初始数据与每日阅览数据）
-#### userImgDescription.md
-用户画像描述
-#### data_generation.md
-本文档
