@@ -82,7 +82,7 @@ def getComicDict():
     table_name = "comic"
     attr = "cid"
     sql = f"""
-            SELECT * 
+            SELECT cid,cover,title 
             FROM {table_name} 
             order by  {attr}
             """
@@ -93,13 +93,8 @@ def getComicDict():
         for row in res:
             comics_dict[row[0]] = dict(ComicBean(
                 cid=row[0],
-                url=row[1],
-                cover=row[2],
-                title=row[3],
-                last_short_title=row[4],
-                author=row[5],
-                type=row[6],
-                state=row[7]
+                cover=row[1],
+                title=row[2],
             ))
     except Exception as e:
         print(repr(e))

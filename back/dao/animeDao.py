@@ -96,7 +96,7 @@ def getAnimeDict():
     table_name = "anime"
     attr = "aid"
     sql = f"""
-            SELECT * 
+            SELECT aid,title,cover 
             FROM {table_name} 
             ORDER BY {attr}
             """
@@ -108,20 +108,7 @@ def getAnimeDict():
             animes_dict[row[0]] = dict(AnimeBean(
                 aid=row[0],
                 title=row[1],
-                index_show=row[2],
-                is_finished=row[3],
-                video_link=row[4],
-                cover=row[5],
-                pub_real_time=row[6],
-                renewal_time=row[7],
-                favorites=row[8],
-                coins=row[9],
-                views=row[10],
-                danmakus=row[11],
-                depth=row[12],
-                media_tags=row[13],
-                score=row[14],
-                cm_count=row[15]
+                cover=row[2],
             ))
     except Exception as e:
         print(repr(e))

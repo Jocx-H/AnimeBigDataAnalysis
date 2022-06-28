@@ -53,38 +53,12 @@ def __statAnime__(uid: int):
     dir_res = {
         "aid": [],
         "title": [],
-        "index_show": [],
-        "is_finished": [],
-        "video_link": [],
         "cover": [],
-        "pub_real_time": [],
-        "renewal_time": [],
-        "favorites": [],
-        "coins": [],
-        "views": [],
-        "danmakus": [],
-        "depth": [],
-        "media_tags": [],
-        "score": [],
-        "cm_count": []
     }
     for k in recommoned_res:
         dir_res["aid"].append(anime_dict[int(k[0])]["aid"])
         dir_res["title"].append(anime_dict[int(k[0])]["title"])
-        dir_res["index_show"].append(anime_dict[int(k[0])]["index_show"])
-        dir_res["is_finished"].append(anime_dict[int(k[0])]["is_finished"])
-        dir_res["video_link"].append(anime_dict[int(k[0])]["video_link"])
         dir_res["cover"].append(anime_dict[int(k[0])]["cover"])
-        dir_res["pub_real_time"].append(anime_dict[int(k[0])]["pub_real_time"])
-        dir_res["renewal_time"].append(anime_dict[int(k[0])]["renewal_time"])
-        dir_res["favorites"].append(anime_dict[int(k[0])]["favorites"])
-        dir_res["coins"].append(anime_dict[int(k[0])]["coins"])
-        dir_res["views"].append(anime_dict[int(k[0])]["views"])
-        dir_res["danmakus"].append(anime_dict[int(k[0])]["danmakus"])
-        dir_res["depth"].append(anime_dict[int(k[0])]["depth"])
-        dir_res["media_tags"].append(anime_dict[int(k[0])]["media_tags"])
-        dir_res["score"].append(anime_dict[int(k[0])]["score"])
-        dir_res["cm_count"].append(anime_dict[int(k[0])]["cm_count"])
 
     return dir_res
 
@@ -118,31 +92,13 @@ def __statNovel__(uid: int):
     recommoned_res = random.sample(recommoned_res, RANDOM_COUNT)
     dir_res = {
         "nid": [],
-        "url": [],
         "cover": [],
         "title": [],
-        "author": [],
-        "score": [],
-        "type": [],
-        "depth": [],
-        "state": [],
-        "click_cnt": [],
-        "update_time": [],
-        "introduce": []
     }
     for k in recommoned_res:
         dir_res["nid"].append(novel_dict[int(k[0])]["nid"])
-        dir_res["url"].append(novel_dict[int(k[0])]["url"])
         dir_res["cover"].append(novel_dict[int(k[0])]["cover"])
         dir_res["title"].append(novel_dict[int(k[0])]["title"])
-        dir_res["author"].append(novel_dict[int(k[0])]["author"])
-        dir_res["score"].append(novel_dict[int(k[0])]["score"])
-        dir_res["type"].append(novel_dict[int(k[0])]["type"])
-        dir_res["depth"].append(novel_dict[int(k[0])]["depth"])
-        dir_res["state"].append(novel_dict[int(k[0])]["state"])
-        dir_res["click_cnt"].append(novel_dict[int(k[0])]["click_cnt"])
-        dir_res["update_time"].append(novel_dict[int(k[0])]["update_time"])
-        dir_res["introduce"].append(novel_dict[int(k[0])]["introduce"])
 
     return dir_res
 
@@ -176,23 +132,13 @@ def __statComic__(uid: int):
     recommoned_res = random.sample(recommoned_res, RANDOM_COUNT)
     dir_res = {
         "cid": [],
-        "url": [],
         "cover": [],
         "title": [],
-        "last_short_title": [],
-        "author": [],
-        "type": [],
-        "state": []
     }
     for k in recommoned_res:
         dir_res["cid"].append(comic_dict[int(k[0])]["cid"])
-        dir_res["url"].append(comic_dict[int(k[0])]["url"])
         dir_res["cover"].append(comic_dict[int(k[0])]["cover"])
         dir_res["title"].append(comic_dict[int(k[0])]["title"])
-        dir_res["last_short_title"].append(comic_dict[int(k[0])]["last_short_title"])
-        dir_res["author"].append(comic_dict[int(k[0])]["author"])
-        dir_res["type"].append(comic_dict[int(k[0])]["type"])
-        dir_res["state"].append(comic_dict[int(k[0])]["state"])
 
     return dir_res
 
@@ -205,13 +151,11 @@ def __statCosplay__(uid: int):
     cosplays = random.sample(cosplays, RANDOM_COUNT)
     dir_res = {
         "cosid": [],
-        "url": [],
         "cover": [],
         "title": []
     }
     for k in cosplays:
         dir_res["cosid"].append(k[1]["cosid"])
-        dir_res["url"].append(k[1]["url"])
         dir_res["cover"].append(k[1]["cover"])
         dir_res["title"].append(k[1]["title"])
     return dir_res

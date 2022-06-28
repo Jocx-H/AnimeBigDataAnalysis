@@ -74,7 +74,7 @@ def getCosplayDict():
     table_name = "cosplay"
     attr = "cosid"
     sql = f"""
-            SELECT * 
+            SELECT cosid,cover,title 
             FROM {table_name} 
             order by  {attr} 
             """
@@ -85,9 +85,8 @@ def getCosplayDict():
         for row in res:
             cosplays_dict[row[0]] = dict(CosplayBean(
                 cosid=row[0],
-                url=row[1],
-                cover=row[2],
-                title=row[3],
+                cover=row[1],
+                title=row[2],
             ))
     except Exception as e:
         print(repr(e))
