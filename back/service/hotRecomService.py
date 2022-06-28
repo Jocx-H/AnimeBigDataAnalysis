@@ -207,8 +207,19 @@ def __statCosplay__(uid: int):
     通过用户相似度矩阵和用户物品爱好矩阵推荐cosplay
     """
     cosplays = list(cosplayDao.getCosplayDict().items())
-    random.shuffle(cosplays)
-    return cosplays
+    cosplays = random.sample(cosplays, RANDOM_COUNT)
+    dir_res = {
+        "cosid": [],
+        "url": [],
+        "cover": [],
+        "title": []
+    }
+    for k in cosplays:
+        dir_res["cosid"].append(k[1]["cosid"])
+        dir_res["url"].append(k[1]["url"])
+        dir_res["cover"].append(k[1]["cover"])
+        dir_res["title"].append(k[1]["title"])
+    return dir_res
 
 
 def getAnime(uid: int) -> dict:
