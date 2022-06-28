@@ -17,6 +17,7 @@ characterList = ['feizhai', 'qingchun', 'xianchong', 'zhiguai', 'zhonger']
 
 userImageDataDir = {}
 
+
 def fileOpen(fileName: str):
     global userImageDataDir
     with open(f"../assets/userImageDataList/{fileName}SelectList.json", encoding="utf-8") as file:
@@ -25,12 +26,14 @@ def fileOpen(fileName: str):
         sum_list = tmp_list[0] + tmp_list[1] + tmp_list[2] + tmp_list[3]
         userImageDataDir[fileName] = sum_list
 
+
 def analysisWatchRatio(ratio: float):
     if ratio > 0.7:
         return ratio
     elif ratio > 0.4:
         return ratio * 0.75
     return ratio * 0.5
+
 
 def analysisWeight(id: int):
     count = 0
@@ -48,6 +51,7 @@ def characterAnalysis(character: str):
         if i.historyid in userImageDataDir[character]:
             totalScore += float(i.ratio) / analysisWeight(i.historyid)
     return totalScore
+
 
 def userAnalysis(uid: int):
     global userHistoryList
@@ -70,4 +74,9 @@ def userAnalysis(uid: int):
 
     return userImageDir
 
-print(userAnalysis(1078))
+
+print(userAnalysis(1025))
+print(userAnalysis(1045))
+print(userAnalysis(1095))
+print(userAnalysis(1140))
+print(userAnalysis(1180))
