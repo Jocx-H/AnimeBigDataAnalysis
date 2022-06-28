@@ -14,6 +14,7 @@ import os
 
 from dataGetAndProcess.CF.utils import *
 
+
 class UserBasedCF():
     def __init__(self, kind, filename):
         """
@@ -125,7 +126,6 @@ class UserBasedCF():
     def user_rec(self, user):
         """
         针对目标用户u，找到与之最相似的20个用户，产生12个推荐
-        
         param user:目标用户u
         return: 12部推荐的动漫
         """

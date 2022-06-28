@@ -23,12 +23,12 @@ router = APIRouter(
 
 
 @router.post("/anime", responses={400: {"model": Code400}})
-def getAnime(uname: str):
+def getAnime(uid: int):
     r"""
     根据用户喜好个性化推荐动漫
     """
     try:
-        indiviAnime = indiviRecomService.getAnime(uname)
+        indiviAnime = indiviRecomService.getAnimeAndNovel(uid)
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -39,12 +39,12 @@ def getAnime(uname: str):
 
 
 @router.post("/novel", responses={400: {"model": Code400}})
-def getNovel(uname: str):
+def getNovel(uid: int):
     r"""
     根据用户喜好个性化推荐小说
     """
     try:
-        indiviNovel = indiviRecomService.getNovel(uname)
+        indiviNovel = indiviRecomService.getNovelAndComic(uid)
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -55,12 +55,12 @@ def getNovel(uname: str):
 
 
 @router.post("/comic", responses={400: {"model": Code400}})
-def getComic(uname: str):
+def getComic(uid: int):
     r"""
     根据用户喜好个性化推荐漫画
     """
     try:
-        indiviComic = indiviRecomService.getComic(uname)
+        indiviComic = indiviRecomService.getAnimeAndComic(uid)
     except HTTPException as e:
         raise e
     except Exception as e:

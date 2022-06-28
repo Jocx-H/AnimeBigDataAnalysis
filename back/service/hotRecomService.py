@@ -116,10 +116,6 @@ def __statNovel__(uid: int):
             rank[item] += Wuv * float(user_item[v][item])
     recommoned_res = sorted(rank.items(), key=itemgetter(1), reverse=True)[:MAX_USER_ITEM_COUNT]
     recommoned_res = random.sample(recommoned_res, RANDOM_COUNT)
-    # res = []
-    # for k in recommoned_res:
-    #     res.append(novel_dict[int(k[0])])
-    # return res
     dir_res = {
         "nid": [],
         "url": [],
@@ -149,7 +145,6 @@ def __statNovel__(uid: int):
         dir_res["introduce"].append(novel_dict[int(k[0])]["introduce"])
 
     return dir_res
-
 
 
 def __statComic__(uid: int):
