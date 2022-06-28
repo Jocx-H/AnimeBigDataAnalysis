@@ -10,7 +10,7 @@ import datetime
 import numpy as np
 import warnings
 
-RATING_PATH = r"G:\GitHub\AnimeBigDataAnalysis\dataGetAndProcess\data_generation\sysData_final.json"
+RATING_PATH = r"G:\GitHub\AnimeBigDataAnalysis\dataGetAndProcess\data_generation\sysDataV2.json"
 DATA_PATH = r"G:\GitHub\AnimeBigDataAnalysis\back\assets\simMatrix"
 
 ANIME = 1
@@ -26,7 +26,7 @@ SIM_ITEMS = 20
 # 当前时间戳（最大时间戳）
 # initDate = datetime.datetime.now()
 # MAX_TIMESTAMP = int(initDate.timestamp() * 1000000)
-MAX_TIMESTAMP = 1656312633807334
+MAX_TIMESTAMP = 1656382982995091
 
 def get_time_score(timestamp):
     """
