@@ -12,9 +12,9 @@ from operator import itemgetter
 import json
 import os
 
-from utils import *
+from dataGetAndProcess.CF.utils import *
 
-class UserBasedCF():
+class RecomCD():
     def __init__(self, type, filename):
         """
         初始化参数
@@ -142,7 +142,7 @@ class UserBasedCF():
                 self.user_sim_matrix[u][v] = count / sqrt(len(self.user_item[u])*len(self.user_item[v]))
         print('='*10, '用户相似度矩阵计算完毕', '='*10)
 
-    def user_rec(self, user):
+    def user_rec_CD(self, user):
         """
         针对目标用户u，找到与之最相似的20个用户，产生12个推荐
         
@@ -178,5 +178,5 @@ class UserBasedCF():
 
 
 if __name__ == "__main__":
-    userCF = UserBasedCF(NOVEL, RATING_PATH)
-    userCF.user_rec("1000")
+    recomCD = RecomCD(NOVEL, RATING_PATH)
+    recomCD.user_rec_CD("1000")
