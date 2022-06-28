@@ -18,6 +18,7 @@ imgBasedHistoryGeneration.py
 后者的用户画像包括：中二、现充、肥宅、志怪、青春五种
 '''
 
+
 # 各类作品总数
 animeTotalNum = 3512    # 动漫总数
 comicTotalNum = 20931   # 漫画总数
@@ -29,14 +30,19 @@ comicDailyRate = 0.7
 novelDailyRate = 0.7
 cosDailyRate = 0.25
 # 用户画像阅览偏好：选择画像内作品的概率
-preferenceRate = 0.7
+preferenceRate = 0.8
 # 存储不同画像的用户偏好作品的id list
 animeSelectList = []
 comicSelectList = []
 novelSelectList = []
 cosSelectList = []
+# 独占作品列表
+animeUniqueImgList = []
+comicUniqueImgList = []
+novelUniqueImgList = []
+cosUniqueImgList = []
 # 全局变量信息设置
-usersTotalNum = 300    # 用户总数
+usersTotalNum = 200     # 用户总数
 startUserId = 1000      # 起始用户ID
 tagSet = {}             # 用户画像对应的tag集合
 userData = {}           # 单个用户数据列表
@@ -121,6 +127,7 @@ def setUserImg(type: str):
     elif type == 'qingchun':    # 青春
         tagSet = getList.qingchunTagSet
     global animeSelectList, comicSelectList, novelSelectList, cosSelectList
+    global animeUniqueImgList, comicUniqueImgList, novelUniqueImgList
     # 读取已经保存的各个画像对应的selectList：空间换时间
     jsonPath = type + "SelectList.json"
     jsonFile = open(jsonPath, 'r')
@@ -129,6 +136,13 @@ def setUserImg(type: str):
     comicSelectList = selectList[1]
     novelSelectList = selectList[2]
     cosSelectList = selectList[3]
+    uniquePath = type + "UniqueIdList.json"
+    uniqueFile = open(uniquePath, 'r')
+    uniqueList = json.load(uniqueFile)
+    animeUniqueImgList = uniqueList[0]
+    comicUniqueImgList = uniqueList[1]
+    novelUniqueImgList = uniqueList[2]
+
 
 '''
 基于用户画像的记录生成函数：
@@ -142,17 +156,25 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     preferFactor = 1        # 偏好因子：有偏好画像的用户对于特定的作品三连概率更高，以此修正
     if ctrlCode == 0:       # 无具体画像的用户无显著偏好，preferenceRate = 0
         preferenceRate = 0
+        print('wuhuaxiang')
+        print(animeSelectList)
     else:                   # 有具体画像的用户阅览内容时有偏好，preferenceRate = 0.7(原始设置)，preferFactor = 1.5
         preferFactor = 1.5
     dailyRecordList = []    # 某用户record.py中的recordList，记录用户每天观看的各种类型作品的信息
     userData = sysData[userId-1000]
     # 动漫 - 每天有0.7的概率会看动漫
     dailyAnimeNum = int(random.random() * 5) if random.random() < animeDailyRate else 0
-    for i in range(dailyAnimeNum):
+    for animeIndex in range(dailyAnimeNum):
         dailyRecordList.append(1)
         animeOptionList = ['1', str(1 + int(animeTotalNum * random.random()))]
-        animeOption1 = int(''.join(animeOptionList))        # 0.3
-        animeOption2 = int(random.choice(animeSelectList))  # 0.7 - prefer
+        animeOption1 = int(''.join(animeOptionList))        # not prefer
+        if len(animeUniqueImgList) > 0:
+            # print(animeUniqueImgList)
+            animeOption3 = int(random.choice(animeUniqueImgList))
+            animeOption4 = int(random.choice(animeSelectList))
+            animeOption2 = animeOption4 if random.random() > preferenceRate else animeOption3  # prefer
+        else:
+            animeOption2 = int(random.choice(animeSelectList))
         dailyAnimeId = animeOption1 if random.random() > preferenceRate else animeOption2
         # dailyRecordList.append(dailyAnimeId == animeOption2) # -- 测试选项 --
         dailyAnimeMark = []
@@ -170,8 +192,13 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     for i in range(dailyComicNum):
         dailyRecordList.append(2)
         comicOptionList = ['2', str(1 + int(comicTotalNum * random.random()))]
-        comicOption1 = int(''.join(comicOptionList))        # 0.3
-        comicOption2 = int(random.choice(comicSelectList))  # 0.7 - prefer
+        comicOption1 = int(''.join(comicOptionList))        # not prefer
+        # comicOption2 = int(random.choice(comicSelectList))  # prefer
+        if len(comicUniqueImgList) > 0:
+            comicOption3 = int(random.choice(comicUniqueImgList))
+            comicOption2 = int(random.choice(comicSelectList)) if random.random() > preferenceRate else comicOption3  # prefer
+        else:
+            comicOption2 = int(random.choice(comicSelectList))
         dailyComicId = comicOption1 if random.random() > preferenceRate else comicOption2
         # dailyRecordList.append(dailyComicId == comicOption2) # -- 测试选项 --
         dailyComicMark = []
@@ -189,10 +216,16 @@ def imgDailyGenerate(ctrlCode: int, userId: int, currDate: int):
     for i in range(dailyNovelNum):
         dailyRecordList.append(3)
         novelOptionList = ['3', str(1 + int(novelTotalNum * random.random()))]
-        novelOption1 = int(''.join(novelOptionList))        # 0.3
-        novelOption2 = int(random.choice(novelSelectList))  # 0.7 - prefer
+        novelOption1 = int(''.join(novelOptionList))        # not prefer
+        # novelOption2 = int(random.choice(novelSelectList))  # prefer
+        if len(novelUniqueImgList) > 0:
+            novelOption3 = int(random.choice(novelUniqueImgList))
+            novelOption4 = int(random.choice(novelSelectList))
+            novelOption2 = novelOption4 if random.random() > preferenceRate else novelOption3  # prefer
+        else:
+            novelOption2 = int(random.choice(novelSelectList))
         dailyNovelId = novelOption1 if random.random() > preferenceRate else novelOption2
-        # dailyRecordList.append(dailyNovelId == novelOption2) # -- 测试选项 --
+        # dailyRecordList.append(dailyNovelId == novelOption3) # -- 测试选项 --
         dailyNovelMark = []
         novelScore = int(random.random() * 6)
         if novelScore < 5:
@@ -260,11 +293,11 @@ if __name__ == '__main__':
             elif i in range(1160, 1200):  # 青春
                 setUserImg('qingchun')
                 recordList.append(imgDailyGenerate(1, i, currDate)[1])
-            else:                           # 无特定画像
-                recordList.append(imgDailyGenerate(0, i, currDate)[1])
+            # else:                           # 无特定画像
+            #     recordList.append(imgDailyGenerate(0, i, currDate)[1])
     print('generate completed!')
     print(recordList)
     # 写入json文件中（多行写入）
-    with open("sysData.json", "w", encoding='utf-8') as f:
+    with open("sysDataV2.json", "w", encoding='utf-8') as f:
         json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)
     print('write into json completed!')
