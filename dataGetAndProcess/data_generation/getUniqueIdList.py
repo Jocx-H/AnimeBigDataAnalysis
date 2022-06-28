@@ -11,15 +11,15 @@ import json
 
 def zhongerUniqueIdList():
     uniqueIdList = []
-    with open("zhongerSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhongerSelectList.json", encoding ="utf-8") as file:
         zhongerList = json.load(file)
-    with open("xianchongSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/xianchongSelectList.json", encoding ="utf-8") as file:
         xianchongList = json.load(file)
-    with open("feizhaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/feizhaiSelectList.json", encoding ="utf-8") as file:
         feizhaiList = json.load(file)
-    with open("zhiguaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhiguaiSelectList.json", encoding ="utf-8") as file:
         zhiguaiList = json.load(file)
-    with open("qingchunSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/qingchunSelectList.json", encoding ="utf-8") as file:
         qingchunList = json.load(file)
     # print(zhongerList)
     # print(xianchongList)
@@ -32,22 +32,22 @@ def zhongerUniqueIdList():
                 # print(zhongerList[i][j])
         uniqueIdList.append(workList)
     # 写入json文件中（多行写入）
-    with open("zhongerUniqueIdList.json", "w", encoding='utf-8') as f:
+    with open("uniqueList/zhongerUniqueIdList.json", "w", encoding='utf-8') as f:
         json.dump(uniqueIdList, f, indent=2, sort_keys=True, ensure_ascii=False)
     return uniqueIdList
 
 
 def xianchongUniqueIdList():
     uniqueIdList = []
-    with open("zhongerSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhongerSelectList.json", encoding ="utf-8") as file:
         zhongerList = json.load(file)
-    with open("xianchongSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/xianchongSelectList.json", encoding ="utf-8") as file:
         xianchongList = json.load(file)
-    with open("feizhaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/feizhaiSelectList.json", encoding ="utf-8") as file:
         feizhaiList = json.load(file)
-    with open("zhiguaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhiguaiSelectList.json", encoding ="utf-8") as file:
         zhiguaiList = json.load(file)
-    with open("qingchunSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/qingchunSelectList.json", encoding ="utf-8") as file:
         qingchunList = json.load(file)
     for i in range(len(xianchongList) - 1):
         workList = []
@@ -58,22 +58,22 @@ def xianchongUniqueIdList():
                 # print(zhongerList[i][j])
         uniqueIdList.append(workList)
     # 写入json文件中（多行写入）
-    with open("xianchongUniqueIdList.json", "w", encoding='utf-8') as f:
+    with open("uniqueList/xianchongUniqueIdList.json", "w", encoding='utf-8') as f:
         json.dump(uniqueIdList, f, indent=2, sort_keys=True, ensure_ascii=False)
     return uniqueIdList
 
 
 def feizhaiUniqueIdList():
     uniqueIdList = []
-    with open("zhongerSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhongerSelectList.json", encoding ="utf-8") as file:
         zhongerList = json.load(file)
-    with open("xianchongSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/xianchongSelectList.json", encoding ="utf-8") as file:
         xianchongList = json.load(file)
-    with open("feizhaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/feizhaiSelectList.json", encoding ="utf-8") as file:
         feizhaiList = json.load(file)
-    with open("zhiguaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhiguaiSelectList.json", encoding ="utf-8") as file:
         zhiguaiList = json.load(file)
-    with open("qingchunSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/qingchunSelectList.json", encoding ="utf-8") as file:
         qingchunList = json.load(file)
     for i in range(len(feizhaiList) - 1):
         workList = []
@@ -83,21 +83,21 @@ def feizhaiUniqueIdList():
                 workList.append(feizhaiList[i][j])
         uniqueIdList.append(workList)
     # 写入json文件中（多行写入）
-    with open("feizhaiUniqueIdList.json", "w", encoding='utf-8') as f:
+    with open("uniqueList/feizhaiUniqueIdList.json", "w", encoding='utf-8') as f:
         json.dump(uniqueIdList, f, indent=2, sort_keys=True, ensure_ascii=False)
     return uniqueIdList
 
 def zhiguaiUniqueIdList():
     uniqueIdList = []
-    with open("zhongerSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhongerSelectList.json", encoding ="utf-8") as file:
         zhongerList = json.load(file)
-    with open("xianchongSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/xianchongSelectList.json", encoding ="utf-8") as file:
         xianchongList = json.load(file)
-    with open("feizhaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/feizhaiSelectList.json", encoding ="utf-8") as file:
         feizhaiList = json.load(file)
-    with open("zhiguaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhiguaiSelectList.json", encoding ="utf-8") as file:
         zhiguaiList = json.load(file)
-    with open("qingchunSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/qingchunSelectList.json", encoding ="utf-8") as file:
         qingchunList = json.load(file)
     for i in range(len(zhiguaiList) - 1):
         workList = []
@@ -107,21 +107,21 @@ def zhiguaiUniqueIdList():
                 workList.append(zhiguaiList[i][j])
         uniqueIdList.append(workList)
     # 写入json文件中（多行写入）
-    with open("zhiguaiUniqueIdList.json", "w", encoding='utf-8') as f:
+    with open("uniqueList/zhiguaiUniqueIdList.json", "w", encoding='utf-8') as f:
         json.dump(uniqueIdList, f, indent=2, sort_keys=True, ensure_ascii=False)
     return uniqueIdList
 
 def qingchunUniqueIdList():
     uniqueIdList = []
-    with open("zhongerSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhongerSelectList.json", encoding ="utf-8") as file:
         zhongerList = json.load(file)
-    with open("xianchongSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/xianchongSelectList.json", encoding ="utf-8") as file:
         xianchongList = json.load(file)
-    with open("feizhaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/feizhaiSelectList.json", encoding ="utf-8") as file:
         feizhaiList = json.load(file)
-    with open("zhiguaiSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/zhiguaiSelectList.json", encoding ="utf-8") as file:
         zhiguaiList = json.load(file)
-    with open("qingchunSelectList.json", encoding ="utf-8") as file:
+    with open("selectList/qingchunSelectList.json", encoding ="utf-8") as file:
         qingchunList = json.load(file)
     for i in range(len(qingchunList) - 1):
         workList = []
@@ -131,7 +131,7 @@ def qingchunUniqueIdList():
                 workList.append(qingchunList[i][j])
         uniqueIdList.append(workList)
     # 写入json文件中（多行写入）
-    with open("qingchunUniqueIdList.json", "w", encoding='utf-8') as f:
+    with open("uniqueList/qingchunUniqueIdList.json", "w", encoding='utf-8') as f:
         json.dump(uniqueIdList, f, indent=2, sort_keys=True, ensure_ascii=False)
     return uniqueIdList
 

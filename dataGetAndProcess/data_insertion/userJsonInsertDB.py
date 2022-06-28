@@ -10,7 +10,7 @@ sysDataList = []
 
 def insertUserJsonToDB(userId: int):
     global db, sysDataList
-    db = pymysql.connect(host="124.70.91.77", user="root", password="12345678", port=3306,
+    db = pymysql.connect(host="124.70.91.77", user="root", password="xxxx", port=3306,
                          database='AnimeBigDataAnalysis')
     cursor = db.cursor(pymysql.cursors.DictCursor)
     index = userId - 1000
@@ -100,7 +100,7 @@ def insertUserJsonToDB(userId: int):
 
 
 if __name__ == "__main__":
-    jsonFile = open('..\\data_generation\\sysDataV2.json', 'r')
+    jsonFile = open('../data_generation/sysData/sysDataV2.json', 'r')
     sysDataList = json.load(jsonFile)
     # print(sysDataList[1]['1001'][0].keys())
     for i in range(1000, 1300):

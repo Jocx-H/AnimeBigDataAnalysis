@@ -107,6 +107,6 @@ if __name__ == "__main__":
     cosList = getCosIdBasedOnTags(tagSet)
     imgList = [animeList, comicList, novelList, cosList]
     # 写入json文件中（多行写入）
-    with open("zhiguaiSelectList.json", "w", encoding='utf-8') as f:  # 每次更改！！
+    with open("selectList/zhiguaiSelectList.json", "w", encoding='utf-8') as f:  # 每次更改！！
         json.dump(imgList, f, indent = 2, sort_keys = True, ensure_ascii = False)
     print('write into json completed!')
