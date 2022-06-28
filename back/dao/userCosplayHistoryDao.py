@@ -8,6 +8,7 @@
 
 import pymysql
 from bean.userCosplayHistoryBean import UserCosplayHistoryBean
+from dao.utils import database
 
 '''
 根据用户id获取其所有的cosplay阅览记录
@@ -17,25 +18,28 @@ from bean.userCosplayHistoryBean import UserCosplayHistoryBean
 
 
 def getCosplayHistoryByUserId(userId: int):
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
-    cursor = db.cursor(pymysql.cursors.DictCursor)
+    db, cursor = database()
     sql = """SELECT * FROM usercosplayhistory WHERE uid = %d""" % (userId)
     try:
         cursor.execute(sql)
-        row = cursor.fetchone()
-        cosplayList = UserCosplayHistoryBean(
-            coshid=row[0],
-            uid=row[1],
-            cosid=row[2],
-            score=row[3],
-            ratio=row[4],
-            like=row[5],
-            collect=row[6],
-            timestamp=row[7]
-        )
+        tmp_result = cursor.fetchall()
         db.commit()
         db.close()
-        return cosplayList
+        result = []
+        for row in tmp_result:
+            result.append(
+                UserCosplayHistoryBean(
+                    coshid=row[0],
+                    uid=row[1],
+                    cosid=row[2],
+                    score=row[3],
+                    ratio=row[4],
+                    like=row[5],
+                    collect=row[6],
+                    timestamp=row[7]
+                )
+            )
+        return result
     except:
         db.rollback()
         return {'message': 'get cosplay fail'}
@@ -51,8 +55,7 @@ def getCosplayHistoryByUserId(userId: int):
 
 
 def getCosplayHistoryAll():
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
-    cursor = db.cursor(pymysql.cursors.DictCursor)
+    db, cursor = database()
     sql = """SELECT * FROM usercosplayhistory"""
     try:
         cursor.execute(sql)
