@@ -15,7 +15,7 @@ import os
 import traceback
 
 
-RESOURCE_PATH = r'.\assets\resourcedata\{}.json'
+RESOURCE_PATH = r'./assets/resourcedata/{}.json'
 
 
 def __animeScoreStatInfo__():

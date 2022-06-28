@@ -17,7 +17,7 @@ from operator import itemgetter
 from dao import animeDao, comicDao, novelDao, cosplayDao
 
 
-MATRIX_PATH = r'.\assets\simMatrix\{}.json'
+MATRIX_PATH = r'./assets/simMatrix/{}.json'
 MAX_SIM_USER_COUNT = 20
 MAX_USER_ITEM_COUNT = 40
 
