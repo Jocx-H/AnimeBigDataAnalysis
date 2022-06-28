@@ -16,7 +16,7 @@ import pymysql
 from dao.utils import database
 import numpy
 
-sys_json_path = "../../dataGetAndProcess/data_generation/sysData.json"
+sys_json_path = "../../dataGetAndProcess/data_generation/sysData/sysData.json"
 with open(sys_json_path, encoding="utf-8") as file:
     file_json = json.load(file)
 zhonegr = []
