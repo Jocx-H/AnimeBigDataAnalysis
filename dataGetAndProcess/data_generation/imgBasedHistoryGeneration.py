@@ -298,6 +298,6 @@ if __name__ == '__main__':
     print('generate completed!')
     print(recordList)
     # 写入json文件中（多行写入）
-    with open("sysDataV2.json", "w", encoding='utf-8') as f:
+    with open("sysData.json", "w", encoding='utf-8') as f:
         json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)
     print('write into json completed!')
