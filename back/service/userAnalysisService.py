@@ -20,7 +20,7 @@ userImageDataDir = {}
 
 def fileOpen(fileName: str):
     global userImageDataDir
-    with open(f"../assets/userImageDataList/{fileName}SelectList.json", encoding="utf-8") as file:
+    with open(f"./assets/userImageDataList/{fileName}SelectList.json", encoding="utf-8") as file:
         tmp_list = json.load(file)
         # 将selectList中anime, comic, novel, cos四个维度的数据id整合到一个统一的list中
         sum_list = tmp_list[0] + tmp_list[1] + tmp_list[2] + tmp_list[3]
@@ -66,20 +66,22 @@ def userAnalysis(uid: int):
     for i in characterList:
         fileOpen(i)
 
-    userImageDir = {}
+    score = []
     for i in characterList:
-        userImageDir[i] = characterAnalysis(i)
+        score.append(characterAnalysis(i))
 
     print("user: ", userInfo.uname)
 
     result = {}
-    result['userImageDir'] = userImageDir
+    result['userImageDir'] = {'categories': ['肥宅', '青春', '现充', '志怪', '中二'],
+                              'name': "用户战力系数",
+                              'data': [score[0], score[1], score[2], score[3], score[4]]}
 
 
     final_result = {'result': result}
     return final_result
 
-
+# 单元测试文件路径需改成../
 # print(userAnalysis(1025))
 # print(userAnalysis(1045))
 # print(userAnalysis(1095))
