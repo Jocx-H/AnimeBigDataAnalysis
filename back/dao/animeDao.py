@@ -45,6 +45,7 @@ def getAnime():
                 media_tags=row[13],
                 score=row[14],
                 cm_count=row[15]
+
             ))
     except Exception as e:
         print(repr(e))
@@ -82,7 +83,8 @@ def getAnimeById(aid):
             depth=row[12],
             media_tags=row[13],
             score=row[14],
-            cm_count=row[15])
+            cm_count=row[15],
+            introduce=row[16])
     except Exception as e:
         print(repr(e))
         traceback.print_exc()

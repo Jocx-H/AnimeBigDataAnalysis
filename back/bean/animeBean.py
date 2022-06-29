@@ -27,10 +27,12 @@ class AnimeBean:
     media_tags: str = None
     score: float = None
     cm_count: str = None
+    introduce: str = None
 
     def keys(self):
         return 'aid', 'title', 'index_show', 'is_finished', 'video_link', 'cover', 'pub_real_time', \
-               'renewal_time', 'favorites', 'coins', 'views', 'danmakus', 'depth', 'media_tags', 'score', 'cm_count'
+               'renewal_time', 'favorites', 'coins', 'views', 'danmakus', 'depth', 'media_tags', 'score', \
+               'cm_count', 'introduce'
 
     def __getitem__(self, item):
         return getattr(self, item)
