@@ -30,7 +30,7 @@ def __animeScoreStatInfo__():
             res = json.load(R)
         new_res = {'categories': [], 'data': []}
         for i in res:
-            new_res['categories'].append(i['score'])
+            new_res['categories'].append(str(i['score']))
             new_res['data'].append(i['count'])
     except Exception as e:
         print(repr(e))
@@ -49,7 +49,7 @@ def __novelScoreStatInfo__():
             res = json.load(R)
         new_res = {'categories': [], 'data': []}
         for i in res:
-            new_res['categories'].append(i['score'])
+            new_res['categories'].append(str(i['score']))
             new_res['data'].append(i['count'])
     except Exception as e:
         print(repr(e))
