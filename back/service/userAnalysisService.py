@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
 @Time: 2022/6/27 10:41
-@Author: CloudAndMist
+@Author: CloudAndMist,WILLOSCAR
 @Description:
 '''
 import time
@@ -91,9 +91,9 @@ def userAnalysis(uid: int):
     adict = sorted(adict.items(), key=lambda x: x[0], reverse=True)
     cdict = sorted(cdict.items(), key=lambda x: x[0], reverse=True)
     ndict = sorted(ndict.items(), key=lambda x: x[0], reverse=True)
-    print(adict, len(adict))
-    print(cdict, len(cdict))
-    print(ndict, len(ndict))
+    # print(adict, len(adict))
+    # print(cdict, len(cdict))
+    # print(ndict, len(ndict))
     animeCnt = 0
     comicCnt = 0
     novelCnt = 0
@@ -113,7 +113,7 @@ def userAnalysis(uid: int):
             novelCnt = 0
 
     all = [animeCalList, comicCalList, novelCalList]
-    print(all)
+    # print(all)
 
     userHistoryList = userAnimeHistoryList + userComicHistoryList + userNovelHistoryList
     if (userAnimeHistoryList is None) or (userComicHistoryList is None) or (userNovelHistoryList is None):
