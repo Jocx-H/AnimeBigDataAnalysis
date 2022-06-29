@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
 # @Time: 2022/6/23 9:39
-# @Author: 何润熹
+# @Author: Jocx
 # @Description: 二次元动漫推荐系统主程序，用于开发环境的调试
 '''
 
