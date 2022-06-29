@@ -28,9 +28,10 @@ def __animeScoreStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
-        new_res = []
+        new_res = {'categories': [], 'data': []}
         for i in res:
-            new_res.append({'name': i['score'], 'value': i['count']})
+            new_res['categories'].append(i['score'])
+            new_res['data'].append(i['count'])
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
@@ -46,9 +47,10 @@ def __novelScoreStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
-        new_res = []
+        new_res = {'categories': [], 'data': []}
         for i in res:
-            new_res.append({'name': i['score'], 'value': i['count']})
+            new_res['categories'].append(i['score'])
+            new_res['data'].append(i['count'])
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
@@ -71,7 +73,7 @@ def __animeTypeStatInfo__():
         print(repr(e))
         traceback.print_exc()
         return None
-    return new_res
+    return new_res[:10]
 
 
 def __novelTypeStatInfo__():
@@ -89,7 +91,7 @@ def __novelTypeStatInfo__():
         print(repr(e))
         traceback.print_exc()
         return None
-    return new_res
+    return new_res[:10]
 
 
 def __comicTypeStatInfo__():
@@ -107,7 +109,7 @@ def __comicTypeStatInfo__():
         print(repr(e))
         traceback.print_exc()
         return None
-    return new_res
+    return new_res[:10]
 
 
 def __animeKeyWordStatInfo__():
