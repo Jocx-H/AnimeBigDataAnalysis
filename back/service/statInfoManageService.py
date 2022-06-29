@@ -28,11 +28,14 @@ def __animeScoreStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
+        new_res = []
+        for i in res:
+            new_res.append({'name': i['score'], 'value': i['count']})
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return res
+    return new_res
 
 
 def __novelScoreStatInfo__():
@@ -43,11 +46,14 @@ def __novelScoreStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
+        new_res = []
+        for i in res:
+            new_res.append({'name': i['score'], 'value': i['count']})
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return res
+    return new_res
 
 
 def __animeTypeStatInfo__():
@@ -58,11 +64,14 @@ def __animeTypeStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
+        new_res = []
+        for i in res:
+            new_res.append({'name': i['type'], 'value': i['count']})
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return res
+    return new_res
 
 
 def __novelTypeStatInfo__():
@@ -73,11 +82,14 @@ def __novelTypeStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
+        new_res = []
+        for i in res:
+            new_res.append({'name': i['type'], 'value': i['count']})
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return res
+    return new_res
 
 
 def __comicTypeStatInfo__():
@@ -88,11 +100,14 @@ def __comicTypeStatInfo__():
     try:
         with open(file, 'r', encoding='utf-8') as R:
             res = json.load(R)
+        new_res = []
+        for i in res:
+            new_res.append({'name': i['type'], 'value': i['count']})
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return res
+    return new_res
 
 
 def __animeKeyWordStatInfo__():
