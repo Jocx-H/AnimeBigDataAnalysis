@@ -20,7 +20,7 @@ userImageDataDir = {}
 
 def fileOpen(fileName: str):
     global userImageDataDir
-    with open(f"../assets/userImageDataList/{fileName}SelectList.json", encoding="utf-8") as file:
+    with open(f"./assets/userImageDataList/{fileName}SelectList.json", encoding="utf-8") as file:
         tmp_list = json.load(file)
         # 将selectList中anime, comic, novel, cos四个维度的数据id整合到一个统一的list中
         sum_list = tmp_list[0] + tmp_list[1] + tmp_list[2] + tmp_list[3]
