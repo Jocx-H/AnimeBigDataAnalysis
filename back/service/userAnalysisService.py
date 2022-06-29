@@ -72,11 +72,16 @@ def userAnalysis(uid: int):
 
     print("user: ", userInfo.uname)
 
-    return userImageDir
+    result = {}
+    result['userImageDir'] = userImageDir
 
 
-print(userAnalysis(1025))
-print(userAnalysis(1045))
-print(userAnalysis(1095))
-print(userAnalysis(1140))
-print(userAnalysis(1180))
+    final_result = {'result': result}
+    return final_result
+
+
+# print(userAnalysis(1025))
+# print(userAnalysis(1045))
+# print(userAnalysis(1095))
+# print(userAnalysis(1140))
+# print(userAnalysis(1180))
