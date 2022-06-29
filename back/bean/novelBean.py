@@ -24,6 +24,7 @@ class NovelBean:
     click_cnt: int = None
     update_time: str = None
     introduce: str = None
+    cm_count: str = None
 
     def keys(self):
         return 'nid', 'url', 'cover', 'title', 'author', 'score', 'type', 'depth', 'state', 'click_cnt', \
