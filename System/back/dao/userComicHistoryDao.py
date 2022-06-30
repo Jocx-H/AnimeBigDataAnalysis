@@ -10,12 +10,13 @@ import pymysql
 from bean.userComicHistoryBean import UserComicHistoryBean
 from dao.utils import database
 
-'''
-根据用户id获取其所有的漫画阅览记录
-返回格式：
-[{'chid': 1, 'uid': 10000, 'cid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
-'''
+
 def getComicHistoryByUserId(userId: int):
+    """
+    根据用户id获取其所有的漫画阅览记录
+    返回格式：
+    [{'chid': 1, 'uid': 10000, 'cid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
+    """
     db, cursor = database()
     sql = """SELECT * FROM usercomichistory WHERE uid = %d"""%(userId)
     try:
@@ -42,14 +43,12 @@ def getComicHistoryByUserId(userId: int):
         db.rollback()
         return {'message': 'get comic fail'}
 
-# print(getComicHistoryByUserId(10001))
 
-
-'''
-返回usercomichistroy中全部用户阅览数据
-数据量大，谨慎操作！
-'''
 def getComicHistoryAll():
+    """
+    返回usercomichistroy中全部用户阅览数据
+    数据量大，谨慎操作！
+    """
     db, cursor = database()
     sql = """SELECT * FROM usercomichistory"""
     try:
@@ -75,5 +74,3 @@ def getComicHistoryAll():
     except:
         db.rollback()
         return {'message': 'get comic fail'}
-
-# print(getComicHistoryAll())

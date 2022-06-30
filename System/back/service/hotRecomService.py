@@ -152,12 +152,14 @@ def __statCosplay__(uid: int):
     dir_res = {
         "cosid": [],
         "cover": [],
-        "title": []
+        "title": [],
+        "url": []
     }
     for k in cosplays:
         dir_res["cosid"].append(k[1]["cosid"])
         dir_res["cover"].append(k[1]["cover"])
         dir_res["title"].append(k[1]["title"])
+        dir_res["url"].append(k[1]["url"])
     return dir_res
 
 
