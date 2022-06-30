@@ -14,7 +14,6 @@ from action.msgCodeConfig import Code400
 from service import userManageService
 from service import userAnalysisService
 
-
 # 构建api路由
 router = APIRouter(
     prefix="/user",
@@ -37,6 +36,7 @@ def usrLogin(account: int, password: str):
         raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
     return jsonable_encoder(loginResult)
 
+
 @router.post("/analysis", responses={400: {"model": Code400}})
 def usrLogin(uid: int):
     r"""
@@ -51,3 +51,19 @@ def usrLogin(uid: int):
         traceback.print_exc()
         raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
     return jsonable_encoder(analysisResult)
+
+
+@router.post("/history", responses={400: {"model": Code400}})
+def usrHistory(uid: int):
+    r"""
+    返回用户登录信息
+    """
+    try:
+        historyResult = userManageService.userHistory(uid)
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(repr(e))
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail="客户端运行错误，请检查输入内容或联系管理员！")
+    return jsonable_encoder(historyResult)

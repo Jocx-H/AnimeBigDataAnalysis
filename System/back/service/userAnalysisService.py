@@ -100,6 +100,10 @@ def userAnalysis(uid: int):
     animeCalList = ['anime']
     comicCalList = ['comic']
     novelCalList = ['novel']
+    animeSum = len(userAnimeHistoryList)
+    comicSum = len(userComicHistoryList)
+    novelSum = len(userNovelHistoryList)
+    sumList = [animeSum, comicSum, novelSum]
     for i in range(min(len(adict), len(cdict), len(ndict))):
         animeCnt += adict[i][1]
         comicCnt += cdict[i][1]
@@ -133,6 +137,7 @@ def userAnalysis(uid: int):
                               'name': "用户战力系数",
                               'data': [score[0], score[1], score[2], score[3], score[4]]}
     result['history'] = all
+    result['sum'] = sumList
     final_result = {'result': result}
     return final_result
 
