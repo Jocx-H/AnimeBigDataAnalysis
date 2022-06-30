@@ -11,9 +11,9 @@ import codecs
 import os
 import math
 
-max_font_size = 50
-min_font_size = 8
-word_num = 30
+max_font_size = 65
+min_font_size = 18
+word_num = 50
 min_fre = 0
 max_fre = 0
 
@@ -24,7 +24,7 @@ def sigmoid(x):
     return 1.0 / (1.0 + math.e**(-x))
 
 if __name__ == '__main__':
-    with open("../data/preData/pre_novel_title_count.json", encoding="utf-8") as file:
+    with open("../data/pre_novel_title_count.json", encoding="utf-8") as file:
         in_file = json.load(file)
     output = []
     total_cnt = 0
