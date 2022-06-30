@@ -56,11 +56,7 @@
 		},
 		methods: {
 			log_in() {
-				uni.navigateTo({
-					url: "./main"
-				})
 				// 和后端交互再用
-				/*
 				uni.setStorage({
 					key: 'password',
 					data: this.form.password,
@@ -70,23 +66,16 @@
 					data: this.form.id,
 				});
 				uni.request({
-					url: 'http://121.36.55.120/login?my_user=' + this.form.id + '&my_password=' + this.form.password,
+					url: 'http://124.70.91.77:8000/api/user/login?account=' + this.form.id + '&password=' + this.form.password,
+					method: 'POST',
 					success: res => {
 						console.log(res)
-						if (res.data.type === "error"){
-							this.content="ID不存在或密码错误，请重新输入"
-							// 模态框提示错误
-							this.show=true
-						}
-						else {
-							// 返回2，跳转到管理员
-							uni.navigateTo({
-								url: "../../manager/m_dish_list/m_dish_list"
-							})
-						}
+						uni.navigateTo({
+							url: "./main?id=" + res.data.usr.uid + "&name=" + res.data.usr.uname
+						})
 					},
 				})
-				*/
+				
 			},
 		}
 	}

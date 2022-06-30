@@ -13,24 +13,24 @@
 				<!-- dilidili图标 -->
 				<uni-col :span="16">
 					<view class="dilidili">
-						<image style="height: 40px;float: left;" mode="heightFix" src="../static/dilidili.png">
+						<image style="height: 40px;float: left;cursor:pointer;text-decoration:none;" mode="heightFix" src="../static/dilidili.png">
 						</image>
 					</view>
 				</uni-col>
 				<!-- 用户头像 -->
 				<uni-col :span="2">
 					<view class="portrait">
-						<image @click="navi_my()"  style="height: 40px; width: 40px; display: block; margin: 0 auto;border-radius: 50%;  border: 3rpx solid #ffb9d4;" src="../static/portrait.jpg">
+						<image @click="navi_my()"  style="cursor:pointer;text-decoration:none;height: 40px; width: 40px; display: block; margin: 0 auto;border-radius: 50%;  border: 3rpx solid #ffb9d4;" src="../static/portrait.jpg">
 						</image>
 					</view>
-					<text v-if="tag==0"  class="portrait-txt">
+					<text class="portrait-txt">
 						{{this.name}}
 					</text>
 				</uni-col>
 				<!-- 足迹 -->
 				<uni-col :span="2">
 					<view class="foot">
-						<image @click="navi_my()" style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/foot.png">
+						<image @click="navi_my()" style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/foot.png">
 						</image>
 					</view>
 					<text class="foot-txt">
@@ -40,7 +40,7 @@
 				<!-- 本站 -->
 				<uni-col :span="2">
 					<view class="exit">
-						<image @click="navi_dilidili()" style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/admin.png">
+						<image @click="navi_dilidili()" style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/admin.png">
 						</image>
 					</view>
 					<text class="exit-txt">
@@ -50,7 +50,7 @@
 				<!-- 退出-->
 				<uni-col :span="2">
 					<view class="exit">
-						<image @click="exit()" style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/exit.png">
+						<image @click="exit()" style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/exit.png">
 						</image>
 					</view>
 					<text class="exit-txt">
@@ -84,33 +84,6 @@
 					</button>
 				</uni-col>
 			</uni-row>
-			<!-- 二级标签 -->
-			<uni-row>
-				<!-- 动漫的二级标签 -->
-				<uni-col :span="1" v-if="tag == 0" v-for="(item, j) in dm_list" :key="j+'b'">
-					<button class="btn_2st" @click="change_dm_list(j)">
-						<text :style="{'color': (index==j ? '#ffb9d4':'#61666d')}">{{dm_list[j]}}</text>
-					</button>
-				</uni-col>
-				<!-- 漫画的二级标签 -->
-				<uni-col :span="1" v-if="tag == 1" v-for="(item, j) in mh_list" :key="j+'b'">
-					<button class="btn_2st" @click="change_mh_list(j)">
-						<text :style="{'color': (index==j ? '#ffb9d4':'#61666d')}">{{mh_list[j]}}</text>
-					</button>
-				</uni-col>
-				<!-- 小说的二级标签 -->
-				<uni-col :span="1" v-if="tag == 2" v-for="(item, j) in xs_list" :key="j+'b'">
-					<button class="btn_2st" @click="change_xs_list(j)">
-						<text :style="{'color': (index==j ? '#ffb9d4':'#61666d')}">{{xs_list[j]}}</text>
-					</button>
-				</uni-col>
-				<!-- cosplay的二级标签 -->
-				<uni-col :span="1" v-if="tag == 3" v-for="(item, j) in cp_list" :key="j+'b'">
-					<button class="btn_2st" @click="change_cp_list(j)">
-						<text :style="{'color': (index==j ? '#ffb9d4':'#61666d')}">{{cp_list[j]}}</text>
-					</button>
-				</uni-col>
-			</uni-row>
 		</view>
 		<!-- 轮播图 -->
 		<view class="swiper-box">
@@ -126,7 +99,7 @@
 				</uni-col>
 				<uni-col :span="12">
 					<view style="width: 100px; float: right; margin-right: calc(20%);">
-						<u-button type="primary" :plain="true" color="#61666d" shape="circle" icon="reload" text="换一换"></u-button>
+						<u-button type="primary" :plain="true" color="#61666d" shape="circle" icon="reload" text="换一换" @click="change_change(tag)"></u-button>
 					</view>
 				</uni-col>
 			</uni-row>
@@ -136,17 +109,17 @@
 					<uni-col :span="4" v-for="(item, i) in temp_6" :key="i+'b'">
 						<!-- 动漫 -->
 						<view class="rec_content_image">
-							<image v-if="tag==0" style="width: 350rpx;" :src="rec_dm_pic_list[item]" mode="aspectFit" @click="toDetail(rec_dm_id_list[item])"></image>
+							<image v-if="tag==0" style="cursor:pointer;text-decoration:none;width: 350rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_dm_pic_list[item]" mode="aspectFill" @click="toDetail(0, item)"></image>
 						</view>
 						<text v-if="tag==0" class="rec_content_title"> {{rec_dm_name_list[item]}} </text>
-						<!-- 漫画-->
+						<!-- 漫画 -->
 						<view class="rec_content_image">
-							<image v-if="tag==1" style="width: 390rpx;" :src="rec_mh_pic_list[i]" mode="aspectFit" @click="toDetail(rec_mh_id_list[item])"></image>
+							<image v-if="tag==1" style="cursor:pointer;text-decoration:none;width: 360rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_mh_pic_list[item]" mode="aspectFill" @click="toDetail(1, item)"></image>
 						</view>
 						<text v-if="tag==1" class="rec_content_title"> {{rec_mh_name_list[item]}} </text>
 						<!-- 小说 -->
 						<view class="rec_content_image">
-							<image v-if="tag==2" style="width: 390rpx;" :src="rec_xs_pic_list[i]" mode="aspectFit" @click="toDetail(rec_xs_id_list[item])"></image>
+							<image v-if="tag==2" style="cursor:pointer;text-decoration:none;width: 360rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_xs_pic_list[item]" mode="aspectFill" @click="toDetail(2, item)"></image>
 						</view>
 						<text v-if="tag==2" class="rec_content_title"> {{rec_xs_name_list[item]}} </text>
 					</uni-col>
@@ -155,17 +128,17 @@
 					<uni-col :span="4" v-for="(item, i) in temp_12" :key="i+'b'">
 						<!-- 动漫 -->
 						<view class="rec_content_image">
-							<image v-if="tag==0" style="width: 390rpx;" :src="rec_dm_pic_list[item]" mode="aspectFit" @click="toDetail(rec_dm_id_list[item])"></image>
+							<image v-if="tag==0" style="cursor:pointer;text-decoration:none;width: 350rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_dm_pic_list[item]" mode="aspectFill" @click="toDetail(0, item)"></image>
 						</view>
 						<text v-if="tag==0" class="rec_content_title"> {{rec_dm_name_list[item]}} </text>
 						<!-- 漫画-->
 						<view class="rec_content_image">
-							<image v-if="tag==1" style="width: 390rpx;" :src="rec_mh_pic_list[item]" mode="aspectFit" @click="toDetail(rec_mh_id_list[item])"></image>
+							<image v-if="tag==1" style="cursor:pointer;text-decoration:none;width: 360rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_mh_pic_list[item]" mode="aspectFill" @click="toDetail(1, item)"></image>
 						</view>
 						<text v-if="tag==1" class="rec_content_title"> {{rec_mh_name_list[item]}} </text>
 						<!-- 小说 -->
 						<view class="rec_content_image">
-							<image v-if="tag==2" style="width: 390rpx;" :src="rec_xs_pic_list[item]" mode="aspectFit" @click="toDetail(rec_xs_id_list[item])"></image>
+							<image v-if="tag==2" style="cursor:pointer;text-decoration:none;width: 360rpx;border-top-left-radius: 15px; border-top-right-radius: 15px;border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;" :src="rec_xs_pic_list[item]" mode="aspectFill" @click="toDetail(2, item)"></image>
 						</view>
 						<text v-if="tag==2" class="rec_content_title"> {{rec_xs_name_list[item]}} </text>
 					</uni-col>
@@ -177,22 +150,21 @@
 					<uni-col :span="4" v-for="(item, i) in temp_6" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image v-if="tag==3" style="width: 370rpx;" :src="rec_cp_pic_list[item]"  mode="aspectFit"></image>
+							<image v-if="tag==3" style="width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill" ></image>
 						</view>
-						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[0]}} </text>
+						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
 				</uni-row>
 				<uni-row>
 					<uni-col :span="4" v-for="(item, i) in temp_12" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image v-if="tag==3" style="width: 370rpx;" :src="rec_cp_pic_list[item]"  mode="aspectFit"></image>
+							<image v-if="tag==3" style="width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill"></image>
 						</view>
-						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[0]}} </text>
+						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
 				</uni-row>
 			</view>
-
 		</view>
 	</view>
 </template>
@@ -206,12 +178,6 @@
 				id:   0,		// 用户名
 				name: "miao",	// 用户昵称
 				tag:  0,		// 一级分类标签，0为动漫，1为漫画，2为小说，3为cosplay
-				index: 0,		// 二级分类标签
-				// 二级标签列表
-				dm_list: ["原创", "校园", "恋爱", "悬疑", "热血"],
-				mh_list: ["搞笑", "治愈", "冒险", "推理", "偶像", "少儿"],
-				xs_list: ["奇幻", "穿越", "原创"],
-				cp_list: ["冒险", "奇幻", "校园", "萝莉", "御姐"],
 				// 轮播图
 				curr_swiper: 0,				// 当前的轮播图
 				swiper_list: [{				// 轮播图的图片
@@ -234,123 +200,20 @@
 				],
 				curr_swiper_link: "",		// 当前轮播图的链接
 				// 动漫、漫画、小说、cosplay推荐的图片
-				rec_dm_pic_list:[
-					"http://i0.hdslb.com/bfs/bangumi/1cc333ff578e5ea9fded7e454953a4e2291440c2.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/4f3edbede7fc0bdb52842075cf8faaa1c5953eaa.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/39f7d690deb477004673f40e0fe65c78895c94f4.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/a9497ed9b2ad8fd3b77289734769f81bd3948d75.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/91e9534cc55aa1a6dc959e7d6d33bde970208232.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/cece1d7eaabd0fac10480efec3d879c542247734.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/376d7e69a667bcb1c0b934a4e35e07e7fa23110b.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/fd492888df64bbc3b821dac5d516dbc1c2fe5f08.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/9d8d2922b08f3d08d018e6e59e49607cf16d39e6.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/847e9dbb6876fb37a30199a5c88910704976d45b.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/82d628408f5472f1440982e880b0b4f0146862ad.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/f5128c939b24909c7cb75bab51be0ee0c4d1b33a.jpg"
-				],
-				rec_mh_pic_list:[
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/4/1447215436.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg",
-					"https://images.dmzj.com/img/webpic/7/1002475871439187470.jpg"
-				],
-				rec_xs_pic_list:[
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg",
-					"http://rs.sfacg.com/web/novel/images/NovelCover/Big/2022/05/a4f1a5cf-3dd0-4084-b401-ae72d941311d.jpg"
-				],
-				rec_cp_pic_list:[
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-					"http://www.cosplay8.com/uploads/allimg/220617/112879-22061G531320-L.jpg",
-				],
+				rec_dm_pic_list:["","","","","","","","","","","",""],
+				rec_mh_pic_list:["","","","","","","","","","","",""],
+				rec_xs_pic_list:["","","","","","","","","","","",""],
+				rec_cp_pic_list:["","","","","","","","","","","",""],
 				// 动漫、漫画、小说、cosplay推荐的标题
-				rec_dm_name_list:[
-					"青春猪头少年不会梦到兔女郎学姐",
-					"Re：从零开始的异世界生活",
-					"辉夜大小姐想让我告白",
-					"间谍过家家",
-					"咒术回战",
-					"工作细胞",
-					"国王排名",
-					"关于我转生变成史莱姆这档事",
-					"JOJO的奇妙冒险",
-					"小林家的龙女仆 第二季",
-					"我的青春恋爱物语果然有问题",
-					"四月是你的谎言"
-				],
-				rec_mh_name_list:[
-					"妖神记",
-					"妖神记",
-					"妖神记",
-					"妖神记",
-					"妖神记",
-					"妖神记",
-					"我家大师兄脑子有坑",
-					"我家大师兄脑子有坑",
-					"我家大师兄脑子有坑",
-					"我家大师兄脑子有坑",
-					"我家大师兄脑子有坑",
-					"我家大师兄脑子有坑"
-				],
-				rec_xs_name_list:[
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我",
-					"被病娇师尊追赶的我"
-				],
-				rec_cp_name_list:[
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇",
-					"《东方Project》圣诞礼遇"
-				],
+				rec_dm_name_list:["","","","","","","","","","","",""],
+				rec_mh_name_list:["","","","","","","","","","","",""],
+				rec_xs_name_list:["","","","","","","","","","","",""],
+				rec_cp_name_list:["","","","","","","","","","","",""],
 				// 动漫、漫画、小说、cosplay推荐的标识符，用于跳转详情页
-				rec_dm_id_list:["001","002","003","004","005","006","007","008","009","010","011","012"],
-				rec_mh_id_list:["001","002","003","004","005","006","007","008","009","010","011","012"],
-				rec_xs_id_list:["001","002","003","004","005","006","007","008","009","010","011","012"],
+				rec_dm_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
+				rec_mh_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
+				rec_xs_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
+				rec_cp_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
 			}
 		},
 		methods: {
@@ -364,6 +227,7 @@
 			change_mh_list(i){ this.index = i; },		// 【Todo】请求获取二级标签的rec_某某_name_list 、 图片
 			change_xs_list(i){ this.index = i; },		// 【Todo】请求获取二级标签的rec_某某_name_list 、 图片
 			change_cp_list(i){ this.index = i; },		// 【Todo】请求获取二级标签的rec_某某_name_list 、 图片
+			// 点击轮播图跳转
 			clickSwiper(){
 				this.curr_swiper_link = this.swiper_link_list[this.curr_swiper];
 				// 打开新标签页
@@ -371,31 +235,143 @@
 				window.open(href, '_blank');
 			},
 			// 跳转详情页
-			toDetail(idenfr){
-				// 打开新标签页
-				var { href } = this.$router.resolve({ path: "detail", query: { idfr: idenfr } }); 
-				window.open(href, '_blank');
+			toDetail(t, i){
+				// console.log("ToDetail:")
+				// console.log("dm:  ",this.rec_dm_id_list)
+				// console.log("mh:  ",this.rec_mh_id_list)
+				// console.log("xs:  ",this.rec_xs_id_list)
+				// console.log("cp:  ",this.rec_cp_id_list)
+				if (t == 0){
+					// 打开动漫新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.rec_dm_id_list[i] } }); 
+					window.open(href, '_blank');
+				}
+				else if (t == 1){
+					// 打开漫画新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.rec_mh_id_list[i] } }); 
+					window.open(href, '_blank');
+				}
+				else if (t == 2){
+					// 打开漫画新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.rec_xs_id_list[i] } }); 
+					window.open(href, '_blank');
+				}
 			},
 			navi_my(){
 				uni.navigateTo({
-					url: '/pages/my',
+					url: "/pages/my?id=" + this.id + "&name=" + this.name
 				})
 			},
 			navi_main(){
 				uni.navigateTo({
-					url: '/pages/main',
+					url: "/pages/main?id=" + this.id + "&name=" + this.name
 				})
 			},
 			navi_dilidili(){
 				uni.navigateTo({
-					url: '/pages/dilidili',
+					url: "/pages/dilidili?id=" + this.id + "&name=" + this.name
 				})
 			},
 			exit(){
 				uni.navigateTo({
-					url: '/pages/login',
+					url: "/pages/login"
 				})
+			},
+			change_change(t){
+				if (t == 0){
+					uni.request({
+						url: 'http://124.70.91.77:8000/api/hot/anime?uid=' + this.id,
+						method: 'GET',
+						success: res => {
+							console.log(res)
+							this.rec_dm_id_list = res.data.result.aid
+							this.rec_dm_name_list = res.data.result.title
+							this.rec_dm_pic_list = res.data.result.cover
+						},
+					})
+				}
+				else if (t == 1){
+					uni.request({
+						url: 'http://124.70.91.77:8000/api/hot/comic?uid=' + this.id,
+						method: 'GET',
+						success: res => {
+							console.log(res)
+							this.rec_mh_id_list = res.data.result.cid
+							this.rec_mh_name_list = res.data.result.title
+							this.rec_mh_pic_list = res.data.result.cover
+						},
+					})
+				}
+				else if (t == 2){
+					uni.request({
+						url: 'http://124.70.91.77:8000/api/hot/novel?uid=' + this.id,
+						method: 'GET',
+						success: res => {
+							console.log(res)
+							this.rec_xs_id_list = res.data.result.nid
+							this.rec_xs_name_list = res.data.result.title
+							this.rec_xs_pic_list = res.data.result.cover
+						},
+					})
+				}
+				else if (t == 3){
+					uni.request({
+						url: 'http://124.70.91.77:8000/api/hot/cosplay?uid=' + this.id,
+						method: 'GET',
+						success: res => {
+							console.log(res)
+							this.rec_cp_id_list = res.data.result.cosid
+							this.rec_cp_name_list = res.data.result.title
+							this.rec_cp_pic_list = res.data.result.cover
+						},
+					})
+				}
 			}
+		},
+		onLoad(option){
+			this.id = option.id
+			this.name = option.name
+			this.tag = 0
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/hot/anime?uid=' + this.id,
+				method: 'GET',
+				success: res => {
+					console.log(res)
+					this.rec_dm_id_list = res.data.result.aid
+					this.rec_dm_name_list = res.data.result.title
+					this.rec_dm_pic_list = res.data.result.cover
+				},
+			})
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/hot/novel?uid=' + this.id,
+				method: 'GET',
+				success: res => {
+					console.log(res)
+					this.rec_xs_id_list = res.data.result.nid
+					this.rec_xs_name_list = res.data.result.title
+					this.rec_xs_pic_list = res.data.result.cover
+				},
+			})
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/hot/comic?uid=' + this.id,
+				method: 'GET',
+				success: res => {
+					console.log(res)
+					this.rec_mh_id_list = res.data.result.cid
+					this.rec_mh_name_list = res.data.result.title
+					this.rec_mh_pic_list = res.data.result.cover
+				},
+			})
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/hot/cosplay?uid=' + this.id,
+				method: 'GET',
+				success: res => {
+					console.log(res)
+					this.rec_cp_id_list = res.data.result.cosid
+					this.rec_cp_name_list = res.data.result.title
+					this.rec_cp_pic_list = res.data.result.cover
+				},
+			})
 		}
 	}
 </script>
@@ -489,6 +465,7 @@
 	}
 	.rec_content_title{
 		margin-top: 10px;
+		margin-bottom: 5px;
 		font-family: cute;
 		font-size: 12px;
 		display: flex;

@@ -70,6 +70,16 @@
     },
     "vueVersion" : "2",
     "h5" : {
-        "template" : "fix.html"
+        "template" : "fix.html",
+        "domain" : "124.70.91.77",
+        "devServer" : {
+            "port" : 8080,
+            "https" : false
+        },
+        "router" : {
+            "mode" : "hash",
+            "base" : "/"
+        },
+        "title" : "Dilidili"
     }
 }
