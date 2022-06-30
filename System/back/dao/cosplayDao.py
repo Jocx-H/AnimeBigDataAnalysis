@@ -74,7 +74,7 @@ def getCosplayDict():
     table_name = "cosplay"
     attr = "cosid"
     sql = f"""
-            SELECT cosid,cover,title 
+            SELECT cosid,cover,title,url 
             FROM {table_name} 
             order by  {attr} 
             """
@@ -87,6 +87,7 @@ def getCosplayDict():
                 cosid=row[0],
                 cover=row[1],
                 title=row[2],
+                url=row[3]
             ))
     except Exception as e:
         print(repr(e))

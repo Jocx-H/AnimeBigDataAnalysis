@@ -13,14 +13,14 @@
 				<!-- dilidili图标 -->
 				<uni-col :span="16">
 					<view class="dilidili">
-						<image @click="navi_main()" style="height: 40px;float: left;" mode="heightFix" src="../static/dilidili.png">
+						<image @click="navi_main()" style="cursor:pointer;text-decoration:none;height: 40px;float: left;" mode="heightFix" src="../static/dilidili.png">
 						</image>
 					</view>
 				</uni-col>
 				<!-- 用户头像 -->
 				<uni-col :span="2">
 					<view class="portrait">
-						<image style="height: 40px; width: 40px; display: block; margin: 0 auto;border-radius: 50%;  border: 3rpx solid #ffb9d4;" src="../static/portrait.jpg">
+						<image style="cursor:pointer;text-decoration:none;height: 40px; width: 40px; display: block; margin: 0 auto;border-radius: 50%;  border: 3rpx solid #ffb9d4;" src="../static/portrait.jpg">
 						</image>
 					</view>
 					<text class="portrait-txt">
@@ -30,7 +30,7 @@
 				<!-- 足迹 -->
 				<uni-col :span="2">
 					<view class="foot">
-						<image style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/foot.png">
+						<image style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/foot.png">
 						</image>
 					</view>
 					<text class="foot-txt">
@@ -40,7 +40,7 @@
 				<!-- 本站 -->
 				<uni-col :span="2">
 					<view class="exit">
-						<image @click="navi_dilidili()" style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/admin.png">
+						<image @click="navi_dilidili()" style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/admin.png">
 						</image>
 					</view>
 					<text class="exit-txt">
@@ -50,7 +50,7 @@
 				<!-- 退出-->
 				<uni-col :span="2">
 					<view class="exit">
-						<image @click="exit()" style="width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/exit.png">
+						<image @click="exit()" style="cursor:pointer;text-decoration:none;width: 42px; display: block; margin: 0 auto;" mode="widthFix" src="../static/exit.png">
 						</image>
 					</view>
 					<text class="exit-txt">
@@ -85,15 +85,19 @@
 		<view class="foot-content" v-if="foot_or_data==0">
 			<view style="margin-left: 32px; margin-bottom: calc(2%);" v-for="(item, i) in foot_id" :key="i+'b'">
 				<view class="foot_content_image">
-					<image style="width: 350rpx;" :src="foot_pic[i]" mode="aspectFit" @click="toDetail(foot_id[i])"></image>
+					<image style="width: 350rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="foot_pic[i]" mode="aspectFill" @click="toDetail(i)"></image>
 				</view>
 				<text class="foot_content_title"> {{foot_name[i]}} </text>
 			</view>
 		</view>
 		<!-- 内容（数据分析） -->
 		<view class="data-content" v-if="foot_or_data==1">
-			
-			
+			<text style="font-family: cute;font-size: 50rpx; padding-left: calc(5%);" > 用户画像 </text>
+			<qiun-data-charts class="pic" type="radar" :opts="{legend:{position: 'bottom'},extra:{radar:{gridType:'circle', max:10}}}" :chartData="Radar"/>
+			<text style="font-family: cute;font-size: 50rpx; padding-left: calc(5%);" > 观看类型统计 </text>
+			<qiun-data-charts class="pic" type="rose" :opts="{legend:{position: 'bottom'},extra:{rose:{type:'radius'}}}" :chartData="PieA"/>
+			<text style="font-family: cute;font-size: 50rpx; padding-left: calc(5%);" > 观看历史统计 </text>
+			<qiun-data-charts class="pic" type="area" :opts="{extra:{area:{type:'curve',addLine:true,gradient:true}}}" :chartData="Line"/>
 		</view>
 	</view>
 </template>
@@ -104,60 +108,95 @@
 			return {
 				temp_6: [0,1,2,3,4,5],
 				temp_12: [6,7,8,9,10,11],
+				id: 0,
 				name: "miao",	// 用户昵称
 				foot_or_data: 0,	// 0为足迹，1为数据分析
-				foot_pic:[			// 足迹的封面图片
-					"http://i0.hdslb.com/bfs/bangumi/1cc333ff578e5ea9fded7e454953a4e2291440c2.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/4f3edbede7fc0bdb52842075cf8faaa1c5953eaa.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/39f7d690deb477004673f40e0fe65c78895c94f4.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/a9497ed9b2ad8fd3b77289734769f81bd3948d75.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/91e9534cc55aa1a6dc959e7d6d33bde970208232.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/cece1d7eaabd0fac10480efec3d879c542247734.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/376d7e69a667bcb1c0b934a4e35e07e7fa23110b.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/fd492888df64bbc3b821dac5d516dbc1c2fe5f08.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/9d8d2922b08f3d08d018e6e59e49607cf16d39e6.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/847e9dbb6876fb37a30199a5c88910704976d45b.png",
-					"http://i0.hdslb.com/bfs/bangumi/image/82d628408f5472f1440982e880b0b4f0146862ad.png",
-					// "http://i0.hdslb.com/bfs/bangumi/image/f5128c939b24909c7cb75bab51be0ee0c4d1b33a.jpg"
-				],
-				foot_name:[			// 足迹的图片标题
-					"青春猪头少年不会梦到兔女郎学姐",
-					"Re：从零开始的异世界生活",
-					"辉夜大小姐想让我告白",
-					"间谍过家家",
-					"咒术回战",
-					"工作细胞",
-					"国王排名",
-					"关于我转生变成史莱姆这档事",
-					"JOJO的奇妙冒险",
-					"小林家的龙女仆 第二季",
-					"我的青春恋爱物语果然有问题",
-					// "四月是你的谎言"
-				],
-				foot_id:[			// 足迹的内容id
-					"001","002","003","004","005","006","007","008","009","010","011",
-				]
+				foot_pic:["", "",	"",	"",	"",	"",	"",	"",	"",	"",	"", ""],// 足迹的封面图片
+				foot_name:["", "",	"",	"",	"",	"",	"",	"",	"",	"",	"", ""],// 足迹的图片标题
+				foot_id:[],// 足迹的内容id
+				Radar: {	//用户画像
+					"categories": [""],
+					"series": [{
+						"name": "",
+						"data": []
+					}]
+				},
+				PieA :{		// 观看类型统计
+					"series": [{
+						"data": [
+					    {
+					    	"name": "动漫",
+					    	"value": 0
+					    }, {
+					    	"name": "漫画",
+					    	"value": 0
+					    }, {
+					    	"name": "小说",
+					    	"value": 0
+					    }
+					  ]
+					}]
+				},
+				Line: {		// 观看历史统计
+					"categories": ["", "", "", "", "", ""],
+					"series": [{
+						"name": "动漫",
+						"data": []
+					}, {
+						"name": "漫画",
+						"data": []
+					}, {
+						"name": "小说",
+						"data": []
+					}]
+				},
 			}
+		},
+		onLoad(option){
+			this.id = option.id
+			this.name = option.name
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/user/history?uid=' + option.id,
+				method: 'POST',
+				success: res => {
+					console.log(res)
+					this.foot_id = res.data.result.id
+					this.foot_name = res.data.result.title
+					this.foot_pic = res.data.result.cover
+				},
+			})
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/user/analysis?uid=' + this.id,
+				method: 'POST',
+				success: res => {
+					console.log(res)
+					this.Radar.categories = res.data.result.userImageDir.categories
+					this.Radar.series[0]['name'] = res.data.result.userImageDir.name
+					this.Radar.series[0]['data'] = res.data.result.userImageDir.data
+					this.PieA.series[0].data = res.data.result.sum
+					this.Line = res.data.result.lineChart
+				},
+			})
 		},
 		methods: {
 			navi_my(){
 				uni.navigateTo({
-					url: '/pages/my',
+					url: "/pages/my?id=" + this.id + "&name=" + this.name
 				})
 			},
 			navi_main(){
 				uni.navigateTo({
-					url: '/pages/main',
+					url: "/pages/main?id=" + this.id + "&name=" + this.name
 				})
 			},
 			navi_dilidili(){
 				uni.navigateTo({
-					url: '/pages/dilidili',
+					url: "/pages/dilidili?id=" + this.id + "&name=" + this.name
 				})
 			},
 			exit(){
 				uni.navigateTo({
-					url: '/pages/login',
+					url: "/pages/login"
 				})
 			},
 			show_foot(){
@@ -165,12 +204,27 @@
 			},
 			show_data(){
 				this.foot_or_data = 1;
+				console.log(",,,,,",this.foot_or_data);
+				
 			},
 			// 跳转详情页
-			toDetail(idenfr){
-				// 打开新标签页
-				var { href } = this.$router.resolve({ path: "detail", query: {  idfr: idenfr } }); 
-				window.open(href, '_blank');
+			toDetail(i){
+				console.log("i:" , this.foot_id[i][0]);
+				if (this.foot_id[i].toString().substring(0,1) == "1"){
+					// 打开动漫新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.foot_id[i] } }); 
+					window.open(href, '_blank');
+				}
+				else if (this.foot_id[i].toString().substring(0,1) == "2"){
+					// 打开漫画新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.foot_id[i] } }); 
+					window.open(href, '_blank');
+				}
+				else if (this.foot_id[i].toString().substring(0,1) == "3"){
+					// 打开漫画新标签页
+					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.foot_id[i] } }); 
+					window.open(href, '_blank');
+				}
 			},
 		}
 	}
@@ -287,6 +341,8 @@
 		margin-bottom: calc(5%);
 	}
 	.foot_content_image{
+		cursor:pointer;
+		text-decoration:none;
 		margin-top: 30px;
 		display: flex;
 		flex-wrap: wrap;
@@ -294,6 +350,8 @@
 		align-content: space-between;
 	}
 	.foot_content_title{
+		width: 350rpx;
+		word-break:break-all;
 		margin-top: 10px;
 		font-family: cute;
 		font-size: 12px;
@@ -307,9 +365,14 @@
 		margin-top: 10px;
 		margin-left: calc(8%);
 		margin-right: calc(8%);
-		height: 3600rpx; 
+		height: 3200rpx; 
 		background-color: #ffffff;
 		border-top-left-radius: 15px;
 		border-top-right-radius: 15px;
+		margin-bottom: calc(2%);
+	}
+	.pic{
+		height: 700rpx;
+		padding-top: calc(5%);
 	}
 </style>

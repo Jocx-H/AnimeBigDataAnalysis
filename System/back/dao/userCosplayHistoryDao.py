@@ -10,14 +10,13 @@ import pymysql
 from bean.userCosplayHistoryBean import UserCosplayHistoryBean
 from dao.utils import database
 
-'''
-根据用户id获取其所有的cosplay阅览记录
-返回格式：
-[{'coshid': 1, 'uid': 10000, 'cosid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
-'''
-
 
 def getCosplayHistoryByUserId(userId: int):
+    """
+    根据用户id获取其所有的cosplay阅览记录
+    返回格式：
+    [{'coshid': 1, 'uid': 10000, 'cosid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
+    """
     db, cursor = database()
     sql = """SELECT * FROM usercosplayhistory WHERE uid = %d""" % (userId)
     try:
@@ -45,16 +44,11 @@ def getCosplayHistoryByUserId(userId: int):
         return {'message': 'get cosplay fail'}
 
 
-# print(getCosplayHistoryByUserId(10001))
-
-
-'''
-返回usercosplayhistroy中全部用户阅览数据
-数据量大，谨慎操作！
-'''
-
-
 def getCosplayHistoryAll():
+    """
+    返回usercosplayhistroy中全部用户阅览数据
+    数据量大，谨慎操作！
+    """
     db, cursor = database()
     sql = """SELECT * FROM usercosplayhistory"""
     try:
@@ -67,4 +61,3 @@ def getCosplayHistoryAll():
         db.rollback()
         return {'message': 'get cosplay fail'}
 
-# print(getCosplayHistoryAll())

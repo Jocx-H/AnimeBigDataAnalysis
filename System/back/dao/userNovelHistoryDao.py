@@ -10,14 +10,13 @@ import pymysql
 from bean.userNovelHistoryBean import UserNovelHistoryBean
 from dao.utils import database
 
-'''
-根据用户id获取其所有的动漫阅览记录
-返回格式：
-[{'nhid': 1, 'uid': 10000, 'nid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
-'''
-
 
 def getNovelHistoryByUserId(userId: int):
+    """
+    根据用户id获取其所有的动漫阅览记录
+    返回格式：
+    [{'nhid': 1, 'uid': 10000, 'nid': 11, 'score': 1.0, 'ratio': 0.32, 'thumb': 1, 'collect': 0, 'time': xxx}, {..}]
+    """
     db, cursor = database()
     sql = """SELECT * FROM usernovelhistory WHERE uid = %d""" % (userId)
     try:
@@ -45,16 +44,11 @@ def getNovelHistoryByUserId(userId: int):
         return {'message': 'get novel fail'}
 
 
-# print(getNovelHistoryByUserId(10001))
-
-
-'''
-返回usernovelhistroy中全部用户阅览数据
-数据量大，谨慎操作！
-'''
-
-
 def getNovelHistoryAll():
+    """
+    返回usernovelhistroy中全部用户阅览数据
+    数据量大，谨慎操作！
+    """
     db, cursor = database()
     sql = """SELECT * FROM usernovelhistory"""
     try:
@@ -66,5 +60,3 @@ def getNovelHistoryAll():
     except:
         db.rollback()
         return {'message': 'get novel fail'}
-
-# print(getNovelHistoryAll())

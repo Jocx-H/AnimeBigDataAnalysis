@@ -91,9 +91,6 @@ def userAnalysis(uid: int):
     adict = sorted(adict.items(), key=lambda x: x[0], reverse=True)
     cdict = sorted(cdict.items(), key=lambda x: x[0], reverse=True)
     ndict = sorted(ndict.items(), key=lambda x: x[0], reverse=True)
-    # print(adict, len(adict))
-    # print(cdict, len(cdict))
-    # print(ndict, len(ndict))
     animeCnt = 0
     comicCnt = 0
     novelCnt = 0
@@ -108,7 +105,6 @@ def userAnalysis(uid: int):
     series = []
     for i in range(len(sumList)):
         series.append({"name": nameList[i], "value": sumList[i]})
-    print(series)
     for i in range(min(len(adict), len(cdict), len(ndict))):
         animeCnt += adict[i][1]
         comicCnt += cdict[i][1]
@@ -122,12 +118,10 @@ def userAnalysis(uid: int):
             novelCnt = 0
 
     all = [animeCalList, comicCalList, novelCalList]
-    print(all)
     categories = [_ * 3 for _ in range(0, len(animeCalList))]
     yaxis = []
     for i in range(0, len(nameList)):
         yaxis.append({"name": nameList[i], "data": all[i]})
-    print(yaxis)
     userHistoryList = userAnimeHistoryList + userComicHistoryList + userNovelHistoryList
     if (userAnimeHistoryList is None) or (userComicHistoryList is None) or (userNovelHistoryList is None):
         raise
@@ -138,8 +132,6 @@ def userAnalysis(uid: int):
     score = []
     for i in characterList:
         score.append(characterAnalysis(i))
-
-    print("user: ", userInfo.uname)
 
     result = {}
     result['userImageDir'] = {'categories': ['肥宅', '青春', '现充', '志怪', '中二'],
