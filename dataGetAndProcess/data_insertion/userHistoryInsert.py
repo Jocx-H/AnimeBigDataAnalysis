@@ -35,8 +35,8 @@ comicSelectList = []
 novelSelectList = []
 cosSelectList = []
 # 全局变量信息设置
-usersTotalNum = 15    # 用户总数
-startUserId = 10000     # 起始用户ID
+usersTotalNum = 250     # 用户总数
+startUserId = 1000      # 起始用户ID
 tagSet = {}             # 用户画像对应的tag集合
 userData = {}           # 单个用户数据列表
 sysData = []            # 系统用户总数据 sysData = [userData1, userData2, ...]
@@ -45,13 +45,19 @@ initDate = datetime.datetime.now()
 initDateStamp = int(initDate.timestamp() * 1000000)
 db = None
 
+# {1032: [{1138: [5, 0.26, True, True, 1656171745203046]}, {2788: [2, 0.3, False, True, 1656171745203046]}, {37016: [4, 0.95, True, False, 1656171745203046]}, {42: [0, 0.09, False, True, 1656171745203046]}]}
+# {'message': 'insert init data successfully'}
+
+# {1000: [{11432: [2, 0.15, False, False, 1656171859617069]}, {23060: [1, 0.15, False, True, 1656171859617069]}, {34005: [3, 0.93, False, False, 1656171859617069]}, {4139: [2, 0.56, False, False, 1656171859617069]}]}
+# None
 
 '''
 根据用户id向数据库中插入初始数据（某一用户，每项单条）
 '''
 def insertInitData(userId: int):
     global db
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
+    db = pymysql.connect(host="124.70.91.77", user="root", password="xxx", port=3306, database='AnimeBigDataAnalysis')
+    # db = pymysql.connect(host="localhost", user="root", password="xxx", port=3307, database='ars')
     cursor = db.cursor(pymysql.cursors.DictCursor)
     global userData
     userData = imgGer.initDataGenerate(userId)
@@ -105,7 +111,7 @@ def insertInitData(userId: int):
         cursor.execute(sql4)
         db.commit()
         # db.close()
-        return {'message': 'successfully'}
+        return {'message': 'insert init data successfully'}
     except:
         db.rollback()
 
@@ -119,7 +125,7 @@ currDate: 插入日期
 '''
 def insertUserDailyData(ctrlCode: int, userId:int, currDate: int):
     global db
-    db = pymysql.connect(host="localhost", user="root", password="xxxx", port=3307, database='ars')
+    db = pymysql.connect(host="124.70.91.77", user="root", password="xxx", port=3306, database='AnimeBigDataAnalysis')
     cursor = db.cursor(pymysql.cursors.DictCursor)
     global preferenceRate
     preferFactor = 1  # 偏好因子：有偏好画像的用户对于特定的作品三连概率更高，以此修正
@@ -281,19 +287,21 @@ if __name__ == "__main__":
         currDateForm = timeDateForm - day * datetime.timedelta(days=1)
         currDate = int(currDateForm.timestamp() * 1000000)
         for i in range(startUserId, startUserId + usersTotalNum):
-            if i in range(10000, 10002):  # 中二
+            if i <= 1100 and i % 20 == 0:
+                print("new type start")
+            if i in range(1000, 1020):  # 中二
                 setUserImg('zhonger')
                 insertUserDailyData(1, i, currDate)
-            elif i in range(10002, 10004):  # 现充
+            elif i in range(1020, 1040):  # 现充
                 setUserImg('xianchong')
                 insertUserDailyData(1, i, currDate)
-            elif i in range(10004, 10006):  # 肥宅
+            elif i in range(1040, 1060):  # 肥宅
                 setUserImg('feizhai')
                 insertUserDailyData(1, i, currDate)
-            elif i in range(10006, 10008):  # 志怪
+            elif i in range(1060, 1080):  # 志怪
                 setUserImg('zhiguai')
                 insertUserDailyData(1, i, currDate)
-            elif i in range(10008, 10010):  # 青春
+            elif i in range(1080, 1100):  # 青春
                 setUserImg('qingchun')
                 insertUserDailyData(1, i, currDate)
             else:                           # 无特定画像

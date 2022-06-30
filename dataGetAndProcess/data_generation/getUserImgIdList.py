@@ -54,7 +54,7 @@ def getAnimeIdBasedOnTags(tagSet: set) -> list:
                     break
     return animeTagIdList
 
-# 漫画
+# 漫画: 注意，有的漫画只有一个tag，所以不cnt！
 def getComicIdBasedOnTags(tagSet: set) -> list:
     comicTagIdList = []
     cnt = 0
@@ -65,9 +65,13 @@ def getComicIdBasedOnTags(tagSet: set) -> list:
         for tag in line['type']:
             if tag in tagSet:
                 cnt += 1
-                if(cnt == 2):
+                if(cnt > 0):
                     comicTagIdList.append(line['id'])
                     break
+    # for line in file_json:
+    #     for tag in tagSet:
+    #         if tag == line['type']:
+    #             comicTagIdList.append(line['id'])
     return comicTagIdList
 
 # 小说
@@ -95,7 +99,7 @@ def getCosIdBasedOnTags(tagSet: set) -> list:
 
 if __name__ == "__main__":
     # 保存各个画像对应的selectList以提高速度：空间换时间
-    tagSet = qingchunTagSet
+    tagSet = zhiguaiTagSet  # 每次更改！！
     imgList = []
     animeList = getAnimeIdBasedOnTags(tagSet)
     comicList = getComicIdBasedOnTags(tagSet)
@@ -103,6 +107,6 @@ if __name__ == "__main__":
     cosList = getCosIdBasedOnTags(tagSet)
     imgList = [animeList, comicList, novelList, cosList]
     # 写入json文件中（多行写入）
-    with open("qingchunSelectList.json", "w", encoding='utf-8') as f:
+    with open("selectList/zhiguaiSelectList.json", "w", encoding='utf-8') as f:  # 每次更改！！
         json.dump(imgList, f, indent = 2, sort_keys = True, ensure_ascii = False)
     print('write into json completed!')

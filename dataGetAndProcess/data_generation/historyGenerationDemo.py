@@ -1,4 +1,4 @@
-# -*- coding: gbk -*-
+# -*- coding: utf-8 -*-
 # @Time :2022/6/21 16:32
 # @File : getUserImgIdList.py
 # @author: derrick
@@ -10,94 +10,94 @@ import json
 
 '''
 historyGenerationDemo.py
-°üº¬¹¦ÄÜ£º
-1.Éú³ÉÓÃ»§ÀúÊ·£»
-2.Ã¿ÈÕÔÄÀÀ¼ÇÂ¼¡£
+åŒ…å«åŠŸèƒ½ï¼š
+1.ç”Ÿæˆç”¨æˆ·å†å²ï¼›
+2.æ¯æ—¥é˜…è§ˆè®°å½•ã€‚
 '''
 
-# ¸÷Àà×÷Æ·×ÜÊı
-animeTotalNum = 3531    # ¶¯Âş×ÜÊı
-comicTotalNum = 20931   # Âş»­×ÜÊı
-novelTotalNum = 9841    # Ğ¡Ëµ×ÜÊı
-cosTotalNum = 200       # cosplay ×ÜÊı
-# Ã¿ÌìÔÄÀÀ¶¯Âş¡¢Âş»­¡¢Ğ¡ËµµÄ¸ÅÂÊ
+# å„ç±»ä½œå“æ€»æ•°
+animeTotalNum = 3531    # åŠ¨æ¼«æ€»æ•°
+comicTotalNum = 20931   # æ¼«ç”»æ€»æ•°
+novelTotalNum = 9841    # å°è¯´æ€»æ•°
+cosTotalNum = 200       # cosplay æ€»æ•°
+# æ¯å¤©é˜…è§ˆåŠ¨æ¼«ã€æ¼«ç”»ã€å°è¯´çš„æ¦‚ç‡
 animeDailyRate = 0.7
 comicDailyRate = 0.7
 novelDailyRate = 0.7
 cosDailyRate = 0.25
-# È«¾Ö±äÁ¿ĞÅÏ¢ÉèÖÃ
-usersTotalNum = 3    # ÓÃ»§×ÜÊı
-startUserId = 10000     # ÆğÊ¼ÓÃ»§ID
-userData = []           # µ¥¸öÓÃ»§Êı¾İÁĞ±í
-sysData = []            # ÏµÍ³ÓÃ»§×ÜÊı¾İ: [userData[], userData[], ...]
+# å…¨å±€å˜é‡ä¿¡æ¯è®¾ç½®
+usersTotalNum = 3    # ç”¨æˆ·æ€»æ•°
+startUserId = 1000      # èµ·å§‹ç”¨æˆ·ID
+userData = []           # å•ä¸ªç”¨æˆ·æ•°æ®åˆ—è¡¨
+sysData = []            # ç³»ç»Ÿç”¨æˆ·æ€»æ•°æ®: [userData[], userData[], ...]
 
-'''Éú³Éµ¥¸öÓÃ»§ÀúÊ·£¨»ù´¡´´½¨£©'''
+'''ç”Ÿæˆå•ä¸ªç”¨æˆ·å†å²ï¼ˆåŸºç¡€åˆ›å»ºï¼‰'''
 def generateHistory(userId: int):
-    # userDataËµÃ÷:
-    # listÀàĞÍ: [userId, {12:[3, 0.85, 1, 0], 45: [4, 0.40, 0, 1], ...}, {12:[3, 0.85, 0, 0], 45: [4, 0.40, 1, 1], ...}, ...]
-    # µÚÒ»ÏîÊÇÓÃ»§ID,µÚ¶ş¡¢Èı¡¢ËÄ¡¢ÎåÏî·Ö±ğÊÇ¶¯Âş¡¢Âş»­¡¢Ğ¡Ëµ¡¢cosplay¼ÇÂ¼£¨×ÖµäÀàĞÍ£©
-    # ×÷Æ·ÆÀ·Ö: Âú·Ö5·Ö,×îµÍ·Ö1·Ö,0·Ö±íÊ¾¹Û¿´µ«Î´ÆÀ·Ö
-    # markÁĞ±íÖĞ´æ·ÅÄªÓÃ»§×÷Æ·µÄ¹Û¿´ĞÅÏ¢£¬ÓÉÆÀ·Ö(int)¡¢¹Û¿´Ê±³¤Õ¼×ÜÊ±³¤Õ¼±È(float)¡¢µãÔŞ(bool)¡¢ÊÕ²Ø(bool)¹¹³É
+    # userDataè¯´æ˜:
+    # listç±»å‹: [userId, {12:[3, 0.85, 1, 0], 45: [4, 0.40, 0, 1], ...}, {12:[3, 0.85, 0, 0], 45: [4, 0.40, 1, 1], ...}, ...]
+    # ç¬¬ä¸€é¡¹æ˜¯ç”¨æˆ·ID,ç¬¬äºŒã€ä¸‰ã€å››ã€äº”é¡¹åˆ†åˆ«æ˜¯åŠ¨æ¼«ã€æ¼«ç”»ã€å°è¯´ã€cosplayè®°å½•ï¼ˆå­—å…¸ç±»å‹ï¼‰
+    # ä½œå“è¯„åˆ†: æ»¡åˆ†5åˆ†,æœ€ä½åˆ†1åˆ†,0åˆ†è¡¨ç¤ºè§‚çœ‹ä½†æœªè¯„åˆ†
+    # markåˆ—è¡¨ä¸­å­˜æ”¾è«ç”¨æˆ·ä½œå“çš„è§‚çœ‹ä¿¡æ¯ï¼Œç”±è¯„åˆ†(int)ã€è§‚çœ‹æ—¶é•¿å æ€»æ—¶é•¿å æ¯”(float)ã€ç‚¹èµ(bool)ã€æ”¶è—(bool)æ„æˆ
     userData = []
     userData.append(userId)
-    # ¶¯Âş ×÷Æ·±àºÅ1¿ªÍ·
-    animeNum = int(3 + 20*(random.random()))            # Ëæ»úÉú³ÉÓÃ»§¹Û¿´µÄÊıÁ¿
-    animeDic = {}  # ÓÃ»§¹Û¿´µÄĞÅÏ¢ÁĞ±í
+    # åŠ¨æ¼« ä½œå“ç¼–å·1å¼€å¤´
+    animeNum = int(3 + 20*(random.random()))            # éšæœºç”Ÿæˆç”¨æˆ·è§‚çœ‹çš„æ•°é‡
+    animeDic = {}  # ç”¨æˆ·è§‚çœ‹çš„ä¿¡æ¯åˆ—è¡¨
     for i in range(animeNum):
         animeIdList = ['1', str(int(animeTotalNum * random.random()))]
-        animeId = int(''.join(animeIdList))             # ×÷Æ·±àºÅ
+        animeId = int(''.join(animeIdList))             # ä½œå“ç¼–å·
         animeMark = []                                  # [score, timePercentage]
-        animeMark.append(int(random.random() * 6))      # ÓÃ»§ÆÀ·Ö
-        animeMark.append(round(random.random(), 2))     # ÓÃ»§¹Û¿´Ê±³¤°Ù·Ö±È
-        animeMark.append((random.random() > 0.5))       # µãÔŞ
-        animeMark.append((random.random() > 0.5))       # ÊÕ²Ø
+        animeMark.append(int(random.random() * 6))      # ç”¨æˆ·è¯„åˆ†
+        animeMark.append(round(random.random(), 2))     # ç”¨æˆ·è§‚çœ‹æ—¶é•¿ç™¾åˆ†æ¯”
+        animeMark.append((random.random() > 0.5))       # ç‚¹èµ
+        animeMark.append((random.random() > 0.5))       # æ”¶è—
         animeDic[animeId] = animeMark
     userData.append(animeDic)
-    # Âş»­ ×÷Æ·±àºÅ2¿ªÍ·
+    # æ¼«ç”» ä½œå“ç¼–å·2å¼€å¤´
     comicNum = int(3 + 20*(random.random()))
     comicDic = {}
     for i in range(comicNum):
         comicIdList = ['2', str(int(comicTotalNum * random.random()))]
-        comicId = int(''.join(comicIdList))             # ×÷Æ·±àºÅ
+        comicId = int(''.join(comicIdList))             # ä½œå“ç¼–å·
         comicMark = []
-        comicMark.append(int(random.random() * 6))      # ÓÃ»§ÆÀ·Ö
-        comicMark.append(round(random.random(), 2))     # ÓÃ»§¹Û¿´Ê±³¤°Ù·Ö±È
-        comicMark.append((random.random() > 0.5))       # µãÔŞ
-        comicMark.append((random.random() > 0.5))       # ÊÕ²Ø
+        comicMark.append(int(random.random() * 6))      # ç”¨æˆ·è¯„åˆ†
+        comicMark.append(round(random.random(), 2))     # ç”¨æˆ·è§‚çœ‹æ—¶é•¿ç™¾åˆ†æ¯”
+        comicMark.append((random.random() > 0.5))       # ç‚¹èµ
+        comicMark.append((random.random() > 0.5))       # æ”¶è—
         comicDic[comicId] = comicMark
     userData.append(comicDic)
-    # Ğ¡Ëµ ×÷Æ·±àºÅ3¿ªÍ·
+    # å°è¯´ ä½œå“ç¼–å·3å¼€å¤´
     novelNum = int(3 + 20*(random.random()))
     novelDic = {}
     for i in range(novelNum):
         novelIdList = ['3', str(int(novelTotalNum * random.random()))]
-        novelId = int(''.join(novelIdList))             # ×÷Æ·±àºÅ
+        novelId = int(''.join(novelIdList))             # ä½œå“ç¼–å·
         novelMark = []
-        novelMark.append(int(random.random() * 6))      # ÓÃ»§ÆÀ·Ö
-        novelMark.append(round(random.random(), 2))     # ÓÃ»§¹Û¿´Ê±³¤°Ù·Ö±È
-        novelMark.append((random.random() > 0.5))       # µãÔŞ
-        novelMark.append((random.random() > 0.5))       # ÊÕ²Ø
+        novelMark.append(int(random.random() * 6))      # ç”¨æˆ·è¯„åˆ†
+        novelMark.append(round(random.random(), 2))     # ç”¨æˆ·è§‚çœ‹æ—¶é•¿ç™¾åˆ†æ¯”
+        novelMark.append((random.random() > 0.5))       # ç‚¹èµ
+        novelMark.append((random.random() > 0.5))       # æ”¶è—
         novelDic[novelId] = novelMark
     userData.append(novelDic)
-    # cosplay ×÷Æ·±àºÅ4¿ªÍ·
+    # cosplay ä½œå“ç¼–å·4å¼€å¤´
     cosNum = int(3 + 20 * (random.random()))
     cosDic = {}
     for i in range(cosNum):
         cosIdList = ['3', str(int(cosTotalNum * random.random()))]
-        cosId = int(''.join(cosIdList))  # ×÷Æ·±àºÅ
+        cosId = int(''.join(cosIdList))  # ä½œå“ç¼–å·
         cosMark = []
-        cosMark.append(int(random.random() * 6))        # ÓÃ»§ÆÀ·Ö
-        cosMark.append(round(random.random(), 2))       # ÓÃ»§¹Û¿´Ê±³¤°Ù·Ö±È
-        cosMark.append((random.random() > 0.5))         # µãÔŞ
-        cosMark.append((random.random() > 0.5))         # ÊÕ²Ø
+        cosMark.append(int(random.random() * 6))        # ç”¨æˆ·è¯„åˆ†
+        cosMark.append(round(random.random(), 2))       # ç”¨æˆ·è§‚çœ‹æ—¶é•¿ç™¾åˆ†æ¯”
+        cosMark.append((random.random() > 0.5))         # ç‚¹èµ
+        cosMark.append((random.random() > 0.5))         # æ”¶è—
         cosDic[cosId] = cosMark
     userData.append(cosDic)
     return userData
 
-'''Éú³ÉÃ¿ÈÕÔÄÀÀ¼ÇÂ¼£¨Ìí¼Ó£©'''
+'''ç”Ÿæˆæ¯æ—¥é˜…è§ˆè®°å½•ï¼ˆæ·»åŠ ï¼‰'''
 def generateDailyBrowsing(userData: list):
-    dailyRecordList = []  # ÓÃ»§record.pyÖĞµÄrecordList£¬¼ÇÂ¼ÓÃ»§Ã¿Ìì¹Û¿´µÄ¸÷ÖÖÀàĞÍ×÷Æ·µÄĞÅÏ¢
-    # ¶¯Âş
+    dailyRecordList = []  # ç”¨æˆ·record.pyä¸­çš„recordListï¼Œè®°å½•ç”¨æˆ·æ¯å¤©è§‚çœ‹çš„å„ç§ç±»å‹ä½œå“çš„ä¿¡æ¯
+    # åŠ¨æ¼«
     dailyAnimeNum = int(random.random() * 5) if random.random() < animeDailyRate else 0
     for i in range(dailyAnimeNum):
         dailyRecordList.append(1)
@@ -106,10 +106,10 @@ def generateDailyBrowsing(userData: list):
         dailyAnimeMark = []
         dailyAnimeMark.append(int(random.random() * 6))
         dailyAnimeMark.append(round(random.random(), 2))
-        dailyAnimeMark.append((random.random() > 0.5))  # µãÔŞ
-        dailyAnimeMark.append((random.random() > 0.5))  # ÊÕ²Ø
+        dailyAnimeMark.append((random.random() > 0.5))  # ç‚¹èµ
+        dailyAnimeMark.append((random.random() > 0.5))  # æ”¶è—
         userData[1][dailyAnimeId] = dailyAnimeMark
-    # Âş»­
+    # æ¼«ç”»
     time.sleep(0.01)
     dailyComicNum = int(random.random() * 5) if random.random() < comicDailyRate else 0
     for i in range(dailyComicNum):
@@ -119,10 +119,10 @@ def generateDailyBrowsing(userData: list):
         dailyComicMark = []
         dailyComicMark.append(int(random.random() * 6))
         dailyComicMark.append(round(random.random(), 2))
-        dailyComicMark.append((random.random() > 0.5))  # µãÔŞ
-        dailyComicMark.append((random.random() > 0.5))  # ÊÕ²Ø
+        dailyComicMark.append((random.random() > 0.5))  # ç‚¹èµ
+        dailyComicMark.append((random.random() > 0.5))  # æ”¶è—
         userData[2][dailyComicId] = dailyComicMark
-    # Ğ¡Ëµ
+    # å°è¯´
     time.sleep(0.01)
     dailyNovelNum = int(random.random() * 5) if random.random() < novelDailyRate else 0
     for i in range(dailyNovelNum):
@@ -132,8 +132,8 @@ def generateDailyBrowsing(userData: list):
         dailyNovelMark = []
         dailyNovelMark.append(int(random.random() * 6))
         dailyNovelMark.append(round(random.random(), 2))
-        dailyNovelMark.append((random.random() > 0.5))  # µãÔŞ
-        dailyNovelMark.append((random.random() > 0.5))  # ÊÕ²Ø
+        dailyNovelMark.append((random.random() > 0.5))  # ç‚¹èµ
+        dailyNovelMark.append((random.random() > 0.5))  # æ”¶è—
         userData[3][dailyNovelId] = dailyNovelMark
     # cosplay
     time.sleep(0.01)
@@ -145,13 +145,13 @@ def generateDailyBrowsing(userData: list):
         dailyCosMark = []
         dailyCosMark.append(int(random.random() * 6))
         dailyCosMark.append(round(random.random(), 2))
-        dailyCosMark.append((random.random() > 0.5))  # µãÔŞ
-        dailyCosMark.append((random.random() > 0.5))  # ÊÕ²Ø
+        dailyCosMark.append((random.random() > 0.5))  # ç‚¹èµ
+        dailyCosMark.append((random.random() > 0.5))  # æ”¶è—
         userData[4][dailyCosId] = dailyCosMark
     return userData, dailyRecordList
 
 
-# ²âÊÔ´úÂë
+# æµ‹è¯•ä»£ç 
 for i in range(startUserId, startUserId + usersTotalNum):
     userData = generateHistory(i)
     sysData.append(userData)
@@ -167,5 +167,5 @@ print(sysData)
 print(recordList)
 
 # with open("sysData.json", "w", encoding='utf-8') as f:
-#     # json.dump(dict_, f)  # Ğ´ÎªÒ»ĞĞ
-#     json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)  # Ğ´Îª¶àĞĞ
+#     # json.dump(dict_, f)  # å†™ä¸ºä¸€è¡Œ
+#     json.dump(sysData, f, indent = 2, sort_keys = True, ensure_ascii = False)  # å†™ä¸ºå¤šè¡Œ

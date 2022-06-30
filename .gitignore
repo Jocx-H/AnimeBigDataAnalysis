@@ -139,6 +139,7 @@ dmypy.json
 
 # 配置
 /back/dao/utils.py
+/back/bean/NovelBean.py
 
 # 附件
 《二次元分析推荐系统》交付工件/
