@@ -97,18 +97,23 @@ def userAnalysis(uid: int):
     animeCnt = 0
     comicCnt = 0
     novelCnt = 0
-    animeCalList = ['anime']
-    comicCalList = ['comic']
-    novelCalList = ['novel']
+    animeCalList = []
+    comicCalList = []
+    novelCalList = []
     animeSum = len(userAnimeHistoryList)
     comicSum = len(userComicHistoryList)
     novelSum = len(userNovelHistoryList)
     sumList = [animeSum, comicSum, novelSum]
+    nameList = ["动漫", "漫画", "小说"]
+    series = []
+    for i in range(len(sumList)):
+        series.append({"name": nameList[i], "value": sumList[i]})
+    print(series)
     for i in range(min(len(adict), len(cdict), len(ndict))):
         animeCnt += adict[i][1]
         comicCnt += cdict[i][1]
         novelCnt += ndict[i][1]
-        if (i + 1) % 5 == 0:
+        if (i + 1) % 3 == 0:
             animeCalList.append(animeCnt)
             comicCalList.append(comicCnt)
             novelCalList.append(novelCnt)
@@ -117,8 +122,12 @@ def userAnalysis(uid: int):
             novelCnt = 0
 
     all = [animeCalList, comicCalList, novelCalList]
-    # print(all)
-
+    print(all)
+    categories = [_ * 3 for _ in range(0, len(animeCalList))]
+    yaxis = []
+    for i in range(0, len(nameList)):
+        yaxis.append({"name": nameList[i], "value": all[i]})
+    print(yaxis)
     userHistoryList = userAnimeHistoryList + userComicHistoryList + userNovelHistoryList
     if (userAnimeHistoryList is None) or (userComicHistoryList is None) or (userNovelHistoryList is None):
         raise
@@ -137,7 +146,8 @@ def userAnalysis(uid: int):
                               'name': "用户战力系数",
                               'data': [score[0], score[1], score[2], score[3], score[4]]}
     result['history'] = all
-    result['sum'] = sumList
+    result['sum'] = series
+    result['lineChart'] = {"categories": categories, "series": yaxis}
     final_result = {'result': result}
     return final_result
 
