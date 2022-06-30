@@ -150,7 +150,7 @@
 					<uni-col :span="4" v-for="(item, i) in temp_6" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image v-if="tag==3" style="width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill" ></image>
+							<image @click="toWeb(i)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill" ></image>
 						</view>
 						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
@@ -159,7 +159,7 @@
 					<uni-col :span="4" v-for="(item, i) in temp_12" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image v-if="tag==3" style="width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill"></image>
+							<image @click="toWeb(i)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill"></image>
 						</view>
 						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
@@ -214,6 +214,8 @@
 				rec_mh_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
 				rec_xs_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
 				rec_cp_id_list:[1,1,1,1,1,1,1,1,1,1,1,1,],
+				// cosplay链接
+				rec_cp_link_list: [],
 			}
 		},
 		methods: {
@@ -256,6 +258,10 @@
 					var { href } = this.$router.resolve({ path: "detail", query: { id:this.id, name: this.name, idfr: this.rec_xs_id_list[i] } }); 
 					window.open(href, '_blank');
 				}
+			},
+			toWeb(i){
+				var href = this.rec_cp_link_list[i];
+				window.open(href, '_blank');
 			},
 			navi_my(){
 				uni.navigateTo({
@@ -323,6 +329,7 @@
 							this.rec_cp_id_list = res.data.result.cosid
 							this.rec_cp_name_list = res.data.result.title
 							this.rec_cp_pic_list = res.data.result.cover
+							this.rec_cp_link_list = res.data.result.url
 						},
 					})
 				}
@@ -370,6 +377,7 @@
 					this.rec_cp_id_list = res.data.result.cosid
 					this.rec_cp_name_list = res.data.result.title
 					this.rec_cp_pic_list = res.data.result.cover
+					this.rec_cp_link_list = res.data.result.url
 				},
 			})
 		}
