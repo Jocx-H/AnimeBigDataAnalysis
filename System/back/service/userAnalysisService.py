@@ -126,7 +126,7 @@ def userAnalysis(uid: int):
     categories = [_ * 3 for _ in range(0, len(animeCalList))]
     yaxis = []
     for i in range(0, len(nameList)):
-        yaxis.append({"name": nameList[i], "value": all[i]})
+        yaxis.append({"name": nameList[i], "data": all[i]})
     print(yaxis)
     userHistoryList = userAnimeHistoryList + userComicHistoryList + userNovelHistoryList
     if (userAnimeHistoryList is None) or (userComicHistoryList is None) or (userNovelHistoryList is None):
