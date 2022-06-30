@@ -113,7 +113,7 @@
 				foot_or_data: 0,	// 0为足迹，1为数据分析
 				foot_pic:["", "",	"",	"",	"",	"",	"",	"",	"",	"",	"", ""],// 足迹的封面图片
 				foot_name:["", "",	"",	"",	"",	"",	"",	"",	"",	"",	"", ""],// 足迹的图片标题
-				foot_id:[1,2,3,4,5,6,7,8],// 足迹的内容id
+				foot_id:[],// 足迹的内容id
 				Radar: {	//用户画像
 					"categories": [""],
 					"series": [{
@@ -126,28 +126,28 @@
 						"data": [
 					    {
 					    	"name": "动漫",
-					    	"value": 50
+					    	"value": 0
 					    }, {
 					    	"name": "漫画",
-					    	"value": 30
+					    	"value": 0
 					    }, {
 					    	"name": "小说",
-					    	"value": 20
+					    	"value": 0
 					    }
 					  ]
 					}]
 				},
 				Line: {		// 观看历史统计
-					"categories": ["2016", "2017", "2018", "2019", "2020", "2021"],
+					"categories": ["", "", "", "", "", ""],
 					"series": [{
 						"name": "动漫",
-						"data": [35, 8, 25, 37, 4, 20]
+						"data": []
 					}, {
 						"name": "漫画",
-						"data": [70, 40, 65, 20, 44, 68]
+						"data": []
 					}, {
 						"name": "小说",
-						"data": [100, 80, 95, 150, 112, 132]
+						"data": []
 					}]
 				},
 			}
@@ -365,10 +365,11 @@
 		margin-top: 10px;
 		margin-left: calc(8%);
 		margin-right: calc(8%);
-		height: 5600rpx; 
+		height: 3200rpx; 
 		background-color: #ffffff;
 		border-top-left-radius: 15px;
 		border-top-right-radius: 15px;
+		margin-bottom: calc(2%);
 	}
 	.pic{
 		height: 700rpx;
