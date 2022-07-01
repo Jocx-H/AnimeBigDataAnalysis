@@ -150,7 +150,7 @@
 					<uni-col :span="4" v-for="(item, i) in temp_6" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image @click="toWeb(i)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill" ></image>
+							<image @click="toWeb(item)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill" ></image>
 						</view>
 						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
@@ -159,7 +159,7 @@
 					<uni-col :span="4" v-for="(item, i) in temp_12" :key="i+'b'">
 						<!-- cosplay -->
 						<view class="rec_content_image_cp">
-							<image @click="toWeb(i)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill"></image>
+							<image @click="toWeb(item)" v-if="tag==3" style="cursor:pointer;text-decoration:none;width: 370rpx;border-top-left-radius: 10px; border-top-right-radius: 10px;border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :src="rec_cp_pic_list[item]"  mode="aspectFill"></image>
 						</view>
 						<text v-if="tag==3" class="rec_content_title"> {{rec_cp_name_list[item]}} </text>
 					</uni-col>
