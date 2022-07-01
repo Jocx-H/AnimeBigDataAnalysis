@@ -32,11 +32,17 @@ def __animeScoreStatInfo__():
         for i in res:
             new_res['categories'].append(str(i['score']))
             new_res['data'].append(i['count'])
+        new_new_res = {'categories': [], 'data': []}
+        for j in range(len(new_res['categories'])-1):
+            if j % 2 == 0:
+                continue
+            new_new_res['categories'].append(new_res['categories'][j])
+            new_new_res['data'].append(new_res['data'][j]+new_res['data'][j]-1)
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return new_res
+    return new_new_res
 
 
 def __novelScoreStatInfo__():
@@ -51,11 +57,17 @@ def __novelScoreStatInfo__():
         for i in res:
             new_res['categories'].append(str(i['score']))
             new_res['data'].append(i['count'])
+        new_new_res = {'categories': [], 'data': []}
+        for j in range(len(new_res['categories'])-1):
+            if j % 2 == 0:
+                continue
+            new_new_res['categories'].append(new_res['categories'][j])
+            new_new_res['data'].append(new_res['data'][j]+new_res['data'][j]-1)
     except Exception as e:
         print(repr(e))
         traceback.print_exc()
         return None
-    return new_res
+    return new_new_res
 
 
 def __animeTypeStatInfo__():

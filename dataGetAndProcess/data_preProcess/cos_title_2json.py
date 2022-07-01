@@ -11,9 +11,9 @@ import codecs
 import os
 import math
 
-max_font_size = 50
-min_font_size = 8
-word_num = 30
+max_font_size = 65
+min_font_size = 18
+word_num = 50
 min_fre = 0
 max_fre = 0
 
@@ -24,7 +24,7 @@ def sigmoid(x):
     return 1.0 / (1.0 + math.e**(-x))
 
 if __name__ == '__main__':
-    with open("../../back/assets/resourcedata/pre_cos_title_count.json", encoding="utf-8") as file:
+    with open("../data/pre_cos_title_count.json", encoding="utf-8") as file:
         in_file = json.load(file)
     output = []
     total_cnt = 0
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     min_fre = output[-1][1]
     print("word frequences: ", output)
 
-    out_file = codecs.open('../../back/assets/resourcedata/cos_title_count.json', 'w+', encoding='UTF-8')
+    out_file = codecs.open('../data/cos_title_count.json', 'w+', encoding='UTF-8')
     out_file.write('{\n\t\"Word\":{\n')
     out_file.write('\t\t\"series\":[\n')
     for (word, count) in output:

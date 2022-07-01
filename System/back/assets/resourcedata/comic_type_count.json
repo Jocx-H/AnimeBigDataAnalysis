@@ -1,5 +1,4 @@
 [
-	{"type": "其他", "count": 14284},
 	{"type": "搞笑", "count": 2679},
 	{"type": "冒险", "count": 1566},
 	{"type": "生活", "count": 1276},
@@ -41,5 +40,6 @@
 	{"type": "颜艺", "count": 1},
 	{"type": "福瑞", "count": 1},
 	{"type": "舰娘", "count": 1},
-	{"type": "音乐舞蹈", "count": 1}
+	{"type": "音乐舞蹈", "count": 1},
+	{"type": "其他", "count": 14284}
 ]

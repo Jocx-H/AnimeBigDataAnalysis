@@ -165,6 +165,18 @@
 					this.foot_pic = res.data.result.cover
 				},
 			})
+			uni.request({
+				url: 'http://124.70.91.77:8000/api/user/analysis?uid=' + this.id,
+				method: 'POST',
+				success: res => {
+					console.log(res)
+					this.Radar.categories = res.data.result.userImageDir.categories
+					this.Radar.series[0]['name'] = res.data.result.userImageDir.name
+					this.Radar.series[0]['data'] = res.data.result.userImageDir.data
+					this.PieA.series[0].data = res.data.result.sum
+					this.Line = res.data.result.lineChart
+				},
+			})
 		},
 		methods: {
 			navi_my(){
@@ -192,18 +204,8 @@
 			},
 			show_data(){
 				this.foot_or_data = 1;
-				uni.request({
-					url: 'http://124.70.91.77:8000/api/user/analysis?uid=' + this.id,
-					method: 'POST',
-					success: res => {
-						console.log(res)
-						this.Radar.categories = res.data.result.userImageDir.categories
-						this.Radar.series[0]['name'] = res.data.result.userImageDir.name
-						this.Radar.series[0]['data'] = res.data.result.userImageDir.data
-						this.PieA.series[0].data = res.data.result.sum
-						this.Line = res.data.result.lineChart
-					},
-				})
+				console.log(",,,,,",this.foot_or_data);
+				
 			},
 			// 跳转详情页
 			toDetail(i){
