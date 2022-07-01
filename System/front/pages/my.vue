@@ -60,7 +60,7 @@
 			</uni-row>
 		</view>
 		<!-- 顶部区域 -->
-		<view class="top">
+		<view class="top" style="background-image: url(../static/bg.png);" >
 			<!-- 头像 -->
 			<image class="top_portrait" src="../static/portrait.jpg"></image>
 			<!-- 昵称 -->
@@ -292,7 +292,6 @@
 		margin-left: calc(8%);
 		margin-right: calc(8%);
 		height: 400rpx;
-		background-image: url("https://i0.hdslb.com/bfs/space/24d0815514951bb108fbb360b04a969441079315.png@2560w_400h_100q_1o.webp");
 	}
 	.top_portrait{
 		margin-top: 200rpx;
